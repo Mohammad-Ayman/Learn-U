@@ -1,0 +1,104 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  width: 60rem;
+  height: 29rem;
+  margin-left: 1rem;
+  box-sizing: border-box;
+}
+
+.title {
+  width: 50rem;
+  height: 4rem;
+  margin-top: 2rem;
+  font-size: 2.5rem;
+  font-weight: 600;
+  margin-left: 1rem;
+}
+
+.friendSuggestions {
+  background-color: white;
+  margin-left: 1rem;
+  height: 20rem;
+  width: 55rem;
+  border-radius: 2rem;
+}
+
+.friendsContainer {
+  margin-top: 1rem;
+  width: 56rem;
+}
+
+.newFriend {
+  display: flex;
+  justify-content: space-between;
+  padding: 1rem;
+  align-items: center;
+  height: 7rem;
+  width: 50rem;
+  margin-right: 5rem;
+  padding-top: 1rem;
+}
+
+.newFriend:hover {
+  scale: 1.02;
+}
+
+.viewAllFriendSuggestions {
+  padding: 1rem;
+  padding-left: 2.5rem;
+  font-size: 2rem;
+  font-weight: 700;
+  color: rgb(46 141 255);
+  height: 6rem;
+  margin-top: 1rem;
+  background-color: white;
+  width: 55rem;
+  cursor: pointer;
+}
+
+.friendName {
+  width: 20rem;
+  text-align: left;
+  padding-left: 1rem;
+  font-size: 1.5rem;
+  font-weight: 700;
+  margin-top: 2rem;
+}
+
+.friendImg {
+  border-radius: 50%;
+  width: 5rem;
+  height: 5rem;
+  margin: 1rem;
+}
+
+.addFriend {
+  padding: 0.3rem 1rem;
+  background-color: rgb(46 141 255);
+  border-radius: 1rem;
+  font-size: 2rem;
+  color: white;
+  margin-left: 20rem;
+  margin-right: 2rem;
+}
+
+.btnAddFriend {
+  display: flex;
+  align-items: center;
+  margin-top: 2rem;
+  width: 25rem;
+  justify-content: space-between;
+}
+
+.friendClose {
+  font-size: 2.5rem;
+  color: grey;
+}
+
+.horizontalLine {
+  position: absolute;
+  width: 51rem;
+  margin-top: 8rem;
+  margin-left: 1rem;
+}

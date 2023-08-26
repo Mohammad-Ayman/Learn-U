@@ -1,0 +1,55 @@
+.buttons {
+  display: flex;
+  justify-content: center;
+  margin-top: 1rem;
+  margin-left: -4rem;
+}
+
+.findFriends {
+  border: 1px solid rgb(46 141 255);
+  width: 20rem;
+  height: 5rem;
+  margin-right: 1rem;
+  border-radius: 1rem;
+  padding: 0.5rem;
+  font-weight: 600;
+  color: rgb(46 141 255);
+  font-size: 1.5rem;
+  margin-bottom: 2rem;
+}
+
+.findFriends:hover {
+  scale: 1.02;
+}
+
+.inviteFriends {
+  border: 1px solid rgb(46 141 255);
+  background-color: rgb(46 141 255);
+  width: 20rem;
+  height: 5rem;
+  margin-left: 1rem;
+  border-radius: 1rem;
+  padding: 0.8rem;
+  font-weight: 600;
+  color: white;
+  font-size: 1.5rem;
+}
+
+.inviteFriends:hover {
+  scale: 1.02;
+}
+
+@media (max-width: 768px) {
+  .buttons {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .findFriends,
+  .inviteFriends {
+    width: 100%;
+    margin-right: 0;
+    margin-left: 35rem;
+    margin-bottom: 1rem;
+  }
+}
