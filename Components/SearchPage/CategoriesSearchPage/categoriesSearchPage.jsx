@@ -29,34 +29,15 @@ function CategoriesSearchPage(props) {
         ? [...prevCheckedCategories, categoryName]
         : prevCheckedCategories.filter((name) => name !== categoryName);
 
-      // const arrayToBeUsed =
-      //   searchCtx.filteredCoursesIds.length === 0
-      //     ? courses
-      //     : courses.filter((course) => {
-      //         searchCtx.filteredCoursesIds.includes(course.id);
-      //       });
-      // console.log(arrayToBeUsed);
-      const filteredCourseIds = courses
-        .filter((course) =>
-          updatedCategories.includes(course.category.toLowerCase())
-        )
-        .map((course) => course.id);
-
-      searchCtx.setFilteredCoursesIds(
-        isChecked
-          ? (prevFilteredCourseIds) => [
-              ...new Set([...prevFilteredCourseIds, ...filteredCourseIds]),
-            ]
-          : filteredCourseIds.filter((id) => id !== categoryName)
-      );
-
+      searchCtx.updateFilterOptions("category", updatedCategories);
       props.categoriesCheckedArray(updatedCategories, "category");
       return updatedCategories;
     });
   };
-  useEffect(() => {
-    // console.log("Updated filteredCoursesIds:", searchCtx.filteredCoursesIds);
-  }, [searchCtx.filteredCoursesIds]);
+  // useEffect(() => {
+  //   console.log(searchCtx.filterOptions); // Use searchCtx to access filterOptions
+  // }, [searchCtx.filterOptions]); // Update dependency to searchCtx.filterOptions
+
   return (
     <section>
       <h2 className={styles.header}>CATEGORIES</h2>

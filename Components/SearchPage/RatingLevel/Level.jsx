@@ -18,43 +18,17 @@ const Level = (props) => {
   // Function to handle checkbox change
   const handleCheckboxChange = (event, categoryId) => {
     const isChecked = event.target.checked;
-    // const arrayToBeUsed =
-    //   searchCtx.filteredCoursesIds.length === 0
-    //     ? courses
-    //     : courses.filter((course) => {
-    //         searchCtx.filteredCoursesIds.includes(course.id);
-    //       });
     setLevelsChecked((prevCheckedCategories) => {
       const updatedCategories = isChecked // Get list of updated categories
         ? [...prevCheckedCategories, categoryId]
         : prevCheckedCategories.filter((id) => id !== categoryId);
 
-      console.log("Updated filteredCoursesIds:", searchCtx.filteredCoursesIds);
-      // console.log("Array to be used:", arrayToBeUsed);
-
-      // Get filter courses ids according to updated categories
-      const filteredCourseIds = courses
-        .filter((course) =>
-          updatedCategories.includes(course.level.toLowerCase())
-        )
-        .map((course) => course.id);
-
-      searchCtx.setFilteredCoursesIds(
-        isChecked
-          ? (prevFilteredCourseIds) => [
-              ...new Set([...prevFilteredCourseIds, ...filteredCourseIds]),
-            ]
-          : filteredCourseIds.filter((id) => id !== categoryId)
-      );
-
+      searchCtx.updateFilterOptions("level", updatedCategories);
       props.levelsCheckedArray(updatedCategories, "level");
 
       return updatedCategories;
     });
   };
-  useEffect(() => {
-    // console.log(searchCtx.filteredCoursesIds);
-  }, [searchCtx.filteredCoursesIds]);
   return (
     <section>
       <h2 className={styles.header}>LEVEL</h2>
