@@ -5,7 +5,6 @@ import SearchContext from "@/store/search-context";
 import "@fortawesome/fontawesome-free/css/all.min.css";
 import "@fortawesome/fontawesome-free/js/all.js";
 import styles from "@/components/SearchPage/CategoriesSearchPage/styles/categoriesSearch.module.css";
-import { courses } from "@/app/page";
 
 let category = [
   { icon: "fa-solid fa-chart-line", name: "Photography" },
@@ -17,7 +16,7 @@ let category = [
   { icon: "fa-solid fa-star", name: "Programming" },
 ];
 
-function CategoriesSearchPage(props) {
+function CategoriesSearchPage() {
   const [categoriesChecked, setCategoriesChecked] = useState([]);
   const searchCtx = useContext(SearchContext);
 
@@ -30,13 +29,9 @@ function CategoriesSearchPage(props) {
         : prevCheckedCategories.filter((name) => name !== categoryName);
 
       searchCtx.updateFilterOptions("category", updatedCategories);
-      props.categoriesCheckedArray(updatedCategories, "category");
       return updatedCategories;
     });
   };
-  // useEffect(() => {
-  //   console.log(searchCtx.filterOptions); // Use searchCtx to access filterOptions
-  // }, [searchCtx.filterOptions]); // Update dependency to searchCtx.filterOptions
 
   return (
     <section>

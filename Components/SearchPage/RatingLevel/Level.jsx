@@ -3,15 +3,13 @@ import { useState, useContext, useEffect } from "react";
 import SearchContext from "@/store/search-context";
 
 import styles from "./styles/level.module.css";
-import { courses } from "@/app/page";
 let category = [
   { id: "beginner", name: "Beginner" },
   { id: "intermediate", name: "Intermediate" },
   { id: "professional", name: "Professional" },
 ];
 
-const Level = (props) => {
-  let coursesIds = [];
+const Level = () => {
   const [levelsChecked, setLevelsChecked] = useState([]);
   const searchCtx = useContext(SearchContext);
 
@@ -24,7 +22,6 @@ const Level = (props) => {
         : prevCheckedCategories.filter((id) => id !== categoryId);
 
       searchCtx.updateFilterOptions("level", updatedCategories);
-      props.levelsCheckedArray(updatedCategories, "level");
 
       return updatedCategories;
     });

@@ -7,15 +7,10 @@ import Recommended from "@/components/SearchPage/RecommendedForYou/Recommended";
 
 import SearchContext from "@/store/search-context";
 
-import { useState, useEffect, useContext } from "react";
+import { useState, useEffect } from "react";
 import { courses } from "@/app/page";
 
 const Search = () => {
-  // const searchCtx = useContext(SearchContext);
-  // const [filteredCoursesIds, setFilteredCoursesIds] = useState([]);
-
-  let checkedArray = [];
-  let matchingCoursesIds = [];
   const [filterOptions, setFilterOptions] = useState([
     {
       category: [],
@@ -23,7 +18,6 @@ const Search = () => {
       rate: 5,
     },
   ]);
-
   const [filter, setFilter] = useState("");
   const [filteredCourses, setFilteredCourses] = useState([]);
 
@@ -31,33 +25,7 @@ const Search = () => {
   const handleInputChange = (searchInput) => {
     setFilter(searchInput);
   };
-
-  /*
-  RATING HANDLER
-*/
-  const handleRating = (rateValue) => {
-    const filteredRateCourses = courses.filter(
-      (course) => course.rate <= rateValue
-    );
-    setFilteredCourses(filteredRateCourses);
-  };
-
-  /* 
-  CHECKED ARRAY HANDLER
-  */
-  const handleCheckedArray = (categoriesCheckedArray, targetKey) => {
-    courses.forEach((course) => {
-      if (categoriesCheckedArray.includes(course[targetKey].toLowerCase())) {
-        matchingCoursesIds.push(course.id);
-      }
-    });
-    checkedArray =
-      ([...checkedArray],
-      courses.filter((course) => matchingCoursesIds.includes(course.id)));
-    setFilteredCourses([...checkedArray]);
-  };
-
-  useEffect(() => {
+  const filterSearchBar = () => {
     const filteredCourses = courses.filter(
       (course) =>
         course.category.toLowerCase().includes(filter.toLowerCase()) ||
@@ -65,6 +33,9 @@ const Search = () => {
         course.description.toLowerCase().includes(filter.toLowerCase())
     );
     setFilteredCourses(filteredCourses);
+  };
+  useEffect(() => {
+    filterSearchBar();
   }, [filter]);
 
   const updateFilterOptions = (filterKey, updatedOptions) => {
@@ -73,63 +44,37 @@ const Search = () => {
       [filterKey]: updatedOptions,
     }));
   };
-  const test = () => {
-    let cat = [
-      {
-        category: [],
-        level: ["intermediate"],
-        rate: 5,
-      },
-    ];
+  const applyFilterOptions = () => {
     let filteredOptionsCourses = courses.filter((course) => {
-      const categoryMatch =
-        cat[0].category.length === 0 ||
-        cat[0].category.includes(course.category.toLowerCase());
-      const levelMatch =
-        cat[0].level.length === 0 ||
-        cat[0].level.includes(course.level.toLowerCase());
-      const rateMatch = course.rate <= cat[0].rate;
-
-      return categoryMatch && levelMatch && rateMatch;
-    });
-
-    console.log("filteredOptionsCourses", filteredOptionsCourses);
-    return filteredOptionsCourses;
-  };
-
-  useEffect(() => {
-    console.log(filterOptions);
-
-    let filteredOptionsCourses = courses.filter((course) => {
-      const categoryMatch =
-        filterOptions[0].category.length === 0 ||
-        filterOptions[0].category.includes(course.category.toLowerCase());
-      const levelMatch =
-        filterOptions[0].level.length === 0 ||
-        filterOptions[0].level.includes(course.level.toLowerCase());
-      const rateMatch = course.rate <= filterOptions[0].rate;
+      const categoryMatch = filterOptions.category
+        ? filterOptions.category.length === 0 ||
+          filterOptions.category.includes(course.category.toLowerCase())
+        : course;
+      const levelMatch = filterOptions.level
+        ? filterOptions.level.length === 0 ||
+          filterOptions.level.includes(course.level.toLowerCase())
+        : course;
+      const rateMatch = +course.rate <= (+filterOptions.rate || 5);
 
       return categoryMatch && levelMatch && rateMatch;
     });
 
     // Set the state with the filtered courses
-    // setFilteredCourses(filteredOptionsCourses);
+    setFilteredCourses(filteredOptionsCourses);
 
     console.log("filteredOptionsCourses", filteredOptionsCourses);
+  };
+  useEffect(() => {
+    applyFilterOptions();
   }, [filterOptions]);
 
   return (
     <main className="home-container">
-      <SearchContext.Provider
-        value={{ filterOptions, setFilterOptions, updateFilterOptions }}
-      >
+      <SearchContext.Provider value={{ updateFilterOptions }}>
         <SearchBar onChange={handleInputChange} />
         <TopSearches onClick={handleInputChange} />
-        <CategoriesSearchPage categoriesCheckedArray={handleCheckedArray} />
-        <RatingLevel
-          levelsCheckedArray={handleCheckedArray}
-          rateValueProp={handleRating}
-        />
+        <CategoriesSearchPage />
+        <RatingLevel />
         <Recommended filteredCoursesProp={filteredCourses} />
       </SearchContext.Provider>
     </main>
