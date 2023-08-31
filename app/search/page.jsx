@@ -11,6 +11,8 @@ import { useState, useEffect } from "react";
 import { courses } from "@/app/page";
 
 const Search = () => {
+  const [filter, setFilter] = useState("");
+  const [filteredCourses, setFilteredCourses] = useState([]);
   const [filterOptions, setFilterOptions] = useState([
     {
       category: [],
@@ -18,8 +20,6 @@ const Search = () => {
       rate: 5,
     },
   ]);
-  const [filter, setFilter] = useState("");
-  const [filteredCourses, setFilteredCourses] = useState([]);
 
   // Update filter state when searchInput changes
   const handleInputChange = (searchInput) => {
@@ -34,6 +34,7 @@ const Search = () => {
     );
     setFilteredCourses(filteredCourses);
   };
+
   useEffect(() => {
     filterSearchBar();
   }, [filter]);
@@ -44,6 +45,7 @@ const Search = () => {
       [filterKey]: updatedOptions,
     }));
   };
+
   const applyFilterOptions = () => {
     let filteredOptionsCourses = courses.filter((course) => {
       const categoryMatch = filterOptions.category
@@ -58,12 +60,11 @@ const Search = () => {
 
       return categoryMatch && levelMatch && rateMatch;
     });
-
     // Set the state with the filtered courses
     setFilteredCourses(filteredOptionsCourses);
-
     console.log("filteredOptionsCourses", filteredOptionsCourses);
   };
+
   useEffect(() => {
     applyFilterOptions();
   }, [filterOptions]);

@@ -19,7 +19,10 @@ function TopSearches(props) {
       ? setActiveSearch(null)
       : setActiveSearch(searchValue);
 
-    props.onClick(searchValue);
+    activeSearch === searchValue
+      ? props.onClick(" ")
+      : props.onClick(searchValue);
+    // props.onClick(searchValue);
   };
 
   return (

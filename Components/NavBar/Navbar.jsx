@@ -57,7 +57,7 @@ const Navbar = () => {
             className={
               changeClass.home
                 ? "text-gray-400 hover:text-blue-400 cursor-pointer"
-                : "text-gray-400 hover:text-blue-400 cursor-pointer "
+                : "text-gray-400 hover:text-blue-400 cursor-pointer"
             }
           >
             <svg
