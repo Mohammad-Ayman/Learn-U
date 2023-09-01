@@ -1,14 +1,14 @@
-import DisplayMyLearning from "@/components/HomePage/MyLearning/DisplayMyLearning";
+import DisplayMyLearning from "@/Components/HomePage/MyLearning/DisplayMyLearning";
 import { courses } from "@/app/page";
-import { fetchedCourses } from "@/components/Fetching/fetching";
-import Button from "@/components/UI/Button";
+import { fetchedCourses } from "@/Components/Fetching/fetching";
+import Button from "@/Components/UI/Button";
 import EqualizerIcon from "@mui/icons-material/Equalizer";
 import Link from "next/link";
 import Styles from "./styles/MyLearningCourses.module.css";
 
 const MyLearningCourses = (props) => {
   const getClickedCourse = (event) => {
-    console.log(event.target.closest("li"));
+    // console.log(event.target.closest("li"));
     // console.log(event.target.closest("li").querySelector("h2").textContent);
     const liExist = event.target.closest("li");
 
@@ -17,15 +17,15 @@ const MyLearningCourses = (props) => {
         .closest("li")
         .getAttribute("data-courseid");
 
-      console.log(clickedCourseID, typeof clickedCourseID);
+      // console.log(clickedCourseID, typeof clickedCourseID);
       props.coursesSource.some((course) => {
         if (course.id == clickedCourseID) {
-          console.log(course);
-          console.log(typeof props.clickedCourseID);
+          // console.log(course);
+          // console.log(typeof props.clickedCourseID);
           props.getClickedCourseName(course);
         }
       });
-      console.log("after", clickedCourseID);
+      // console.log("after", clickedCourseID);
     } else return;
   };
 
@@ -51,7 +51,7 @@ const MyLearningCourses = (props) => {
           </h2>
         </Link>
       </div>
-      <ul onClick={getClickedCourse}>
+      <ul onClick={getClickedCourse} className={Styles.coursesList}>
         <DisplayMyLearning
           AllCourses={props.courses}
           isButton={props.isButton}

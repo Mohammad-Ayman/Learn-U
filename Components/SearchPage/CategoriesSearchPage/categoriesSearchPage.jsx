@@ -4,7 +4,7 @@ import SearchContext from "@/store/search-context";
 
 import "@fortawesome/fontawesome-free/css/all.min.css";
 import "@fortawesome/fontawesome-free/js/all.js";
-import styles from "@/components/SearchPage/CategoriesSearchPage/styles/categoriesSearch.module.css";
+import styles from "@/Components/SearchPage/CategoriesSearchPage/styles/categoriesSearch.module.css";
 
 let category = [
   { icon: "fa-solid fa-chart-line", name: "Photography" },

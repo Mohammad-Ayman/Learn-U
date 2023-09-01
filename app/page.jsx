@@ -237,7 +237,380 @@ const courses = [
       { name: "Skill Test", videos: 1 },
     ],
   },
+  {
+    id: "12",
+    name: "Digital Marketing Mastery",
+    author: "Emily White",
+    category: "Marketing",
+    description:
+      "Master the art of digital marketing and boost your online presence.",
+    duration: "2h 30min",
+    level: "Intermediate",
+    price: 34.99,
+    rate: 4.2,
+    value: 15,
+    image:
+      "https://images.unsplash.com/photo-1556822475-570b270e7c36?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=MnwyMDUzMDJ8MHwxfHNlYXJjaHw4NXx8ZGlnaXRhbCUyMG1hcmtldGluZ3xlbnwxfHx8fDE2NzMwMTkwOTQ&ixlib=rb-4.0.3&q=80&w=1080",
+    content: [
+      { name: "Introduction", videos: 1 },
+      { name: "1. SEO Strategies", videos: 6 },
+      { name: "2. Social Media Marketing", videos: 8 },
+      { name: "3. Email Marketing", videos: 5 },
+      { name: "Skill Test", videos: 3 },
+    ],
+  },
+  {
+    id: "13",
+    name: "Machine Learning Foundations",
+    author: "Alex Turner",
+    category: "Programming",
+    description:
+      "Get started with machine learning and build predictive models.",
+    duration: "3h",
+    level: "Intermediate",
+    price: 49.99,
+    rate: 4.5,
+    value: 18,
+    image:
+      "https://images.unsplash.com/photo-1524557594315-746f1d1e1d5d?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=MnwyMDUzMDJ8MHwxfHNlYXJjaHwyfHxtYWNoaW5lJTIwbGVhcm5pbmclMjBmb3VuZGF0aW9uc3xlbnwxfHx8fDE2NzMwMTkwOTQ&ixlib=rb-4.0.3&q=80&w=1080",
+    content: [
+      { name: "Introduction", videos: 1 },
+      { name: "1. Data Preprocessing", videos: 5 },
+      { name: "2. Regression Models", videos: 8 },
+      { name: "3. Classification Models", videos: 7 },
+      { name: "Skill Test", videos: 4 },
+    ],
+  },
+  {
+    id: "14",
+    name: "Web Development Bootcamp",
+    author: "Sarah Smith",
+    category: "Programming",
+    description:
+      "Learn web development from scratch and build modern websites.",
+    duration: "2h 45min",
+    level: "Beginner",
+    price: 29.99,
+    rate: 4.0,
+    value: 20,
+    image:
+      "https://images.unsplash.com/photo-1504219857359-7a5e9d04767b?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=MnwyMDUzMDJ8MHwxfHNlYXJjaHw4OHx8d2ViJTIwZGV2ZWxvcG1lbnR8ZW58MXx8fHwxNjczMDE5MTk0&ixlib=rb-4.0.3&q=80&w=1080",
+    content: [
+      { name: "Introduction", videos: 1 },
+      { name: "1. HTML & CSS Basics", videos: 7 },
+      { name: "2. JavaScript Fundamentals", videos: 9 },
+      { name: "3. Building Responsive Websites", videos: 6 },
+      { name: "Skill Test", videos: 2 },
+    ],
+  },
+  {
+    id: "15",
+    name: "Artificial Intelligence in Healthcare",
+    author: "Dr. Jane Anderson",
+    category: "Programming",
+    description:
+      "Explore AI applications in healthcare for diagnosis and treatment.",
+    duration: "2h 15min",
+    level: "Professional",
+    price: 39.99,
+    rate: 3.8,
+    value: 22,
+    image:
+      "https://images.unsplash.com/photo-1560807707-8cc77767d783?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=MnwyMDUzMDJ8MHwxfHNlYXJjaHw1fHxhcnRpZmlxdWElMjBpbmNlJTIwaGVhbHRoY2F1Z2h8ZW58MXx8fHwxNjczMDE5MTk0&ixlib=rb-4.0.3&q=80&w=1080",
+    content: [
+      { name: "Introduction", videos: 1 },
+      { name: "1. Medical Data Analysis", videos: 6 },
+      { name: "2. Diagnostic AI Models", videos: 8 },
+      { name: "3. AI in Drug Discovery", videos: 5 },
+      { name: "Skill Test", videos: 3 },
+    ],
+  },
+  {
+    id: "16",
+    name: "Digital Art and Illustration",
+    author: "Elena Martinez",
+    category: "Design",
+    description:
+      "Unlock your creativity with digital art and illustration techniques.",
+    duration: "2h 30min",
+    level: "Intermediate",
+    price: 34.99,
+    rate: 4.5,
+    value: 18,
+    image:
+      "https://images.unsplash.com/photo-1521737711861-1960b7bea6e0?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=MnwyMDUzMDJ8MHwxfHNlYXJjaHw2MHx8ZGlnaXRhbCUyMGFydCUyMGlsbHVzdHJhdGlvbiUyMHRlY2huaXF1ZSUyMG1hcmtldGx5fGVufDB8fHx8fDE2NzMwMTkwOTQ&ixlib=rb-4.0.3&q=80&w=1080",
+    content: [
+      { name: "Introduction", videos: 1 },
+      { name: "1. Digital Painting Techniques", videos: 7 },
+      { name: "2. Character Illustration", videos: 8 },
+      { name: "3. Digital Artistry Tips", videos: 6 },
+      { name: "Skill Test", videos: 4 },
+    ],
+  },
+  {
+    id: "17",
+    name: "Financial Planning and Investment",
+    author: "John Davis",
+    category: "HR",
+    description:
+      "Learn financial planning, budgeting, and investment strategies.",
+    duration: "2h 45min",
+    level: "Intermediate",
+    price: 29.99,
+    rate: 4.2,
+    value: 20,
+    image:
+      "https://images.unsplash.com/photo-1553163141-4b943f1cb0eb?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=MnwyMDUzMDJ8MHwxfHNlYXJjaHwyfHxmaW5hbmNpYWwlMjBwbGFubmluZyUyMGFuZCUyMGludmVzdG1lbnR8ZW58MXx8fHx8fDE2NzMwMTkwOTQ&ixlib=rb-4.0.3&q=80&w=1080",
+    content: [
+      { name: "Introduction", videos: 1 },
+      { name: "1. Financial Planning Basics", videos: 7 },
+      { name: "2. Investment Strategies", videos: 8 },
+      { name: "3. Retirement Planning", videos: 6 },
+      { name: "Skill Test", videos: 2 },
+    ],
+  },
+  {
+    id: "18",
+    name: "Digital Photography Essentials",
+    author: "Michael Turner",
+    category: "Photography",
+    description:
+      "Master the art of digital photography and capture stunning images.",
+    duration: "2h 15min",
+    level: "Intermediate",
+    price: 39.99,
+    rate: 2.0,
+    value: 22,
+    image:
+      "https://images.unsplash.com/photo-1555685814-ec0eb86c2253?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=MnwyMDUzMDJ8MHwxfHNlYXJjaHwxfHhpZ2h0JTIwbG91c3RyYXRpb24lMjBhbmQlMjBpbnZlc3RtZW50fGVufDB8fHx8fDE2NzMwMTkwOTQ&ixlib=rb-4.0.3&q=80&w=1080",
+    content: [
+      { name: "Introduction", videos: 1 },
+      { name: "1. Camera Settings", videos: 7 },
+      { name: "2. Composition Techniques", videos: 8 },
+      { name: "3. Editing and Post-processing", videos: 6 },
+      { name: "Skill Test", videos: 3 },
+    ],
+  },
+  {
+    id: "19",
+    name: "Python for Data Analysis",
+    author: "Linda Peterson",
+    category: "Programming",
+    description:
+      "Learn Python programming for data analysis and visualization.",
+    duration: "2h 30min",
+    level: "Intermediate",
+    price: 34.99,
+    rate: 3.8,
+    value: 15,
+    image:
+      "https://images.unsplash.com/photo-1509565866022-0f4ffaa879f5?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=MnwyMDUzMDJ8MHwxfHNlYXJjaHwxfHxweXRob24lMjBmb3IlMjBkYXRhJTIwYW5hbHlzaXxlbnwxfHx8fHwxNjczMDE5MTk0&ixlib=rb-4.0.3&q=80&w=1080",
+    content: [
+      { name: "Introduction", videos: 1 },
+      { name: "1. Python Basics", videos: 7 },
+      { name: "2. Data Manipulation with Pandas", videos: 8 },
+      { name: "3. Data Visualization with Matplotlib", videos: 6 },
+      { name: "Skill Test", videos: 4 },
+    ],
+  },
+  {
+    id: "20",
+    name: "Leadership and Management",
+    author: "Sophia Clark",
+    category: "HR",
+    description: "Develop leadership and management skills for career growth.",
+    duration: "2h 45min",
+    level: "Professional",
+    price: 29.99,
+    rate: 1.3,
+    value: 20,
+    image:
+      "https://images.unsplash.com/photo-1534786471127-5a69c17e1e4b?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=MnwyMDUzMDJ8MHwxfHNlYXJjaHwyfHxsaWdodG5lc3MlMjBhbmQlMjBtYW5hZ2VtZW50fGVufDB8fHx8fDE2NzMwMTkwOTQ&ixlib=rb-4.0.3&q=80&w=1080",
+    content: [
+      { name: "Introduction", videos: 1 },
+      { name: "1. Leadership Fundamentals", videos: 7 },
+      { name: "2. Effective Team Management", videos: 8 },
+      { name: "3. Strategic Planning", videos: 6 },
+      { name: "Skill Test", videos: 2 },
+    ],
+  },
+  {
+    id: "21",
+    name: "Spanish Language Mastery",
+    author: "Carlos Rodriguez",
+    category: "Design",
+    description:
+      "Become fluent in Spanish with comprehensive language lessons.",
+    duration: "2h 30min",
+    level: "Beginner",
+    price: 34.99,
+    rate: 2.6,
+    value: 18,
+    image:
+      "https://images.unsplash.com/photo-1568586068277-83b23e4a6949?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=MnwyMDUzMDJ8MHwxfHNlYXJjaHw3MHx8c3BhbmlzaCUyMGxhbmd1YWdlfGVufDB8fHx8fDE2NzMwMTkwOTQ&ixlib=rb-4.0.3&q=80&w=1080",
+    content: [
+      { name: "Introduction", videos: 1 },
+      { name: "1. Basic Vocabulary", videos: 7 },
+      { name: "2. Conversational Spanish", videos: 8 },
+      { name: "3. Cultural Insights", videos: 6 },
+      { name: "Skill Test", videos: 3 },
+    ],
+  },
+  {
+    id: "22",
+    name: "Artificial Intelligence Ethics",
+    author: "Dr. Alan Foster",
+    category: "Programming",
+    description: "Explore the ethical implications of AI and machine learning.",
+    duration: "2h 15min",
+    level: "Professional",
+    price: 39.99,
+    rate: 3.1,
+    value: 22,
+    image:
+      "https://images.unsplash.com/photo-1564772126-4f4e4470e3d2?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=MnwyMDUzMDJ8MHwxfHNlYXJjaHw1MXx8YXJ0aWZpY3klMjBpbXBsaWNhdGlvbnxlbnwxfHx8fHwxNjczMDE5MTk0&ixlib=rb-4.0.3&q=80&w=1080",
+    content: [
+      { name: "Introduction", videos: 1 },
+      { name: "1. AI Bias and Fairness", videos: 6 },
+      { name: "2. Privacy and Data Ethics", videos: 8 },
+      { name: "3. Ethical AI Development", videos: 5 },
+      { name: "Skill Test", videos: 3 },
+    ],
+  },
+  {
+    id: "23",
+    name: "Digital Marketing Analytics",
+    author: "Rachel Turner",
+    category: "Marketing",
+    description:
+      "Learn how to use data analytics for effective digital marketing strategies.",
+    duration: "2h 30min",
+    level: "Intermediate",
+    price: 34.99,
+    rate: 4.3,
+    value: 18,
+    image:
+      "https://images.unsplash.com/photo-1550745165-570b270e7c36?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=MnwyMDUzMDJ8MHwxfHNlYXJjaHw4OXx8ZGlnaXRhbCUyMG1hcmtldGluZyUyMGFuZCUyMGNvbXBldGl0aW9uJTIwYXNzaWdub258ZW58MXx8fHx8fDE2NzMwMTkwOTQ&ixlib=rb-4.0.3&q=80&w=1080",
+    content: [
+      { name: "Introduction", videos: 1 },
+      { name: "1. Data Collection and Analysis", videos: 7 },
+      { name: "2. Google Analytics", videos: 8 },
+      { name: "3. Campaign Optimization", videos: 6 },
+      { name: "Skill Test", videos: 2 },
+    ],
+  },
+  {
+    id: "24",
+    name: "Creative Writing Workshop",
+    author: "Olivia Walker",
+    category: "Drawing",
+    description:
+      "Unleash your creativity with writing exercises and storytelling techniques.",
+    duration: "2h 45min",
+    level: "Intermediate",
+    price: 29.99,
+    rate: 4.5,
+    value: 20,
+    image:
+      "https://images.unsplash.com/photo-1565092396188-2a23f3f4dce5?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=MnwyMDUzMDJ8MHwxfHNlYXJjaHwyfHxjcmVhdGl2ZSUyMGdyYXRpbmclMjB3cml0aW5nJTIwd29ya3Nob3d0aW5nJTIwdGVhbXN0cmFpbmd8ZW58MXx8fHx8fDE2NzMwMTkwOTQ&ixlib=rb-4.0.3&q=80&w=1080",
+    content: [
+      { name: "Introduction", videos: 1 },
+      { name: "1. Creative Writing Techniques", videos: 7 },
+      { name: "2. Storytelling Strategies", videos: 8 },
+      { name: "3. Poetry and Prose", videos: 6 },
+      { name: "Skill Test", videos: 2 },
+    ],
+  },
+  {
+    id: "25",
+    name: "Data Science for Beginners",
+    author: "Dr. Sarah Johnson",
+    category: "Marketing",
+    description:
+      "Introduction to data science, data analysis, and visualization.",
+    duration: "2h 15min",
+    level: "Beginner",
+    price: 39.99,
+    rate: 3.0,
+    value: 22,
+    image:
+      "https://images.unsplash.com/photo-1560807707-8cc77767d783?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=MnwyMDUzMDJ8MHwxfHNlYXJjaHwyfHxkYXRhJTIwc2NpZW5jZXxlbnwxfHx8fHwxNjczMDE5MTk0&ixlib=rb-4.0.3&q=80&w=1080",
+    content: [
+      { name: "Introduction", videos: 1 },
+      { name: "1. Data Analysis Tools", videos: 7 },
+      { name: "2. Data Visualization", videos: 8 },
+      { name: "3. Case Studies", videos: 6 },
+      { name: "Skill Test", videos: 3 },
+    ],
+  },
+  {
+    id: "26",
+    name: "Photography Editing Techniques",
+    author: "David Miller",
+    category: "Drawing",
+    description:
+      "Master photo editing software and enhance your photography skills.",
+    duration: "2h 30min",
+    level: "Intermediate",
+    price: 34.99,
+    rate: 2.2,
+    value: 18,
+    image:
+      "https://images.unsplash.com/photo-1564429598085-754d7f0e92bf?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=MnwyMDUzMDJ8MHwxfHNlYXJjaHw1M3x8cGhvdG9ncmFwaHklMjBlZGl0aW5nJTIwdGVhbXN0cmFpbmd8ZW58MXx8fHx8fDE2NzMwMTkwOTQ&ixlib=rb-4.0.3&q=80&w=1080",
+    content: [
+      { name: "Introduction", videos: 1 },
+      { name: "1. Editing Software Basics", videos: 7 },
+      { name: "2. Retouching and Effects", videos: 8 },
+      { name: "3. Advanced Editing Techniques", videos: 6 },
+      { name: "Skill Test", videos: 4 },
+    ],
+  },
+  {
+    id: "27",
+    name: "Entrepreneurship Fundamentals",
+    author: "Mark Johnson",
+    category: "HR",
+    description:
+      "Learn the basics of entrepreneurship and starting your own business.",
+    duration: "2h 45min",
+    level: "Beginner",
+    price: 29.99,
+    rate: 1.6,
+    value: 20,
+    image:
+      "https://images.unsplash.com/photo-1530614387541-8138f6871b21?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=MnwyMDUzMDJ8MHwxfHNlYXJjaHwyfHxlbmR0cmVlJTIwcHJvZHVjdHklMjBzZWN1cml0eSUyMGJ5fGVufDB8fHx8fDE2NzMwMTkwOTQ&ixlib=rb-4.0.3&q=80&w=1080",
+    content: [
+      { name: "Introduction", videos: 1 },
+      { name: "1. Entrepreneurial Mindset", videos: 7 },
+      { name: "2. Business Planning", videos: 8 },
+      { name: "3. Marketing Strategies", videos: 6 },
+      { name: "Skill Test", videos: 2 },
+    ],
+  },
+  {
+    id: "28",
+    name: "Digital Illustration Masterclass",
+    author: "Sophie Adams",
+    category: "Design",
+    description:
+      "Advance your digital illustration skills with in-depth techniques.",
+    duration: "2h 15min",
+    level: "Professional",
+    price: 39.99,
+    rate: 0.3,
+    value: 22,
+    image:
+      "https://images.unsplash.com/photo-1554177252-6a6f3e9ef5b3?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=MnwyMDUzMDJ8MHwxfHNlYXJjaHw0NXx8ZGlnaXRhbCUyMGlsbHVzdHJhdGlvbiUyMG1hcmtldGx5fGVufDB8fHx8fDE2NzMwMTkwOTQ&ixlib=rb-4.0.3&q=80&w=1080",
+    content: [
+      { name: "Introduction", videos: 1 },
+      { name: "1. Digital Drawing Tools", videos: 7 },
+      { name: "2. Illustration Techniques", videos: 8 },
+      { name: "3. Creating Digital Art", videos: 6 },
+      { name: "Skill Test", videos: 3 },
+    ],
+  },
 ];
+
 const firstPage = () => {
   return (
     <div className="flex bg-gray-300 w-screen h-screen">
@@ -271,8 +644,13 @@ const firstPage = () => {
           </div>
           <div>
             <Link href="/signin">
-              <button className="bg-blue-600 hover:bg-blue-500 text-white text-lg p-1 font-bold w-52 h-12 mt-10 tracking-wide rounded-xl">
+              <button className="block bg-blue-600 hover:bg-blue-500 text-white text-xl p-1 font-bold w-52 h-12 mt-10 tracking-wide rounded-xl">
                 GET STARTED
+              </button>
+            </Link>
+            <Link href="/home">
+              <button className="bg-blue-600 hover:bg-blue-500 text-white pr-8 pl-8 text-2xl p-1 font-bold w-102 h-12 mt-10 tracking-wide rounded-xl">
+                Continue As A Guest
               </button>
             </Link>
           </div>

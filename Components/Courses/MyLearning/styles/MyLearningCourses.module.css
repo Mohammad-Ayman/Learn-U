@@ -8,3 +8,20 @@
 .statistics:hover {
   color: rgb(3, 129, 255);
 }
+
+.coursesList {
+  max-height: 110vh;
+  overflow-y: scroll;
+}
+.coursesList::-webkit-scrollbar {
+  width: 0em;
+  height: 0em;
+}
+
+.coursesList::-webkit-scrollbar-thumb {
+  background-color: #fff;
+}
+
+.coursesList::-webkit-scrollbar-track {
+  background-color: transparent;
+}

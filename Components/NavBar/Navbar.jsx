@@ -11,6 +11,8 @@ const Navbar = () => {
     saved: false,
     profile: false,
   };
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+
   const [changeClass, setChangeClass] = useState(classes);
   const pathname = usePathname();
   if (
@@ -138,72 +140,76 @@ const Navbar = () => {
             <p className="text-l font-bold">Course</p>
           </div>
         </Link>
+        {/* Render Saved And Profile Only When isLoggedIn === true */}
+        {isLoggedIn === true && (
+          <>
+            <Link href="/saved">
+              <div
+                onClick={() =>
+                  setChangeClass({
+                    search: false,
+                    course: false,
+                    saved: true,
+                    profile: false,
+                    home: false,
+                  })
+                }
+                className={
+                  changeClass.saved
+                    ? "text-gray-400 hover:text-blue-400 cursor-pointer"
+                    : "text-gray-400 hover:text-blue-400 cursor-pointer"
+                }
+              >
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  viewBox="0 0 24 24"
+                  fill="currentColor"
+                  className="mx-auto w-10 h-10"
+                >
+                  <path
+                    fillRule="evenodd"
+                    d="M6.32 2.577a49.255 49.255 0 0111.36 0c1.497.174 2.57 1.46 2.57 2.93V21a.75.75 0 01-1.085.67L12 18.089l-7.165 3.583A.75.75 0 013.75 21V5.507c0-1.47 1.073-2.756 2.57-2.93z"
+                    clipRule="evenodd"
+                  />
+                </svg>
+                <p className="text-l font-bold">Saved</p>
+              </div>
+            </Link>
 
-        <Link href="/saved">
-          <div
-            onClick={() =>
-              setChangeClass({
-                search: false,
-                course: false,
-                saved: true,
-                profile: false,
-                home: false,
-              })
-            }
-            className={
-              changeClass.saved
-                ? "text-gray-400 hover:text-blue-400 cursor-pointer"
-                : "text-gray-400 hover:text-blue-400 cursor-pointer"
-            }
-          >
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              viewBox="0 0 24 24"
-              fill="currentColor"
-              className="mx-auto w-10 h-10"
-            >
-              <path
-                fillRule="evenodd"
-                d="M6.32 2.577a49.255 49.255 0 0111.36 0c1.497.174 2.57 1.46 2.57 2.93V21a.75.75 0 01-1.085.67L12 18.089l-7.165 3.583A.75.75 0 013.75 21V5.507c0-1.47 1.073-2.756 2.57-2.93z"
-                clipRule="evenodd"
-              />
-            </svg>
-            <p className="text-l font-bold">Saved</p>
-          </div>
-        </Link>
-
-        <Link href="/profile">
-          <div
-            onClick={() =>
-              setChangeClass({
-                search: false,
-                course: false,
-                saved: false,
-                profile: true,
-                home: false,
-              })
-            }
-            className={
-              changeClass.profile
-                ? "text-gray-400 hover:text-blue-400 cursor-pointer mb-4"
-                : "text-gray-400 hover:text-blue-400 cursor-pointer mb-4"
-            }
-          >
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              viewBox="0 0 24 24"
-              fill="currentColor"
-              className="mx-auto w-10 h-10"
-            >
-              <path
-                fillRule="evenodd"
-                d="M18.685 19.097A9.723 9.723 0 0021.75 12c0-5.385-4.365-9.75-9.75-9.75S2.25 6.615 2.25 12a9.723 9.723 0 003.065 7.097A9.716 9.716 0 0012 21.75a9.716 9.716 0 006.685-2.653zm-12.54-1.285A7.486 7.486 0 0112 15a7.486 7.486 0 015.855 2.812A8.224 8.224 0 0112 20.25a8.224 8.224 0 01-5.855-2.438zM15.75 9a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0z"
-                clipRule="evenodd"
-              />
-            </svg>
-            <p className="text-l font-bold">Profile</p>
-          </div>
-        </Link>
+            <Link href="/profile">
+              <div
+                onClick={() =>
+                  setChangeClass({
+                    search: false,
+                    course: false,
+                    saved: false,
+                    profile: true,
+                    home: false,
+                  })
+                }
+                className={
+                  changeClass.profile
+                    ? "text-gray-400 hover:text-blue-400 cursor-pointer mb-4"
+                    : "text-gray-400 hover:text-blue-400 cursor-pointer mb-4"
+                }
+              >
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  viewBox="0 0 24 24"
+                  fill="currentColor"
+                  className="mx-auto w-10 h-10"
+                >
+                  <path
+                    fillRule="evenodd"
+                    d="M18.685 19.097A9.723 9.723 0 0021.75 12c0-5.385-4.365-9.75-9.75-9.75S2.25 6.615 2.25 12a9.723 9.723 0 003.065 7.097A9.716 9.716 0 0012 21.75a9.716 9.716 0 006.685-2.653zm-12.54-1.285A7.486 7.486 0 0112 15a7.486 7.486 0 015.855 2.812A8.224 8.224 0 0112 20.25a8.224 8.224 0 01-5.855-2.438zM15.75 9a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0z"
+                    clipRule="evenodd"
+                  />
+                </svg>
+                <p className="text-l font-bold">Profile</p>
+              </div>
+            </Link>
+          </>
+        )}
       </div>
     </nav>
   );

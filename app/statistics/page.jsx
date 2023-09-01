@@ -1,8 +1,8 @@
 "use client";
-import ThisWeek from "@/components/Statistics/ThisWeek/ThisWeek";
-import MyPerformance from "@/components/Statistics/MyPerformance/MyPerformance";
-import MyActivity from "@/components/Statistics/MyActivity/MyActivity";
-import LastYear from "@/components/Statistics/LastYear/LastYear";
+import ThisWeek from "@/Components/Statistics/ThisWeek/ThisWeek";
+import MyPerformance from "@/Components/Statistics/MyPerformance/MyPerformance";
+import MyActivity from "@/Components/Statistics/MyActivity/MyActivity";
+import LastYear from "@/Components/Statistics/LastYear/LastYear";
 import Styles from "./statistics.module.css";
 
 const Statistics = (props) => {
