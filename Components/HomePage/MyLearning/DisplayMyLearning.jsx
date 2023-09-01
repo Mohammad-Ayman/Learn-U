@@ -1,6 +1,6 @@
-import Progress from "@/components/UI/Progress";
+import Progress from "@/Components/UI/Progress";
 import MyLearningElement from "./MyLearningElement";
-import Button from "@/components/UI/Button";
+import Button from "@/Components/UI/Button";
 
 const DisplayMyLearning = (props) => {
   const getClickedCourse = (event) => {
