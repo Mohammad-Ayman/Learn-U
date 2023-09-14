@@ -11,7 +11,7 @@ const Navbar = () => {
     saved: false,
     profile: false,
   };
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [isLoggedIn, setIsLoggedIn] = useState(true);
 
   const [changeClass, setChangeClass] = useState(classes);
   const pathname = usePathname();
@@ -176,7 +176,7 @@ const Navbar = () => {
               </div>
             </Link>
 
-            <Link href="/profile">
+            {/* <Link href="/profile">
               <div
                 onClick={() =>
                   setChangeClass({
@@ -207,7 +207,7 @@ const Navbar = () => {
                 </svg>
                 <p className="text-l font-bold">Profile</p>
               </div>
-            </Link>
+            </Link> */}
           </>
         )}
       </div>

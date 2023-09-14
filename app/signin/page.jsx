@@ -3,12 +3,14 @@ import React, { useState } from "react";
 import { useRouter } from "next/navigation";
 import Image from "next/image";
 import { auth, googleProvider } from "../../firebase";
+import db from "../../firebase";
 import { signInWithPopup } from "firebase/auth";
 import {
   getAuth,
   createUserWithEmailAndPassword,
   signInWithEmailAndPassword,
 } from "firebase/auth";
+import { collection, addDoc } from "firebase/firestore";
 import { AiOutlineEyeInvisible, AiOutlineEye } from "react-icons/ai";
 import styles from "./signinPage.module.css";
 
@@ -21,9 +23,63 @@ const LoginPage = () => {
   const [error, setError] = useState(null);
   const [passwordVisible, setPasswordVisible] = useState(false);
 
+  const addUserData = async (uid) => {
+    try {
+      const docRef = await setDoc(
+        doc(db, "users", "id36256"),
+        {
+          // first: "Ada",
+          // last: "Lovelace",
+          // born: 1815,
+          // id: uid,
+        }
+        // { merge: true }
+      );
+      const docRefSavedCourses = await addDoc(
+        collection(db, "saved courses"),
+        {
+          // first: "Ada",
+          // last: "Lovelace",
+          // born: 1815,
+          // id: uid,
+        }
+        // { merge: true }
+      );
+      console.log("Document written with ID: ", docRef.id);
+      console.log("Document written with ID: ", docRefSavedCourses.id);
+    } catch (e) {
+      console.error("Error adding document: ", e);
+    }
+  };
+  const addUserData1 = async (uid) => {
+    try {
+      // Add the user's UID as a document in the "users" collection
+      const userDocRef = doc(db, "users", uid);
+      await addDoc(userDocRef, {
+        // You can add additional user data here if needed
+      });
+
+      // Create a new collection named "savedcourses" for the user
+      const savedCoursesCollectionRef = collection(db, "savedcourses");
+      await addDoc(savedCoursesCollectionRef, {
+        // You can initialize saved courses data here if needed
+        // For example: { course1: true, course2: true }
+      });
+
+      console.log("User document and 'savedcourses' collection created.");
+    } catch (e) {
+      console.error("Error adding user data: ", e);
+    }
+  };
+
   const handleSignup = () => {
     createUserWithEmailAndPassword(auth, email, password)
-      .then(() => {
+      .then((userCredential) => {
+        const user = userCredential.user;
+        console.log(user);
+        // Call the function to add user data and create "savedcourses" collection
+        // addUserData(user.uid);
+        addUserData();
         router.push("/home");
       })
       .catch((error) => {
@@ -33,15 +89,20 @@ const LoginPage = () => {
         console.error(error);
       });
   };
-
   const handleLogin = () => {
     signInWithEmailAndPassword(auth, email, password)
-      .then(() => {
+      .then((userCredential) => {
+        const user = userCredential.user;
+        // console.log(user);
+        // addUserData(user.uid);
+        addUserData(user.uid);
         router.push("/home");
       })
       .catch((error) => {
-        setError("Incorrect email or password!");
-        console.error(error);
+        // setError("Incorrect email or password!");
+        setError(error.code);
+        // console.error(error.errors[0].message);
+        console.error(error.message);
       });
   };
 

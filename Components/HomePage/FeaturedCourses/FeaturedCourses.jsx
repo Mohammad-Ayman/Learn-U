@@ -4,13 +4,15 @@ import DisplayCourses from "./DisplayCourses";
 import styles from "./styles/featuredCourses.module.css";
 import { fetchCourses } from "@/Components/Fetching/fetching";
 
+import { courses } from "@/app/page";
+
 const FeaturedCourses = () => {
-  const [courses, setCourses] = useState([]);
+  const [fetchedCourses, setFetchedCourses] = useState([]);
 
   useEffect(() => {
     const fetchAllCourses = async () => {
       const courseList = await fetchCourses();
-      setCourses(courseList);
+      setFetchedCourses(courseList);
     };
 
     fetchAllCourses();
@@ -19,11 +21,16 @@ const FeaturedCourses = () => {
   return (
     <section className={styles["features-container"]}>
       <h2 className="header-text">Featured Courses</h2>
-      <ul className={`${styles["cards-container"]} mflex`}>
-        {courses && <DisplayCourses AllCourses={courses.slice(0, 4)} />}
-      </ul>
+      <DisplayCourses AllCourses={courses.slice(0, 5)} />
     </section>
   );
 };
 
 export default FeaturedCourses;
+
+// <ul className={`${styles["cards-container"]} mflex`}>
+//   {/* {fetchedCourses && (
+//     <DisplayCourses AllCourses={fetchedCourses.slice(0, 4)} />
+//   )} */}
+//   {courses && <DisplayCourses AllCourses={courses.slice(0, 4)} />}
+// </ul>

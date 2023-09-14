@@ -5,19 +5,19 @@
 
 .cards-container {
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
+  grid-template-columns: repeat(5, 1fr);
   gap: 1rem;
   justify-content: flex-start;
 }
 
-@media (max-width: 950px) {
+@media (max-width: 1250px) {
   .cards-container {
-    grid-template-columns: repeat(2, 1fr);
+    grid-template-columns: repeat(3, 1fr);
     column-gap: 4rem;
   }
 }
 
-@media (max-width: 480px) {
+@media (max-width: 680px) {
   .cards-container {
     grid-template-columns: repeat(2, 1fr);
     column-gap: 1rem;

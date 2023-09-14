@@ -3,6 +3,7 @@ import FeaturedCourses from "@/Components/HomePage/FeaturedCourses/FeaturedCours
 import MyLearning from "@/Components/HomePage/MyLearning/MyLearning";
 
 const Home = (props) => {
+  
   return (
     <main className="home-container">
       <FeaturedCourses />

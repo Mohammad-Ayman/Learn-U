@@ -39,38 +39,42 @@ const BookmarkButton = styled.button`
 `;
 
 const FeaturedCourseElement = (props) => {
-  const [isBookmarked, setIsBookmarked] = useState(false);
+  // const [isBookmarked, setIsBookmarked] = useState(false);
 
-  useEffect(() => {
-    const fetchBookmarkStatus = async () => {
-      const status = await checkIfBookmarked(props.name);
-      setIsBookmarked(status);
-    };
-    fetchBookmarkStatus();
-  }, [props.name]);
+  // useEffect(() => {
+  //   const fetchBookmarkStatus = async () => {
+  //     const status = await checkIfBookmarked(props.name);
+  //     setIsBookmarked(status);
+  //   };
+  //   fetchBookmarkStatus();
+  // }, [props.name]);
 
-  const handleBookmark = async () => {
-    try {
-      const alreadyBookmarked = await checkIfBookmarked(props.name);
-      if (alreadyBookmarked) {
-        alert("This course has already been added!");
-        return;
-      }
-      await bookmarkCourse({
-        name: props.name,
-        image: props.image,
-        duration: props.duration,
-        rate: props.rate,
-        price: props.price,
-      });
-      setIsBookmarked(true);
-    } catch (error) {
-      console.error("Error bookmarking course: ", error);
-    }
-  };
+  // const handleBookmark = async () => {
+  //   try {
+  //     const alreadyBookmarked = await checkIfBookmarked(props.name);
+  //     if (alreadyBookmarked) {
+  //       alert("This course has already been added!");
+  //       return;
+  //     }
+  //     await bookmarkCourse({
+  //       name: props.name,
+  //       image: props.image,
+  //       duration: props.duration,
+  //       rate: props.rate,
+  //       price: props.price,
+  //     });
+  //     setIsBookmarked(true);
+  //   } catch (error) {
+  //     console.error("Error bookmarking course: ", error);
+  //   }
+  // };
 
   return (
-    <li key={props.id} className={`${styles["course-card"]} mflex`}>
+    <li
+      key={props.id}
+      className={`${styles["course-card"]} mflex`}
+      data-courseId={props.id}
+    >
       <div className={`${styles["course-image__container"]}`}>
         <img src={props.image} />
       </div>
@@ -105,11 +109,11 @@ const FeaturedCourseElement = (props) => {
               clipRule="evenodd"
             />
           </svg>
-          {props.rate}/5
+          {props.rate}/5.0
         </p>
         <ButtonContainer>
           <PriceBox>${props.price}</PriceBox>
-          <BookmarkButton onClick={handleBookmark}>
+          {/* <BookmarkButton onClick={handleBookmark}>
             <svg
               xmlns="http://www.w3.org/2000/svg"
               className="bookmark-icon"
@@ -124,7 +128,7 @@ const FeaturedCourseElement = (props) => {
                 d="M4 6a2 2 0 012-2h12a2 2 0 012 2v14l-8-4-8 4V6z"
               />
             </svg>
-          </BookmarkButton>
+          </BookmarkButton> */}
         </ButtonContainer>
       </div>
     </li>
