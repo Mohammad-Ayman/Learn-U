@@ -1,10 +1,8 @@
 import { courses } from "@/app/page";
 import DisplayMyLearning from "./DisplayMyLearning";
 import styles from "./styles/myLearning.module.css";
-import Button from "@/components/UI/Button";
-import Progress from "@/components/UI/Progress";
 
-const MyLearning = (props) => {
+const MyLearning = () => {
   return (
     <section className={styles["myLearning-container"]}>
       <h2 className="header-text">My Learning</h2>
