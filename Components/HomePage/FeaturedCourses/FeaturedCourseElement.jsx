@@ -1,6 +1,8 @@
 "use client";
 import styles from "./styles/featuredCourseElement.module.css";
 import { styled } from "styled-components";
+import { useRouter } from "next/navigation";
+import { courses } from "@/app/page";
 import { useState, useEffect } from "react";
 import {
   checkIfBookmarked,
@@ -68,12 +70,24 @@ const FeaturedCourseElement = (props) => {
   //     console.error("Error bookmarking course: ", error);
   //   }
   // };
-
+  const router = useRouter();
+  const reviewBtnHandler = () => {
+    const course = courses.find((course) => course.id === props.id);
+    if (course) {
+      // Navigate to the dynamic course page with the course Name
+      const coursePageUrl = `/courses/${course.id}`;
+      console.log(coursePageUrl);
+      router.push(coursePageUrl);
+    } else {
+      console.log(typeof props.getClickedCourseName);
+    }
+  };
   return (
     <li
       key={props.id}
       className={`${styles["course-card"]} mflex`}
       data-courseId={props.id}
+      onClick={reviewBtnHandler}
     >
       <div className={`${styles["course-image__container"]}`}>
         <img src={props.image} />
