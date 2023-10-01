@@ -1,6 +1,6 @@
 "use client";
 import AuthContext from "@/store/AuthContext";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
 import Image from "next/image";
 import { auth, googleProvider } from "../../firebase";
@@ -11,7 +11,7 @@ import {
   createUserWithEmailAndPassword,
   signInWithEmailAndPassword,
 } from "firebase/auth";
-import { collection, addDoc } from "firebase/firestore";
+import { collection, addDoc, doc, setDoc } from "firebase/firestore";
 import { AiOutlineEyeInvisible, AiOutlineEye } from "react-icons/ai";
 import styles from "./signinPage.module.css";
 
@@ -27,19 +27,23 @@ const LoginPage = () => {
   const [savedCourses, setSavedCourses] = useState([]);
   const [myLearning, setMyLearning] = useState([]);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [userId, setUserId] = useState(null);
 
   const addUserData = async (uid) => {
     try {
-      const docRef = await setDoc(
-        doc(db, "users", "id36256")
-        // { merge: true }
-      );
-      const docRefSavedCourses = await addDoc(
-        collection(db, "saved courses")
-        // { merge: true }
-      );
-      console.log("Document written with ID: ", docRef.id);
-      console.log("Document written with ID: ", docRefSavedCourses.id);
+      console.log("Calling addUserData...");
+      const userDocRef = doc(db, "users", uid);
+
+      // Data to associate with the user
+      const userData = {
+        savedCourses: [],
+        myLearning: [],
+      };
+
+      // Set or update user data
+      await setDoc(userDocRef, userData); // Use setDoc to set the data
+
+      console.log("Document written with ID: ", uid); // You can use 'uid' as the document ID
     } catch (e) {
       console.error("Error adding document: ", e);
     }
@@ -51,6 +55,7 @@ const LoginPage = () => {
         const user = userCredential.user;
         console.log(user);
         setIsLoggedIn(true);
+        setUserId(user.uid);
         // Call the function to add user data and create "savedcourses" collection
         addUserData(user.uid);
         router.push("/home");
@@ -66,15 +71,14 @@ const LoginPage = () => {
     signInWithEmailAndPassword(auth, email, password)
       .then((userCredential) => {
         const user = userCredential.user;
-        setIsLoggedIn(true);
-        // console.log(user);
         addUserData(user.uid);
+        setIsLoggedIn(true);
+        // setUserId(user.uid);
         router.push("/home");
       })
       .catch((error) => {
         // setError("Incorrect email or password!");
         setError(error.code);
-        // console.error(error.errors[0].message);
         console.error(error.message);
       });
   };
@@ -93,7 +97,10 @@ const LoginPage = () => {
   const navigateToHomePage = () => {
     router.push("/");
   };
-
+  useEffect(() => {
+    console.log(userId);
+    console.log(isLoggedIn);
+  }, [userId, isLoggedIn]);
   return (
     <AuthContext.Provider
       value={{ isLoggedIn, userId, savedCourses, myLearning }}
@@ -162,6 +169,7 @@ const LoginPage = () => {
                   <AiOutlineEye size={18} />
                 )}
               </span>
+              <button onClick={addUserData}>click me</button>
             </div>
 
             <input
