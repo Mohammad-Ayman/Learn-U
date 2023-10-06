@@ -71,9 +71,9 @@ const LoginPage = () => {
     signInWithEmailAndPassword(auth, email, password)
       .then((userCredential) => {
         const user = userCredential.user;
-        addUserData(user.uid);
+        // addUserData(user.uid);
         setIsLoggedIn(true);
-        // setUserId(user.uid);
+        setUserId(user.uid);
         router.push("/home");
       })
       .catch((error) => {
@@ -169,7 +169,6 @@ const LoginPage = () => {
                   <AiOutlineEye size={18} />
                 )}
               </span>
-              <button onClick={addUserData}>click me</button>
             </div>
 
             <input
