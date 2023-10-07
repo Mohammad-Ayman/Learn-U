@@ -1,9 +1,11 @@
 "use client";
 import { usePathname } from "next/navigation";
 import Link from "next/link";
-import { useState } from "react";
+import { useState, useContext } from "react";
+// import AuthContext from "@/store/AuthContext";
 
-const Navbar = () => {
+const Navbar = (props) => {
+  // const authContext = useContext(AuthContext);
   const classes = {
     home: true,
     search: false,
@@ -11,7 +13,7 @@ const Navbar = () => {
     saved: false,
     profile: false,
   };
-  const [isLoggedIn, setIsLoggedIn] = useState(true);
+  // const [isLoggedIn, setIsLoggedIn] = useState(true);
 
   const [changeClass, setChangeClass] = useState(classes);
   const pathname = usePathname();
@@ -22,7 +24,7 @@ const Navbar = () => {
   ) {
     return null;
   }
-
+  console.log("hello", props.isLoggedIn);
   return (
     <nav
       className={`flex flex-col rounded w-20 h-screen text-center gap-10 pl-10 pt-12`}
@@ -141,7 +143,7 @@ const Navbar = () => {
           </div>
         </Link>
         {/* Render Saved And Profile Only When isLoggedIn === true */}
-        {isLoggedIn === true && (
+        {props.isLoggedIn === true && (
           <>
             <Link href="/saved">
               <div
