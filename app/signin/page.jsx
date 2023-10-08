@@ -1,24 +1,18 @@
 "use client";
 import AuthContext from "@/store/AuthContext";
-import React, { useState, useEffect, useContext } from "react";
+import React, { useState, useContext } from "react";
 import { useRouter } from "next/navigation";
 import Image from "next/image";
-import { auth, googleProvider } from "../../firebase";
-import db from "../../firebase";
-import { signInWithPopup } from "firebase/auth";
 import {
-  getAuth,
-  createUserWithEmailAndPassword,
-  signInWithEmailAndPassword,
-} from "firebase/auth";
-import { collection, addDoc, doc, setDoc } from "firebase/firestore";
+  handleSignup,
+  handleLogin,
+  handleGoogleLogin,
+} from "@/store/AuthContext";
 import { AiOutlineEyeInvisible, AiOutlineEye } from "react-icons/ai";
 import styles from "./signinPage.module.css";
 
 const LoginPage = () => {
   const router = useRouter();
-  const auth = getAuth();
-
   const authContext = useContext(AuthContext);
 
   const [email, setEmail] = useState("");
@@ -26,79 +20,10 @@ const LoginPage = () => {
   const [error, setError] = useState(null);
   const [passwordVisible, setPasswordVisible] = useState(false);
 
- 
-  const addUserData = async (uid) => {
-    try {
-      console.log("Calling addUserData...");
-      const userDocRef = doc(db, "users", uid);
-
-      // Data to associate with the user
-      const userData = {
-        savedCourses: [],
-        myLearning: [],
-      };
-
-      // Set or update user data
-      await setDoc(userDocRef, userData); // Use setDoc to set the data
-
-      console.log("Document written with ID: ", uid); // You can use 'uid' as the document ID
-    } catch (e) {
-      console.error("Error adding document: ", e);
-    }
-  };
-
-  const handleSignup = () => {
-    createUserWithEmailAndPassword(auth, email, password)
-      .then((userCredential) => {
-        const user = userCredential.user;
-        console.log(user);
-        authContext.setIsLoggedIn(true);
-        authContext.setUserId(user.uid);
-        // Call the function to add user data and create "savedcourses" collection
-        addUserData(user.uid);
-        router.push("/home");
-      })
-      .catch((error) => {
-        setError(
-          "Incorrect email or password! Please provide valid email and password with at least 6 characters"
-        );
-        console.error(error);
-      });
-  };
-  const handleLogin = () => {
-    signInWithEmailAndPassword(auth, email, password)
-      .then((userCredential) => {
-        const user = userCredential.user;
-        // addUserData(user.uid);
-        authContext.setIsLoggedIn(true);
-        authContext.setUserId(user.uid);
-        router.push("/home");
-      })
-      .catch((error) => {
-        // setError("Incorrect email or password!");
-        setError(error.code);
-        console.error(error.message);
-      });
-  };
-
-  const handleGoogleLogin = () => {
-    signInWithPopup(auth, googleProvider)
-      .then(() => {
-        authContext.setIsLoggedIn(true);
-        router.push("/home");
-      })
-      .catch((error) => {
-        console.error(error);
-      });
-  };
-
   const navigateToHomePage = () => {
     router.push("/");
   };
-  useEffect(() => {
-    console.log(authContext.userId);
-    console.log(authContext.isLoggedIn);
-  }, [authContext.userId, authContext.isLoggedIn]);
+
   return (
     <div className="flex bg-gray-300 w-screen h-screen">
       <div className="w-1/2 flex items-center justify-center h-screen p-2">
@@ -169,14 +94,18 @@ const LoginPage = () => {
           <input
             className="bg-blue-600 hover:bg-blue-500 text-white font-semibold text-2xl h-20 rounded-xl pl-4 m-10 mt-0"
             type="submit"
-            onClick={handleLogin}
+            onClick={() =>
+              handleLogin(email, password, setError, authContext, router)
+            }
             value="Log In"
           />
           <hr className="bg-slate-400 mx-auto mt-0 w-1/2 h-1 rounded" />
           <input
             className="bg-green-600 hover:bg-green-500 text-white font-semibold text-2xl h-20 rounded-xl pl-4 m-10"
             type="button"
-            onClick={handleSignup}
+            onClick={() =>
+              handleSignup(email, password, setError, authContext, router)
+            }
             name=""
             id=""
             value="Sign Up"
@@ -184,7 +113,7 @@ const LoginPage = () => {
           <input
             className="bg-red-600 hover:bg-red-500 text-white font-semibold text-2xl h-20 rounded-xl pl-4 m-10 mt-0"
             type="button"
-            onClick={handleGoogleLogin}
+            onClick={() => handleGoogleLogin(authContext, router)}
             value="Log In with Google"
           />
         </div>

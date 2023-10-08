@@ -86,7 +86,7 @@ const FeaturedCourseElement = (props) => {
     <li
       key={props.id}
       className={`${styles["course-card"]} mflex`}
-      data-courseId={props.id}
+      data-courseid={props.id}
       onClick={reviewBtnHandler}
     >
       <div className={`${styles["course-image__container"]}`}>
