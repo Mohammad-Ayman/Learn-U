@@ -1,6 +1,7 @@
 import React, { useContext } from "react";
 
-import { db, auth, googleProvider } from "@/firebase";
+import db from "@/firebase";
+import { auth, googleProvider } from "@/firebase";
 import { signInWithPopup } from "firebase/auth";
 import {
   getAuth,
