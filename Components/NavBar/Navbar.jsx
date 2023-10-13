@@ -3,12 +3,7 @@ import { usePathname } from "next/navigation";
 import Link from "next/link";
 import { useState, useContext } from "react";
 import AuthContext from "@/store/AuthContext";
-import {
-  handleSignup,
-  handleLogin,
-  handleGoogleLogin,
-  handleLogout,
-} from "@/store/AuthContext";
+import { handleLogout } from "@/store/AuthContext";
 
 const Navbar = () => {
   const authContext = useContext(AuthContext);
@@ -19,7 +14,6 @@ const Navbar = () => {
     saved: false,
     profile: false,
   };
-  // const [isLoggedIn, setIsLoggedIn] = useState(true);
 
   const [changeClass, setChangeClass] = useState(classes);
   const pathname = usePathname();
@@ -30,7 +24,6 @@ const Navbar = () => {
   ) {
     return null;
   }
-  console.log("hello", authContext.isLoggedIn);
   return (
     <nav
       className={`flex flex-col rounded w-20 h-screen text-center gap-10 pl-10 pt-12`}
@@ -183,30 +176,6 @@ const Navbar = () => {
                 <p className="text-l font-bold">Saved</p>
               </div>
             </Link>
-            <Link href="/signin">
-              <div
-                onClick={() => handleLogout(authContext)}
-                className={
-                  changeClass.profile
-                    ? "text-gray-400 hover:text-blue-400 cursor-pointer mb-4"
-                    : "text-gray-400 hover:text-blue-400 cursor-pointer mb-4"
-                }
-              >
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  viewBox="0 0 24 24"
-                  fill="currentColor"
-                  className="mx-auto w-10 h-10"
-                >
-                  <path
-                    fillRule="evenodd"
-                    d="M18.685 19.097A9.723 9.723 0 0021.75 12c0-5.385-4.365-9.75-9.75-9.75S2.25 6.615 2.25 12a9.723 9.723 0 003.065 7.097A9.716 9.716 0 0012 21.75a9.716 9.716 0 006.685-2.653zm-12.54-1.285A7.486 7.486 0 0112 15a7.486 7.486 0 015.855 2.812A8.224 8.224 0 0112 20.25a8.224 8.224 0 01-5.855-2.438zM15.75 9a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0z"
-                    clipRule="evenodd"
-                  />
-                </svg>
-                <p className="text-l font-bold">Signout</p>
-              </div>
-            </Link>
             {/* <Link href="/profile">
               <div
                 onClick={() =>
@@ -241,6 +210,37 @@ const Navbar = () => {
             </Link> */}
           </>
         )}
+
+        <Link href="/signin">
+          <div
+            onClick={() => {
+              if (authContext.isLoggedIn === true) {
+                handleLogout(authContext);
+              }
+            }}
+            className={
+              changeClass.profile
+                ? "text-gray-400 hover:text-blue-400 cursor-pointer mb-4"
+                : "text-gray-400 hover:text-blue-400 cursor-pointer mb-4"
+            }
+          >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              viewBox="0 0 24 24"
+              fill="currentColor"
+              className="mx-auto w-10 h-10"
+            >
+              <path
+                fillRule="evenodd"
+                d="M18.685 19.097A9.723 9.723 0 0021.75 12c0-5.385-4.365-9.75-9.75-9.75S2.25 6.615 2.25 12a9.723 9.723 0 003.065 7.097A9.716 9.716 0 0012 21.75a9.716 9.716 0 006.685-2.653zm-12.54-1.285A7.486 7.486 0 0112 15a7.486 7.486 0 015.855 2.812A8.224 8.224 0 0112 20.25a8.224 8.224 0 01-5.855-2.438zM15.75 9a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0z"
+                clipRule="evenodd"
+              />
+            </svg>
+            <p className="text-l font-bold">
+              {authContext.isLoggedIn === true ? "Logout" : "Login"}
+            </p>
+          </div>
+        </Link>
       </div>
     </nav>
   );
