@@ -1,6 +1,9 @@
-import React from "react";
+"use client";
+import React, { useEffect, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
+import { getDocs, collection, addDoc, query, where } from "firebase/firestore";
+import db from "@/firebase.js";
 
 const courses = [
   {
@@ -611,7 +614,24 @@ const courses = [
   },
 ];
 
+// let courses = [];
 const firstPage = () => {
+  // const [courses, setCourses] = useState([]);
+
+  // useEffect(() => {
+  //   const fetchCourses = async () => {
+  //     const courseCollection = collection(db, "courses");
+  //     const courseSnapshot = await getDocs(courseCollection);
+  //     const coursesData = [];
+  //     courseSnapshot.forEach((doc) => {
+  //       // coursesData.push({ id: doc.id, ...doc.data() });
+  //       courses.push({ id: doc.id, ...doc.data() });
+  //     });
+  //     // setCourses(coursesData);
+  //   };
+
+  //   fetchCourses(); // Call the fetchCourses function when the component mounts
+  // }, []); //
   return (
     <div className="flex bg-gray-300 w-screen h-screen">
       <div className="w-1/2 flex items-center justify-center h-screen">

@@ -1,3 +1,4 @@
+"use client";
 import { courses } from "@/app/page";
 import DisplayMyLearning from "./DisplayMyLearning";
 import styles from "./styles/myLearning.module.css";

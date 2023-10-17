@@ -12,6 +12,7 @@ const FeaturedCourses = () => {
   useEffect(() => {
     const fetchAllCourses = async () => {
       const courseList = await fetchCourses();
+      console.log(courseList);
       setFetchedCourses(courseList);
     };
 
@@ -22,6 +23,7 @@ const FeaturedCourses = () => {
     <section className={styles["features-container"]}>
       <h2 className="header-text">Featured Courses</h2>
       <DisplayCourses AllCourses={courses.slice(0, 5)} />
+      {/* <DisplayCourses AllCourses={fetchedCourses.slice(0, 5)} /> */}
     </section>
   );
 };

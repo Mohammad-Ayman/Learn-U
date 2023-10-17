@@ -4,7 +4,11 @@ import db from "@/firebase.js";
 export const fetchCourses = async () => {
   const courseCollection = collection(db, "courses");
   const courseSnapshot = await getDocs(courseCollection);
-  return courseSnapshot.docs.map((doc) => doc.data());
+  let courses1=[];
+  courseSnapshot.forEach((doc) => {
+    courses1.push({ id: doc.id, ...doc.data() });
+  });
+  return courses1;
 };
 
 export const fetchSavedCourses = async () => {
