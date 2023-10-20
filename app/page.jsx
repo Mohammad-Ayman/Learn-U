@@ -614,24 +614,24 @@ const courses = [
   },
 ];
 
-// let courses = [];
+let featuredCourses = [];
 const firstPage = () => {
-  // const [courses, setCourses] = useState([]);
+  const [courses, setCourses] = useState([]);
 
-  // useEffect(() => {
-  //   const fetchCourses = async () => {
-  //     const courseCollection = collection(db, "courses");
-  //     const courseSnapshot = await getDocs(courseCollection);
-  //     const coursesData = [];
-  //     courseSnapshot.forEach((doc) => {
-  //       // coursesData.push({ id: doc.id, ...doc.data() });
-  //       courses.push({ id: doc.id, ...doc.data() });
-  //     });
-  //     // setCourses(coursesData);
-  //   };
+  useEffect(() => {
+    const fetchCourses = async () => {
+      const courseCollection = collection(db, "courses");
+      const courseSnapshot = await getDocs(courseCollection);
+      const coursesData = [];
+      courseSnapshot.forEach((doc) => {
+        // coursesData.push({ id: doc.id, ...doc.data() });
+        featuredCourses.push({ id: doc.id, ...doc.data() });
+      });
+      // setCourses(coursesData);
+    };
 
-  //   fetchCourses(); // Call the fetchCourses function when the component mounts
-  // }, []); //
+    fetchCourses(); // Call the fetchCourses function when the component mounts
+  }, []); //
   return (
     <div className="flex bg-gray-300 w-screen h-screen">
       <div className="w-1/2 flex items-center justify-center h-screen">
