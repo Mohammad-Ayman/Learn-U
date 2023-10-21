@@ -8,45 +8,28 @@ import db from "@/firebase.js";
 import { courses } from "@/app/page";
 
 const FeaturedCourses = () => {
-  const [featuredCourses, setFeaturedCourses] = useState([]);
-  useEffect(() => {
-    const fetchCourses = async () => {
-      const courseCollection = collection(db, "courses");
-      const courseSnapshot = await getDocs(courseCollection);
-      const coursesData = [];
-      courseSnapshot.forEach((doc) => {
-        coursesData.push({ id: doc.id, ...doc.data() });
-        setFeaturedCourses(coursesData);
-      });
-      // setCourses(coursesData);
-    };
-
-    fetchCourses(); // Call the fetchCourses function when the component mounts
-  }, []); //
+  // const [featuredCourses, setFeaturedCourses] = useState([]);
   // useEffect(() => {
-  //   const fetchAllCourses = async () => {
-  //     const courseList = await fetchCourses();
-  //     console.log(courseList);
-  //     setFetchedCourses(courseList);
+  //   const fetchCourses = async () => {
+  //     const courseCollection = collection(db, "courses");
+  //     const courseSnapshot = await getDocs(courseCollection);
+  //     const coursesData = [];
+  //     courseSnapshot.forEach((doc) => {
+  //       coursesData.push({ id: doc.id, ...doc.data() });
+  //       setFeaturedCourses(coursesData);
+  //     });
+  //     // setCourses(coursesData);
   //   };
 
-  //   fetchAllCourses();
+  //   fetchCourses(); // Call the fetchCourses function when the component mounts
   // }, []);
-
   return (
     <section className={styles["features-container"]}>
       <h2 className="header-text">Featured Courses</h2>
-      {/* <DisplayCourses AllCourses={courses.slice(0, 5)} /> */}
-      <DisplayCourses AllCourses={featuredCourses.slice(0, 5)} />
+      <DisplayCourses AllCourses={courses.slice(0, 5)} />
+      {/* <DisplayCourses AllCourses={featuredCourses.slice(0, 5)} /> */}
     </section>
   );
 };
 
 export default FeaturedCourses;
-
-// <ul className={`${styles["cards-container"]} mflex`}>
-//   {/* {fetchedCourses && (
-//     <DisplayCourses AllCourses={fetchedCourses.slice(0, 4)} />
-//   )} */}
-//   {courses && <DisplayCourses AllCourses={courses.slice(0, 4)} />}
-// </ul>
