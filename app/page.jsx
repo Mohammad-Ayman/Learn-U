@@ -2,15 +2,7 @@
 import React, { useEffect, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
-import {
-  getDocs,
-  collection,
-  addDoc,
-  query,
-  where,
-  updateDoc,
-  doc,
-} from "firebase/firestore";
+import { getDocs, collection } from "firebase/firestore";
 import db from "@/firebase.js";
 
 // const courses2 = [

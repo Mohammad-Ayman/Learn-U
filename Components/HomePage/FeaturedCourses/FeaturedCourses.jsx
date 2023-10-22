@@ -1,13 +1,15 @@
 "use client";
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import DisplayCourses from "./DisplayCourses";
 import styles from "./styles/featuredCourses.module.css";
 import { fetchCourses } from "@/Components/Fetching/fetching";
 import { getDocs, collection, addDoc, query, where } from "firebase/firestore";
 import db from "@/firebase.js";
 import { courses } from "@/app/page";
+import FetchedCourses from "@/store/FetchedCourses";
 
 const FeaturedCourses = () => {
+  const fetchedCourses = useContext(FetchedCourses);
   // const [featuredCourses, setFeaturedCourses] = useState([]);
   // useEffect(() => {
   //   const fetchCourses = async () => {
@@ -26,7 +28,7 @@ const FeaturedCourses = () => {
   return (
     <section className={styles["features-container"]}>
       <h2 className="header-text">Featured Courses</h2>
-      <DisplayCourses AllCourses={courses.slice(0, 5)} />
+      <DisplayCourses AllCourses={fetchedCourses.layoutCourses.slice(0, 5)} />
       {/* <DisplayCourses AllCourses={featuredCourses.slice(0, 5)} /> */}
     </section>
   );
