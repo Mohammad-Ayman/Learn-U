@@ -12,7 +12,8 @@ const MyLearning = () => {
       <h2 className="header-text">My Learning</h2>
       <ul className={`${styles["cards-container"]} mflex`}>
         <DisplayMyLearning
-          AllCourses={fetchedCourses.layoutCourses.slice(0, 2)}
+          // AllCourses={fetchedCourses.layoutCourses.slice(0, 2)}
+          AllCourses={courses.slice(0, 2)}
         ></DisplayMyLearning>
       </ul>
     </section>
