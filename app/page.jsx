@@ -5,7 +5,7 @@ import Link from "next/link";
 import { getDocs, collection } from "firebase/firestore";
 import db from "@/firebase.js";
 
-// const courses2 = [
+// const courses = [
 //   {
 //     id: "1",
 //     name: "Building ios15 App",
@@ -616,33 +616,6 @@ import db from "@/firebase.js";
 
 let courses = [];
 const firstPage = () => {
-  useEffect(() => {
-    const fetchCourses = async () => {
-      const courseCollection = collection(db, "courses");
-      const courseSnapshot = await getDocs(courseCollection);
-      const coursesData = [];
-      courseSnapshot.forEach((doc) => {
-        coursesData.push({ id: doc.id, ...doc.data() });
-      });
-      courses = coursesData;
-    };
-
-    fetchCourses(); // Call the fetchCourses function when the component mounts
-  }, []);
-
-  // const collectionName = "courses";
-  // const inert = () => {
-  //   // Iterate through the courses array and add each course as a document
-  //   courses2.forEach(async (course) => {
-  //     try {
-  //       // Use the `add` method to add a new document to the collection
-  //       const docRef = await addDoc(collection(db, collectionName), course);
-  //       console.log(`Course added with ID: ${docRef.id}`);
-  //     } catch (error) {
-  //       console.error("Error adding course: ", error);
-  //     }
-  //   });
-  // };
   return (
     <div className="flex bg-gray-300 w-screen h-screen">
       <div className="w-1/2 flex items-center justify-center h-screen">

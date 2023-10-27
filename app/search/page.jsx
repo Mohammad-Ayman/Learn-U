@@ -9,16 +9,24 @@ import SearchContext from "@/store/search-context";
 
 import { useState, useEffect, useContext } from "react";
 import FetchedCourses from "@/store/FetchedCourses";
+import { fetchCourses } from "@/Components/Fetching/fetching";
 import { courses } from "@/app/page";
 
 const Search = () => {
+  const [allCourses, setAllCourses] = useState([]);
+  const [filteredCourses, setFilteredCourses] = useState([]);
+  useEffect(() => {
+    const fetchAllCourses = async () => {
+      const courses = await fetchCourses();
+      setAllCourses(courses);
+      setFilteredCourses(courses);
+    };
+
+    fetchAllCourses();
+  }, []);
   const fetchedCourses = useContext(FetchedCourses);
 
   const [filter, setFilter] = useState("");
-  // const [filteredCourses, setFilteredCourses] = useState([]);
-  const [filteredCourses, setFilteredCourses] = useState(
-    fetchedCourses.layoutCourses
-  );
   const [filterOptions, setFilterOptions] = useState([
     {
       category: [],
@@ -32,7 +40,7 @@ const Search = () => {
     setFilter(searchInput);
   };
   const filterSearchBar = () => {
-    const filteredCourses = fetchedCourses.layoutCourses.filter(
+    const filteredCourses = allCourses.filter(
       (course) =>
         course.category.toLowerCase().includes(filter.toLowerCase()) ||
         course.name.toLowerCase().includes(filter.toLowerCase()) ||
@@ -53,21 +61,19 @@ const Search = () => {
   };
 
   const applyFilterOptions = () => {
-    let filteredOptionsCourses = fetchedCourses.layoutCourses.filter(
-      (course) => {
-        const categoryMatch = filterOptions.category
-          ? filterOptions.category.length === 0 ||
-            filterOptions.category.includes(course.category.toLowerCase())
-          : course;
-        const levelMatch = filterOptions.level
-          ? filterOptions.level.length === 0 ||
-            filterOptions.level.includes(course.level.toLowerCase())
-          : course;
-        const rateMatch = +course.rate <= (+filterOptions.rate || 5);
+    let filteredOptionsCourses = allCourses.filter((course) => {
+      const categoryMatch = filterOptions.category
+        ? filterOptions.category.length === 0 ||
+          filterOptions.category.includes(course.category.toLowerCase())
+        : course;
+      const levelMatch = filterOptions.level
+        ? filterOptions.level.length === 0 ||
+          filterOptions.level.includes(course.level.toLowerCase())
+        : course;
+      const rateMatch = +course.rate <= (+filterOptions.rate || 5);
 
-        return categoryMatch && levelMatch && rateMatch;
-      }
-    );
+      return categoryMatch && levelMatch && rateMatch;
+    });
     // Set the state with the filtered courses
     setFilteredCourses(filteredOptionsCourses);
     console.log("filteredOptionsCourses", filteredOptionsCourses);
@@ -84,7 +90,10 @@ const Search = () => {
         <TopSearches onClick={handleInputChange} />
         <CategoriesSearchPage />
         <RatingLevel />
-        <Recommended filteredCoursesProp={filteredCourses} />
+        <Recommended
+          filteredCoursesProp={filteredCourses}
+          allData={allCourses}
+        />
       </SearchContext.Provider>
     </main>
   );

@@ -33,7 +33,7 @@ export default function RootLayout({ children }) {
     setLayoutCourses(coursesData);
   };
 
-  fetchCourses();
+  // fetchCourses();
   // }, []);
 
   return (

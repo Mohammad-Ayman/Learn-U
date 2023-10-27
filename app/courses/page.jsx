@@ -1,16 +1,27 @@
 "use client";
-import { useState, useContext } from "react";
+import { useState, useContext, useEffect } from "react";
 import { courses } from "@/app/page";
 import FetchedCourses from "@/store/FetchedCourses";
 import CoursePreview from "@/Components/Courses/Course/CoursePreview";
 import MyLearningCourses from "@/Components/Courses/MyLearning/MyLearningCourses";
+import { fetchCourses } from "@/Components/Fetching/fetching";
 import styles from "./coursePage.module.css";
 
 const Courses = (props) => {
-  const [displayCourse, setDisplayCourse] = useState(courses[0]);
+  const [displayCourse, setDisplayCourse] = useState("");
+  const [allCourses, setAllCourses] = useState([]);
+  useEffect(() => {
+    const fetchAllCourses = async () => {
+      const courses = await fetchCourses();
+      setAllCourses(courses);
+      setDisplayCourse(courses[0]);
+    };
+
+    fetchAllCourses();
+  }, []);
   const renderClickedCourse = (courseName) => {
-    const clickedCourseIndex = courses.indexOf(courseName);
-    setDisplayCourse(courses[clickedCourseIndex]);
+    const clickedCourseIndex = allCourses.indexOf(courseName);
+    setDisplayCourse(allCourses[clickedCourseIndex]);
   };
 
   const fetchedCourses = useContext(FetchedCourses);
@@ -20,15 +31,13 @@ const Courses = (props) => {
     >
       <MyLearningCourses
         header={"My Learning"}
-        // coursesSource={courses}
-        // courses={courses /*.slice(0, 4)*/}
-        coursesSource={fetchedCourses.layoutCourses}
-        courses={fetchedCourses.layoutCourses.slice(0, 4)}
+        coursesSource={allCourses}
+        courses={allCourses}
         getClickedCourseName={renderClickedCourse}
       />
       <CoursePreview
         displayedCourse={displayCourse}
-        coursesSource={courses}
+        coursesSource={allCourses}
         reviewBtn={"REVIEW COURSE"}
         actionBtn={"CONTINUE LEARNING"}
       />
