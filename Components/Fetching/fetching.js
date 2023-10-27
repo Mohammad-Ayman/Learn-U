@@ -1,10 +1,32 @@
-import { getDocs, collection, addDoc, query, where } from "firebase/firestore";
+import {
+  getDocs,
+  collection,
+  addDoc,
+  query,
+  where,
+  limit,
+} from "firebase/firestore";
 import db from "@/firebase.js";
 
 export const fetchCourses = async () => {
+  console.log("Started Fetching");
   const courseCollection = collection(db, "courses");
   const courseSnapshot = await getDocs(courseCollection);
-  return courseSnapshot.docs.map((doc) => doc.data());
+  let fetchedCourses = [];
+  courseSnapshot.forEach((doc) => {
+    fetchedCourses.push({ _id: doc.id, ...doc.data() });
+  });
+  return fetchedCourses;
+};
+export const fetchLimitedCourses = async (limitC = 1) => {
+  console.log("Started Fetching");
+  const courseCollection = query(collection(db, "courses"), limit(limitC));
+  const courseSnapshot = await getDocs(courseCollection);
+  let fetchedCourses = [];
+  courseSnapshot.forEach((doc) => {
+    fetchedCourses.push({ _id: doc.id, ...doc.data() });
+  });
+  return fetchedCourses;
 };
 
 export const fetchSavedCourses = async () => {

@@ -8,8 +8,6 @@ import Styles from "./styles/MyLearningCourses.module.css";
 
 const MyLearningCourses = (props) => {
   const getClickedCourse = (event) => {
-    // console.log(event.target.closest("li"));
-    // console.log(event.target.closest("li").querySelector("h2").textContent);
     const liExist = event.target.closest("li");
 
     if (liExist !== null) {

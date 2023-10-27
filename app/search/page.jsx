@@ -7,12 +7,26 @@ import Recommended from "@/Components/SearchPage/RecommendedForYou/Recommended";
 
 import SearchContext from "@/store/search-context";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
+import FetchedCourses from "@/store/FetchedCourses";
+import { fetchCourses } from "@/Components/Fetching/fetching";
 import { courses } from "@/app/page";
 
 const Search = () => {
-  const [filter, setFilter] = useState("");
+  const [allCourses, setAllCourses] = useState([]);
   const [filteredCourses, setFilteredCourses] = useState([]);
+  useEffect(() => {
+    const fetchAllCourses = async () => {
+      const courses = await fetchCourses();
+      setAllCourses(courses);
+      setFilteredCourses(courses);
+    };
+
+    fetchAllCourses();
+  }, []);
+  const fetchedCourses = useContext(FetchedCourses);
+
+  const [filter, setFilter] = useState("");
   const [filterOptions, setFilterOptions] = useState([
     {
       category: [],
@@ -26,7 +40,7 @@ const Search = () => {
     setFilter(searchInput);
   };
   const filterSearchBar = () => {
-    const filteredCourses = courses.filter(
+    const filteredCourses = allCourses.filter(
       (course) =>
         course.category.toLowerCase().includes(filter.toLowerCase()) ||
         course.name.toLowerCase().includes(filter.toLowerCase()) ||
@@ -47,7 +61,7 @@ const Search = () => {
   };
 
   const applyFilterOptions = () => {
-    let filteredOptionsCourses = courses.filter((course) => {
+    let filteredOptionsCourses = allCourses.filter((course) => {
       const categoryMatch = filterOptions.category
         ? filterOptions.category.length === 0 ||
           filterOptions.category.includes(course.category.toLowerCase())
@@ -76,7 +90,10 @@ const Search = () => {
         <TopSearches onClick={handleInputChange} />
         <CategoriesSearchPage />
         <RatingLevel />
-        <Recommended filteredCoursesProp={filteredCourses} />
+        <Recommended
+          filteredCoursesProp={filteredCourses}
+          allData={allCourses}
+        />
       </SearchContext.Provider>
     </main>
   );
