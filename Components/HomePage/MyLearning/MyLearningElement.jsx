@@ -24,8 +24,7 @@ const MyLearningElement = (props) => {
               viewBox="0 0 24 24"
               fill="currentColor"
               onClick={() => {
-                console.log(authContext.userId);
-                addToSavedCourses(authContext.userId, "abn");
+                addToSavedCourses(authContext.userId, props._id);
               }}
               className={`${styles.icon} ${
                 props.isSaved ? styles["active-icon"] : ""
