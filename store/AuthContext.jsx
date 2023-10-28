@@ -25,7 +25,6 @@ export default AuthContext;
 
 export const addUserData = async (uid) => {
   try {
-    console.log("Calling addUserData...");
     const userDocRef = doc(db, "users", uid);
 
     // Data to associate with the user

@@ -1,7 +1,12 @@
+"use client";
+import { useContext } from "react";
+import AuthContext from "@/store/AuthContext";
+import { addToSavedCourses } from "@/Components/Fetching/fetching";
 import Image from "next/image";
 import styles from "./styles/myLearningElement.module.css";
 
 const MyLearningElement = (props) => {
+  const authContext = useContext(AuthContext);
   return (
     <li
       className={`${styles["myLearning-card"]} mflex`}
@@ -18,6 +23,10 @@ const MyLearningElement = (props) => {
               xmlns="http://www.w3.org/2000/svg"
               viewBox="0 0 24 24"
               fill="currentColor"
+              onClick={() => {
+                console.log(authContext.userId);
+                addToSavedCourses(authContext.userId, "abn");
+              }}
               className={`${styles.icon} ${
                 props.isSaved ? styles["active-icon"] : ""
               }`}
