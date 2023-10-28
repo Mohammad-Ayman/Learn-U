@@ -2,10 +2,8 @@
 import Navbar from "@/Components/NavBar/Navbar";
 import "./globals.css";
 import { Inter } from "next/font/google";
-import { getDocs, collection } from "firebase/firestore";
-import db from "@/firebase.js";
 
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import AuthContext from "@/store/AuthContext";
 import FetchedCourses from "@/store/FetchedCourses";
 
@@ -21,20 +19,6 @@ export default function RootLayout({ children }) {
   const [myLearning, setMyLearning] = useState([]);
   const [userId, setUserId] = useState(null);
   const [layoutCourses, setLayoutCourses] = useState([]);
-
-  // useEffect(() => {
-  const fetchCourses = async () => {
-    const courseCollection = collection(db, "courses");
-    const courseSnapshot = await getDocs(courseCollection);
-    const coursesData = [];
-    courseSnapshot.forEach((doc) => {
-      coursesData.push({ id: doc.id, ...doc.data() });
-    });
-    setLayoutCourses(coursesData);
-  };
-
-  // fetchCourses();
-  // }, []);
 
   return (
     <AuthContext.Provider

@@ -47,11 +47,13 @@
   font-weight: 700;
 }
 
-.course svg {
+.icon {
+  width: 3rem;
   fill: #b1b1b1;
-  /* padding: ; */
 }
-
+.active-icon {
+  fill: #2e8dff;
+}
 .author-name {
   font-size: 1.2rem;
   font-weight: 500;
