@@ -1,11 +1,12 @@
 "use client";
-import { useContext } from "react";
+import { useState, useContext } from "react";
 import AuthContext from "@/store/AuthContext";
 import { addToSavedCourses } from "@/Components/Fetching/fetching";
 import Image from "next/image";
 import styles from "./styles/myLearningElement.module.css";
 
 const MyLearningElement = (props) => {
+  const [saved, setSaved] = useState(false);
   const authContext = useContext(AuthContext);
   return (
     <li
@@ -24,11 +25,9 @@ const MyLearningElement = (props) => {
               viewBox="0 0 24 24"
               fill="currentColor"
               onClick={() => {
-                addToSavedCourses(authContext.userId, props._id);
+                addToSavedCourses(authContext.userId, props._id, setSaved);
               }}
-              className={`${styles.icon} ${
-                props.isSaved ? styles["active-icon"] : ""
-              }`}
+              className={`${styles.icon} ${saved ? styles["active-icon"] : ""}`}
             >
               <path
                 fillRule="evenodd"

@@ -43,7 +43,7 @@ export const fetchSavedCourses = async () => {
   return courses;
 };
 
-export const addToSavedCourses = async (uid, courseId) => {
+export const addToSavedCourses = async (uid, courseId, setSaved) => {
   try {
     const userDocRef = doc(db, "users", uid);
     const userDoc = await getDoc(userDocRef);
@@ -51,11 +51,13 @@ export const addToSavedCourses = async (uid, courseId) => {
       const userData = userDoc.data();
       const savedCourses = userData.savedCourses || [];
       const courseIndex = savedCourses.indexOf(courseId);
-
+      let className = "";
       if (courseIndex !== -1) {
         savedCourses.splice(courseIndex, 1);
+        setSaved(false);
       } else {
         savedCourses.push(courseId);
+        setSaved(true);
       }
 
       // Update the user document with the updated savedCourses array
