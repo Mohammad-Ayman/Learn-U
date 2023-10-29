@@ -8,7 +8,7 @@ import {
   createUserWithEmailAndPassword,
   signInWithEmailAndPassword,
 } from "firebase/auth";
-import { collection, addDoc, doc, setDoc } from "firebase/firestore";
+import { doc, setDoc } from "firebase/firestore";
 
 const AuthContext = React.createContext({
   isLoggedIn: false,
@@ -25,7 +25,6 @@ export default AuthContext;
 
 export const addUserData = async (uid) => {
   try {
-    console.log("Calling addUserData...");
     const userDocRef = doc(db, "users", uid);
 
     // Data to associate with the user

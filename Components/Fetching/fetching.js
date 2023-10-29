@@ -1,4 +1,9 @@
 import {
+  doc,
+  setDoc,
+  getDoc,
+  updateDoc,
+  arrayUnion,
   getDocs,
   collection,
   addDoc,
@@ -36,6 +41,44 @@ export const fetchSavedCourses = async () => {
     courses.push(doc.data());
   });
   return courses;
+};
+
+export const addToSavedCourses = async (uid, courseId, setSaved) => {
+  try {
+    const userDocRef = doc(db, "users", uid);
+    const userDoc = await getDoc(userDocRef);
+    if (userDoc.exists()) {
+      const userData = userDoc.data();
+      const savedCourses = userData.savedCourses || [];
+      const courseIndex = savedCourses.indexOf(courseId);
+      let className = "";
+      if (courseIndex !== -1) {
+        savedCourses.splice(courseIndex, 1);
+        setSaved(false);
+      } else {
+        savedCourses.push(courseId);
+        setSaved(true);
+      }
+
+      // Update the user document with the updated savedCourses array
+      await updateDoc(userDocRef, { savedCourses });
+
+      console.log(
+        `Course ${courseId} ${
+          courseIndex !== -1 ? "removed from" : "added to"
+        } savedCourses for user with ID: ${uid}`
+      );
+      // if (userDoc.exists()) {
+      //   const userData = userDoc.data();
+      //   const updatedSavedCourses = [courseId, ...userData.savedCourses];
+      //   // Update the user document with the updated savedCourses array
+      //   await updateDoc(userDocRef, { savedCourses: updatedSavedCourses });
+    } else {
+      console.error("User document not found.");
+    }
+  } catch (e) {
+    console.error("Error adding course to savedCourses: ", e);
+  }
 };
 
 export const checkIfBookmarked = async (courseName) => {

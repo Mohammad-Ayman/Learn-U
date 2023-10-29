@@ -13,6 +13,7 @@ const DisplayMyLearning = (props) => {
         onClick={() => console.log("Course Clicked")}
         key={course.id}
         id={course.id}
+        _id={course._id}
         name={course.name}
         image={course.image}
         author={course.author}

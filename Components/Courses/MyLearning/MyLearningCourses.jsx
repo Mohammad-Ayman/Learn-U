@@ -18,12 +18,9 @@ const MyLearningCourses = (props) => {
       // console.log(clickedCourseID, typeof clickedCourseID);
       props.coursesSource.some((course) => {
         if (course.id == clickedCourseID) {
-          // console.log(course);
-          // console.log(typeof props.clickedCourseID);
           props.getClickedCourseName(course);
         }
       });
-      // console.log("after", clickedCourseID);
     } else return;
   };
 

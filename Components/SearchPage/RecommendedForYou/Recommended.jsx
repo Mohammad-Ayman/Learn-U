@@ -3,6 +3,8 @@ import { courses } from "@/app/page";
 import { useRouter } from "next/navigation";
 import { useContext } from "react";
 import FetchedCourses from "@/store/FetchedCourses";
+import styles from "./styles/recommended.module.css";
+
 const Recommended = (props) => {
   const fetchedCourses = useContext(FetchedCourses);
   const router = useRouter();
@@ -19,35 +21,57 @@ const Recommended = (props) => {
       router.push(coursePageUrl);
     }
   };
-
   return (
-    <section className="max-w-full  h-1/2 pt-10 p-x-5">
-      <h3 className="text-slate-800 text-xl font-bold">RECOMMENDED FOR YOU</h3>
-      <div
-        className="flex flex-row flex-wrap gap-6 p-3 ml-2"
-        onClick={reviewBtnHandler}
-      >
+    <section className={styles["recommended-container"]}>
+      <h3 className={styles["section-title"]}>RECOMMENDED FOR YOU</h3>
+      <div className={styles["course-container"]} onClick={reviewBtnHandler}>
         {props.filteredCoursesProp.map((course) => (
           <div
-            className="cursor-pointer hover:outline hover:outline-2 hover:outline-blue-600 mt-5 rounded-2xl"
+            className={styles["course-card"]}
             key={course.id}
-            data-coureseid={course.id}
+            data-courseid={course.id}
           >
             <img
-              className="object-fill w-72 h-60 rounded-xl"
+              className={styles["course-image"]}
               src={course.image}
               alt="Picture of the author"
             />
-
-            <h2 className="text-black font-bold text-xl pl-2 mt-3">
-              {course.name}
-            </h2>
-            <p className="text-gray-500 text-sm pl-2">{course.author}</p>
+            <h2 className={styles["course-title"]}>{course.name}</h2>
+            <p className={styles["course-author"]}>{course.author}</p>
           </div>
         ))}
       </div>
     </section>
   );
+
+  //   return (
+  //     <section className="max-w-full  h-1/2 pt-10 p-x-5">
+  //       <h3 className="text-slate-800 text-xl font-bold">RECOMMENDED FOR YOU</h3>
+  //       <div
+  //         className="flex flex-row flex-wrap gap-6 p-3 ml-2"
+  //         onClick={reviewBtnHandler}
+  //       >
+  //         {props.filteredCoursesProp.map((course) => (
+  //           <div
+  //             className="cursor-pointer hover:outline hover:outline-2 hover:outline-blue-600 mt-5 rounded-2xl"
+  //             key={course.id}
+  //             data-coureseid={course.id}
+  //           >
+  //             <img
+  //               className="object-fill w-72 h-60 rounded-xl"
+  //               src={course.image}
+  //               alt="Picture of the author"
+  //             />
+
+  //             <h2 className="text-black font-bold text-xl pl-2 mt-3">
+  //               {course.name}
+  //             </h2>
+  //             <p className="text-gray-500 text-sm pl-2">{course.author}</p>
+  //           </div>
+  //         ))}
+  //       </div>
+  //     </section>
+  //   );
 };
 
 export default Recommended;
