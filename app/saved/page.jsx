@@ -1,39 +1,31 @@
 "use client";
-import { redirect } from 'next/navigation'
-import { useState, useEffect, useContext } from "react";
-import { courses } from "@/app/page";
+import { redirect } from "next/navigation";
+import { useState, useContext, useEffect } from "react";
 import CoursePreview from "@/Components/Courses/Course/CoursePreview";
 import MyLearningCourses from "@/Components/Courses/MyLearning/MyLearningCourses";
-import {
-  fetchSavedCourses,
-  fetchedCourses,
-} from "@/Components/Fetching/fetching";
+import { fetchCourses } from "@/Components/Fetching/fetching";
 import AuthContext from "@/store/AuthContext";
 import styles from "../courses/coursePage.module.css";
 
-const SavedCourses = (props) => {
+const SavedCourses = () => {
   const context = useContext(AuthContext);
   if (!context.isLoggedIn) redirect("/signin");
 
-  const [displayCourse, setDisplayCourse] = useState(courses[1]);
-  const renderClickedCourse = (courseName) => {
-    const clickedCourseIndex = fetchedCourses.indexOf(courseName);
-    console.log(clickedCourseIndex);
-    console.log("fetchedCourses", fetchedCourses);
-    console.log(typeof fetchedCourses);
-    setDisplayCourse(fetchedCourses[clickedCourseIndex]);
-  };
-
-  const [savedCourses, setSavedCourses] = useState([courses[0]]);
+  const [displayCourse, setDisplayCourse] = useState("");
+  const [allCourses, setAllCourses] = useState([]);
   useEffect(() => {
-    const fetchCourses = async () => {
-      const newlyFetchedCourses = await fetchSavedCourses();
-      setSavedCourses(newlyFetchedCourses);
+    const fetchAllCourses = async () => {
+      const courses = await fetchCourses();
+      setAllCourses(courses);
+      setDisplayCourse(courses[0]);
     };
-    fetchCourses();
+
+    fetchAllCourses();
   }, []);
-  console.log("savedCourses");
-  console.log(savedCourses);
+  const renderClickedCourse = (courseName) => {
+    const clickedCourseIndex = allCourses.indexOf(courseName);
+    setDisplayCourse(allCourses[clickedCourseIndex]);
+  };
 
   return (
     <main
@@ -41,14 +33,14 @@ const SavedCourses = (props) => {
     >
       <MyLearningCourses
         header={"Saved Courses"}
-        courses={savedCourses}
-        coursesSource={fetchedCourses}
+        coursesSource={allCourses}
+        courses={allCourses}
         isButton={true}
         getClickedCourseName={renderClickedCourse}
       />
       <CoursePreview
         displayedCourse={displayCourse}
-        coursesSource={fetchedCourses}
+        coursesSource={allCourses}
         reviewBtn={"PREVIEW"}
         actionBtn={"BUY NOW"}
       />

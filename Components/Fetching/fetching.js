@@ -63,7 +63,7 @@ export const fetchCourseByDocumentId = async (documentId) => {
   }
 };
 export const fetchSavedCourses = async () => {
-  const querySnapshot = await getDocs(collection(db, "savedCourses"));
+  const querySnapshot = await getDocs(collection(db, "courses"));
   let courses = [];
   querySnapshot.forEach((doc) => {
     courses.push(doc.data());
