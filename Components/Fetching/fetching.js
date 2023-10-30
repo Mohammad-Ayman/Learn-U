@@ -33,7 +33,35 @@ export const fetchLimitedCourses = async (limitC = 1) => {
   });
   return fetchedCourses;
 };
-
+export const fetchCoursesWhere = async (fsField, operator, localField) => {
+  const courseWhere = query(
+    collection(db, "courses"),
+    where(fsField, operator, localField)
+  );
+  const courseSnapshot = await getDocs(courseWhere);
+  let fetchedCourses = [];
+  courseSnapshot.forEach((doc) => {
+    fetchedCourses.push({ _id: doc.id, ...doc.data() });
+  });
+  return fetchedCourses;
+};
+export const fetchCourseByDocumentId = async (documentId) => {
+  const courseRef = doc(collection(db, "courses"), documentId);
+  try {
+    const courseSnapshot = await getDoc(courseRef);
+    if (courseSnapshot.exists()) {
+      const courseData = { _id: documentId, ...courseSnapshot.data() };
+      console.log("Fetched course data:", courseData);
+      return courseData;
+    } else {
+      console.log("Course not found.");
+      return null;
+    }
+  } catch (error) {
+    console.error("Error fetching course:", error);
+    return null;
+  }
+};
 export const fetchSavedCourses = async () => {
   const querySnapshot = await getDocs(collection(db, "savedCourses"));
   let courses = [];

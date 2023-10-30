@@ -71,11 +71,11 @@ const FeaturedCourseElement = (props) => {
   //   }
   // };
   const router = useRouter();
-  const reviewBtnHandler = () => {
-    const course = courses.find((course) => course.id === props.id);
-    if (course) {
+  const reviewBtnHandler = (_id) => {
+    // const course = courses.find((course) => course.id === props.id);
+    if (_id) {
       // Navigate to the dynamic course page with the course Name
-      const coursePageUrl = `/courses/${course.id}`;
+      const coursePageUrl = `/courses/${_id}`;
       console.log(coursePageUrl);
       router.push(coursePageUrl);
     } else {
@@ -87,7 +87,7 @@ const FeaturedCourseElement = (props) => {
       key={props.id}
       className={`${styles["course-card"]} mflex`}
       data-courseid={props.id}
-      onClick={reviewBtnHandler}
+      onClick={() => reviewBtnHandler(props._id)}
     >
       <div className={`${styles["course-image__container"]}`}>
         <img src={props.image} />

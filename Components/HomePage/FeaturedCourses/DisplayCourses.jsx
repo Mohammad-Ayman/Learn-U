@@ -3,14 +3,13 @@ import styles from "./styles/featuredCourses.module.css";
 import CourseElement from "./FeaturedCourseElement";
 
 const DisplayCourses = (props) => {
-
-  
   return (
     <ul className={`${styles["cards-container"]} mflex`}>
       {props.AllCourses.map((course) => (
         <CourseElement
           key={course.id}
           id={course.id}
+          _id={course._id}
           name={course.name}
           image={course.image}
           duration={course.duration}
