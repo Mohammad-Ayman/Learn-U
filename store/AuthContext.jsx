@@ -62,6 +62,7 @@ export const handleSignup = (email, password, setError, context, router) => {
 };
 export const handleLogin = (email, password, setError, context, router) => {
   const auth = getAuth();
+  console.log("auth", auth);
   signInWithEmailAndPassword(auth, email, password, setError)
     .then((userCredential) => {
       const user = userCredential.user;
@@ -93,3 +94,16 @@ export const handleLogout = (context) => {
   context.setIsLoggedIn(false);
   context.setUserId(null);
 };
+
+export async function getServerSideProps({ req, res }) {
+  // const { isLoggedIn } = useAuth(); // Access the isLoggedIn state from your context
+
+  if (!context.isLoggedIn) {
+    res.writeHead(302, { Location: "/login" }); // Redirect to the login page
+    res.end();
+  }
+
+  return {
+    props: {},
+  };
+}

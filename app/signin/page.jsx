@@ -51,14 +51,14 @@ const LoginPage = () => {
             {error && (
               <div className="text-xl text-red-600 mt-2 text-center">
                 {" "}
-                {error}{" "}  
+                {error}{" "}
               </div>
             )}
           </div>
           <input
             className="h-20 outline outline-2 outline-slate-400 focus:outline-blue-400 text-2xl rounded p-1 pl-4 m-10"
             type="text"
-            placeholder="Email or Phone number"
+            placeholder="example@mail.com"
             value={email}
             onChange={(e) => {
               setEmail(e.target.value);
