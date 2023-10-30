@@ -10,6 +10,15 @@
   width: 100%;
 }
 
+.centered-loading {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  height: 100vh;
+  font-size: 4rem;
+  color: #2e8dff;
+}
+
 @media (max-width: 650px) {
   .home-container__courses {
     grid-template-columns: 1fr;

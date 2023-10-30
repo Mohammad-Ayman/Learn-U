@@ -2,8 +2,7 @@
 import React, { useEffect, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
-import { getDocs, collection } from "firebase/firestore";
-import db from "@/firebase.js";
+import { fetchCourseByDocumentId } from "@/Components/Fetching/fetching";
 
 const courses = [
   {
@@ -657,7 +656,13 @@ const firstPage = () => {
                 Continue As A Guest
               </button>
             </Link>
-            {/* <button onClick={inert}>hereee</button> */}
+            <button
+              onClick={async () =>
+                fetchCourseByDocumentId("3NBZVZDQU0Y7M009i7AX")
+              }
+            >
+              hereee
+            </button>
           </div>
         </div>
       </div>
