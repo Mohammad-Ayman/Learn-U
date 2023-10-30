@@ -1,13 +1,18 @@
 "use client";
+import { redirect } from "next/navigation";
 import { useState, useContext, useEffect } from "react";
 import { courses } from "@/app/page";
 import FetchedCourses from "@/store/FetchedCourses";
 import CoursePreview from "@/Components/Courses/Course/CoursePreview";
 import MyLearningCourses from "@/Components/Courses/MyLearning/MyLearningCourses";
 import { fetchCourses } from "@/Components/Fetching/fetching";
+import AuthContext from "@/store/AuthContext";
 import styles from "./coursePage.module.css";
 
 const Courses = (props) => {
+  const context = useContext(AuthContext);
+  if (!context.isLoggedIn) redirect("/signin");
+
   const [displayCourse, setDisplayCourse] = useState("");
   const [allCourses, setAllCourses] = useState([]);
   useEffect(() => {
