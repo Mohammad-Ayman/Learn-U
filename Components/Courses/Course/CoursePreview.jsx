@@ -1,17 +1,13 @@
 "use client";
-import { courses } from "@/app/page";
 import { useRouter } from "next/navigation";
 import styles from "./styles/coursePreview.module.css";
 
 const CoursePreview = (props) => {
   const router = useRouter();
-  const reviewBtnHandler = () => {
-    const course = props.coursesSource.find(
-      (course) => course.id === props.displayedCourse.id
-    );
-    if (course) {
+  const reviewBtnHandler = (_id) => {
+    if (_id) {
       // Navigate to the dynamic course page with the course Name
-      const coursePageUrl = `/courses/${course.id}`;
+      const coursePageUrl = `/courses/${_id}`;
       console.log(coursePageUrl);
       router.push(coursePageUrl);
     } else {
@@ -88,7 +84,7 @@ const CoursePreview = (props) => {
           </Link> */}
           <button
             className={`${styles["action-button"]} ${styles["action-button__review"]}`}
-            onClick={reviewBtnHandler}
+            onClick={() => reviewBtnHandler(props.displayedCourse._id)}
           >
             {props.reviewBtn}
           </button>

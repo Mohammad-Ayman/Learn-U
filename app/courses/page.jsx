@@ -25,6 +25,7 @@ const Courses = () => {
   const renderClickedCourse = (courseName) => {
     const clickedCourseIndex = allCourses.indexOf(courseName);
     setDisplayCourse(allCourses[clickedCourseIndex]);
+    console.log(allCourses[clickedCourseIndex]);
   };
 
   return (

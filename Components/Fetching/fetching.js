@@ -51,7 +51,6 @@ export const fetchCourseByDocumentId = async (documentId) => {
     const courseSnapshot = await getDoc(courseRef);
     if (courseSnapshot.exists()) {
       const courseData = { _id: documentId, ...courseSnapshot.data() };
-      console.log("Fetched course data:", courseData);
       return courseData;
     } else {
       console.log("Course not found.");
