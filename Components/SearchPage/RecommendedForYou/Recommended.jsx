@@ -1,25 +1,15 @@
 "use client";
-import { courses } from "@/app/page";
 import { useRouter } from "next/navigation";
-import { useContext } from "react";
-import FetchedCourses from "@/store/FetchedCourses";
 import styles from "./styles/recommended.module.css";
 
 const Recommended = (props) => {
-  const fetchedCourses = useContext(FetchedCourses);
   const router = useRouter();
   const reviewBtnHandler = (e) => {
-    const courseId = e.target.closest("div").getAttribute("data-coureseid");
-    // const course = fetchedCourses.layoutCourses.find(
-    const course = props.filteredCoursesProp.find(
-      (course) => course.id === courseId
-    );
-    if (course) {
-      // Navigate to the dynamic course page with the course ID
-      const coursePageUrl = `/courses/${course.id}`;
-      console.log(coursePageUrl);
-      router.push(coursePageUrl);
-    }
+    const courseId = e.target.closest("div").getAttribute("data-courseid");
+    const coursePageUrl = `/courses/${courseId}`;
+    console.log(coursePageUrl);
+    router.push(coursePageUrl);
+    // }
   };
   return (
     <section className={styles["recommended-container"]}>
@@ -29,7 +19,7 @@ const Recommended = (props) => {
           <div
             className={styles["course-card"]}
             key={course.id}
-            data-courseid={course.id}
+            data-courseid={course._id}
           >
             <img
               className={styles["course-image"]}

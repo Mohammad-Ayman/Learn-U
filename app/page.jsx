@@ -656,13 +656,13 @@ const firstPage = () => {
                 Continue As A Guest
               </button>
             </Link>
-            <button
+            {/* <button
               onClick={async () =>
                 fetchCourseByDocumentId("3NBZVZDQU0Y7M009i7AX")
               }
             >
               hereee
-            </button>
+            </button> */}
           </div>
         </div>
       </div>
