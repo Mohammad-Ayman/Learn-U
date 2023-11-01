@@ -8,9 +8,7 @@ import Recommended from "@/Components/SearchPage/RecommendedForYou/Recommended";
 import SearchContext from "@/store/search-context";
 
 import { useState, useEffect, useContext } from "react";
-import FetchedCourses from "@/store/FetchedCourses";
 import { fetchCourses } from "@/Components/Fetching/fetching";
-import { courses } from "@/app/page";
 
 const Search = () => {
   const [allCourses, setAllCourses] = useState([]);
@@ -24,7 +22,6 @@ const Search = () => {
 
     fetchAllCourses();
   }, []);
-  const fetchedCourses = useContext(FetchedCourses);
 
   const [filter, setFilter] = useState("");
   const [filterOptions, setFilterOptions] = useState([
@@ -76,7 +73,6 @@ const Search = () => {
     });
     // Set the state with the filtered courses
     setFilteredCourses(filteredOptionsCourses);
-    console.log("filteredOptionsCourses", filteredOptionsCourses);
   };
 
   useEffect(() => {

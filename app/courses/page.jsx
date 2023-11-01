@@ -15,7 +15,7 @@ const Courses = () => {
   const [allCourses, setAllCourses] = useState([]);
   useEffect(() => {
     const fetchAllCourses = async () => {
-      console.log("NOT from cached courses")
+      // console.log("NOT from cached courses")
       const userSavedCourses = await fetchUserSavedCourses(context.userId);
       const courses = await fetchCourses();
       const updatedCourses = [];

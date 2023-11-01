@@ -2,12 +2,6 @@
 import styles from "./styles/featuredCourseElement.module.css";
 import { styled } from "styled-components";
 import { useRouter } from "next/navigation";
-import { courses } from "@/app/page";
-import { useState, useEffect } from "react";
-import {
-  checkIfBookmarked,
-  bookmarkCourse,
-} from "@/Components/Fetching/fetching";
 
 const PriceBox = styled.span`
   background-color: #2e8dff;
@@ -41,42 +35,11 @@ const BookmarkButton = styled.button`
 `;
 
 const FeaturedCourseElement = (props) => {
-  // const [isBookmarked, setIsBookmarked] = useState(false);
-
-  // useEffect(() => {
-  //   const fetchBookmarkStatus = async () => {
-  //     const status = await checkIfBookmarked(props.name);
-  //     setIsBookmarked(status);
-  //   };
-  //   fetchBookmarkStatus();
-  // }, [props.name]);
-
-  // const handleBookmark = async () => {
-  //   try {
-  //     const alreadyBookmarked = await checkIfBookmarked(props.name);
-  //     if (alreadyBookmarked) {
-  //       alert("This course has already been added!");
-  //       return;
-  //     }
-  //     await bookmarkCourse({
-  //       name: props.name,
-  //       image: props.image,
-  //       duration: props.duration,
-  //       rate: props.rate,
-  //       price: props.price,
-  //     });
-  //     setIsBookmarked(true);
-  //   } catch (error) {
-  //     console.error("Error bookmarking course: ", error);
-  //   }
-  // };
   const router = useRouter();
   const reviewBtnHandler = (_id) => {
-    // const course = courses.find((course) => course.id === props.id);
     if (_id) {
       // Navigate to the dynamic course page with the course Name
       const coursePageUrl = `/courses/${_id}`;
-      console.log(coursePageUrl);
       router.push(coursePageUrl);
     } else {
       console.log(typeof props.getClickedCourseName);
@@ -127,22 +90,6 @@ const FeaturedCourseElement = (props) => {
         </p>
         <ButtonContainer>
           <PriceBox>${props.price}</PriceBox>
-          {/* <BookmarkButton onClick={handleBookmark}>
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              className="bookmark-icon"
-              fill={isBookmarked ? "blue" : "currentColor"}
-              viewBox="0 0 24 24"
-              stroke={isBookmarked ? "blue" : "currentColor"}
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth={2}
-                d="M4 6a2 2 0 012-2h12a2 2 0 012 2v14l-8-4-8 4V6z"
-              />
-            </svg>
-          </BookmarkButton> */}
         </ButtonContainer>
       </div>
     </li>

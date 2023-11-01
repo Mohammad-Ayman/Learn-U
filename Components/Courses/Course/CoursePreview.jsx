@@ -8,7 +8,6 @@ const CoursePreview = (props) => {
     if (_id) {
       // Navigate to the dynamic course page with the course Name
       const coursePageUrl = `/courses/${_id}`;
-      console.log(coursePageUrl);
       router.push(coursePageUrl);
     } else {
       console.log(typeof props.getClickedCourseName);
