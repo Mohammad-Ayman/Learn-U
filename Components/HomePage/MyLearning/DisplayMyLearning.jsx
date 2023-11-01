@@ -3,10 +3,6 @@ import MyLearningElement from "./MyLearningElement";
 import Button from "@/Components/UI/Button";
 
 const DisplayMyLearning = (props) => {
-  const getClickedCourse = (event) => {
-    console.log(event);
-    console.log("Clicked ");
-  };
   return props.AllCourses.map((course) => {
     return (
       <MyLearningElement
@@ -17,6 +13,7 @@ const DisplayMyLearning = (props) => {
         name={course.name}
         image={course.image}
         author={course.author}
+        saved={course.saved}
       >
         {props.isButton ? (
           <Button>BUY</Button>

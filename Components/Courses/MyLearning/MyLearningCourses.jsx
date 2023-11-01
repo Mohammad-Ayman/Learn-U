@@ -1,5 +1,4 @@
 import DisplayMyLearning from "@/Components/HomePage/MyLearning/DisplayMyLearning";
-import { courses } from "@/app/page";
 import { fetchedCourses } from "@/Components/Fetching/fetching";
 import Button from "@/Components/UI/Button";
 import EqualizerIcon from "@mui/icons-material/Equalizer";
@@ -15,7 +14,6 @@ const MyLearningCourses = (props) => {
         .closest("li")
         .getAttribute("data-courseid");
 
-      // console.log(clickedCourseID, typeof clickedCourseID);
       props.coursesSource.some((course) => {
         if (course.id == clickedCourseID) {
           props.getClickedCourseName(course);

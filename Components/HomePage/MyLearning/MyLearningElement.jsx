@@ -6,7 +6,7 @@ import Image from "next/image";
 import styles from "./styles/myLearningElement.module.css";
 
 const MyLearningElement = (props) => {
-  const [saved, setSaved] = useState(false);
+  const [saved, setSaved] = useState(props.saved);
   const authContext = useContext(AuthContext);
   return (
     <li

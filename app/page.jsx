@@ -1,8 +1,7 @@
 "use client";
-import React, { useEffect, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
-import { fetchCourseByDocumentId } from "@/Components/Fetching/fetching";
+import {fetchCourses, fetchUserSavedCourses } from "@/Components/Fetching/fetching";
 
 const courses = [
   {
@@ -657,12 +656,20 @@ const firstPage = () => {
               </button>
             </Link>
             {/* <button
-              onClick={async () =>
-                fetchCourseByDocumentId("3NBZVZDQU0Y7M009i7AX")
+              onClick={async () => {
+                const savedCourses = await fetchUserSavedCourses('QuJBDm4wTeMNvUNf9HgsKdP5lF42');
+                const courses = await fetchCourses();
+                let newcourses=[]
+                courses.map((course) => {
+                  savedCourses.savedCourses.includes(course._id) ? course = {saved: true, ...course} : course = {saved: false, ...course} 
+                  newcourses.push(course)
+                })
+              }
               }
             >
               hereee
             </button> */}
+
           </div>
         </div>
       </div>
@@ -673,7 +680,7 @@ const firstPage = () => {
           src="https://assets.api.uizard.io/api/cdn/stream/a8ce660d-47da-404a-b3b3-63ca6970ddcf.png"
           width={500}
           height={500}
-          alt="front page"
+          alt="Landing page"
         />
       </div>
     </div>
