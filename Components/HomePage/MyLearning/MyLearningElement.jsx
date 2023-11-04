@@ -14,7 +14,13 @@ const MyLearningElement = (props) => {
       data-courseid={props.id}
     >
       <div className={styles["image-container"]}>
-        <img src={props.image} />
+        {/* <img src={props.image} /> */}
+        <Image
+          src={props.image}
+          width={1000}
+          height={1000}
+          alt="Picture of the author"
+        />
       </div>
       <div className={`${styles.text} mflex`}>
         <div style={{ width: "100%", height: "100%" }}>
