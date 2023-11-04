@@ -2,6 +2,7 @@
 import styles from "./styles/featuredCourseElement.module.css";
 import { styled } from "styled-components";
 import { useRouter } from "next/navigation";
+import Image from "next/image";
 import { courses } from "@/app/page";
 import { useState, useEffect } from "react";
 import {
@@ -90,7 +91,13 @@ const FeaturedCourseElement = (props) => {
       onClick={() => reviewBtnHandler(props._id)}
     >
       <div className={`${styles["course-image__container"]}`}>
-        <img src={props.image} />
+        {/* <img src={props.image} /> */}
+        <Image
+          src={props.image}
+          width={1770}
+          height={1180}
+          alt="Picture of the author"
+        />
       </div>
       <h3 className={styles["course-name"]}>{props.name}</h3>
       <div className={`${styles["course-info"]} mflex`}>

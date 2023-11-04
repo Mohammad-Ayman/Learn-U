@@ -674,6 +674,7 @@ const firstPage = () => {
           width={500}
           height={500}
           alt="front page"
+          priority
         />
       </div>
     </div>
