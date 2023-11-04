@@ -17,8 +17,8 @@ const MyLearningElement = (props) => {
         {/* <img src={props.image} /> */}
         <Image
           src={props.image}
-          width={1000}
-          height={1000}
+          width={1770}
+          height={1180}
           alt="Picture of the author"
         />
       </div>

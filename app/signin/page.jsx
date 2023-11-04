@@ -124,8 +124,8 @@ const LoginPage = () => {
         <Image
           className=""
           src="https://assets.api.uizard.io/api/cdn/stream/a8ce660d-47da-404a-b3b3-63ca6970ddcf.png"
-          width={500}
-          height={500}
+          width={640}
+          height={727}
           alt="front page"
           priority
         />
