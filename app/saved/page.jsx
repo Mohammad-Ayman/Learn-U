@@ -3,7 +3,7 @@ import { redirect } from "next/navigation";
 import { useState, useContext, useEffect } from "react";
 import CoursePreview from "@/Components/Courses/Course/CoursePreview";
 import MyLearningCourses from "@/Components/Courses/MyLearning/MyLearningCourses";
-import { fetchCourses } from "@/Components/Fetching/fetching";
+import { fetchCourses, fetchUserSavedCourses } from "@/Components/Fetching/fetching";
 import AuthContext from "@/store/AuthContext";
 import styles from "../courses/coursePage.module.css";
 
@@ -15,9 +15,14 @@ const SavedCourses = () => {
   const [allCourses, setAllCourses] = useState([]);
   useEffect(() => {
     const fetchAllCourses = async () => {
+      const userSavedCourses = await fetchUserSavedCourses(context.userId);
       const courses = await fetchCourses();
-      setAllCourses(courses);
-      setDisplayCourse(courses[0]);
+      const updatedCourses = [];
+      courses.map((course) => {
+        if(userSavedCourses.savedCourses.includes(course._id)) updatedCourses.push({saved: true, ...course})
+      })
+      setAllCourses(updatedCourses);
+      setDisplayCourse(updatedCourses[0]);
     };
 
     fetchAllCourses();
