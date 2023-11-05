@@ -5,7 +5,13 @@ module.exports = nextConfig;
 // next.config.js
 module.exports = {
   images: {
-    domains: ["images.unsplash.com", "assets.api.uizard.io"],
+    domains: [
+      "images.unsplash.com",
+      "assets.api.uizard.io",
+      "www.nyip.edu",
+      "plus.unsplash.com",
+      "media.istockphoto.com",
+    ],
   },
   head: {
     link: [

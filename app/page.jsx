@@ -681,6 +681,8 @@ const firstPage = () => {
           width={500}
           height={500}
           alt="Landing page"
+
+          priority
         />
       </div>
     </div>

@@ -1,5 +1,6 @@
 "use client";
 import { useRouter } from "next/navigation";
+import Image from "next/image";
 import styles from "./styles/recommended.module.css";
 
 const Recommended = (props) => {
@@ -20,10 +21,18 @@ const Recommended = (props) => {
             key={course.id}
             data-courseid={course._id}
           >
-            <img
+            {/* <img
               className={styles["course-image"]}
               src={course.image}
               alt="Picture of the author"
+            /> */}
+            <Image
+              className={styles["course-image"]}
+              src={course.image}
+              width={1770}
+              height={1180}
+              alt="Course Image"
+              priority
             />
             <h2 className={styles["course-title"]}>{course.name}</h2>
             <p className={styles["course-author"]}>{course.author}</p>
