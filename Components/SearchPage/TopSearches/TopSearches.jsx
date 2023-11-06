@@ -22,7 +22,6 @@ function TopSearches(props) {
     activeSearch === searchValue
       ? props.onClick(" ")
       : props.onClick(searchValue);
-    // props.onClick(searchValue);
   };
 
   return (

@@ -13,7 +13,7 @@ const CourseContent = (props) => {
           course={props.displayedCourseContent}
         />
       </ul>
-      <ActionButton action={"BUY NOW"} />
+      <ActionButton action={"BUY NOW"} onClick={props.onClick} />
     </section>
   );
 };

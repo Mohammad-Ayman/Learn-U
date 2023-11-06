@@ -21,11 +21,6 @@ const Recommended = (props) => {
             key={course.id}
             data-courseid={course._id}
           >
-            {/* <img
-              className={styles["course-image"]}
-              src={course.image}
-              alt="Picture of the author"
-            /> */}
             <Image
               className={styles["course-image"]}
               src={course.image}
