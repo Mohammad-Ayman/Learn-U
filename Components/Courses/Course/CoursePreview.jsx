@@ -1,5 +1,7 @@
 "use client";
+import { addToMyLearningCourses } from "@/Components/Fetching/fetching";
 import { useRouter } from "next/navigation";
+import Image from "next/image";
 import styles from "./styles/coursePreview.module.css";
 
 const CoursePreview = (props) => {
@@ -10,7 +12,7 @@ const CoursePreview = (props) => {
       const coursePageUrl = `/courses/${_id}`;
       router.push(coursePageUrl);
     } else {
-      console.log(typeof props.getClickedCourseName);
+      return;
     }
   };
 
@@ -18,16 +20,24 @@ const CoursePreview = (props) => {
     <section className={`${styles["course-preview__container"]} mflex`}>
       <div className={`${styles.container} mflex`}>
         <div className={styles["media-container"]}>
-          <img src={props.displayedCourse.image} alt="Course Photo" />
+          <Image
+            src={props.displayedCourse.image}
+            width={1770}
+            height={1180}
+            alt="Course Photo"
+            priority
+          />
         </div>
         <div className={styles["course-content__container"]}>
           <h2 className={styles.text}>{props.displayedCourse.name}</h2>
           <div className={`${styles["course-info"]} mflex`}>
             <div className={`${styles["author-container"]} mflex`}>
               <div className={styles["author-image__container"]}>
-                <img
+                <Image
                   src="https://assets.api.uizard.io/api/cdn/stream/106a750d-2bad-4c6c-bd08-6d8a6c8f7cae.jpg"
-                  alt="Author's Photo"
+                  width={2981}
+                  height={4096}
+                  alt="Picture of the author"
                 />
               </div>
               <h3>{props.displayedCourse.author}</h3>
@@ -67,27 +77,29 @@ const CoursePreview = (props) => {
         <div className={styles["course-description__container"]}>
           <h2 className={styles.text}>Course Description</h2>
           <p>
-            This online course was created for you if you are interested in
+            {/* This online course was created for you if you are interested in
             taking great digital photos and learning how to make your
-            photography unique and outstanding.
+            photography unique and outstanding. */}
+            {props.displayedCourse.description}
           </p>
         </div>
       </div>
       {!props.actionButton && (
         <div className={`${styles["actions-container"]} mflex`}>
-          {/* <Link
-            className={`${styles["action-button"]} ${styles["action-button__review"]}`}
-            href={`/courses/${props.displayedCourse.id}`}
-          >
-            {props.reviewBtn}
-          </Link> */}
           <button
             className={`${styles["action-button"]} ${styles["action-button__review"]}`}
             onClick={() => reviewBtnHandler(props.displayedCourse._id)}
           >
             {props.reviewBtn}
           </button>
-          <button className={styles["action-button"]}>{props.actionBtn}</button>
+          <button
+            className={styles["action-button"]}
+            onClick={async () => {
+              addToMyLearningCourses(props.userId, props.displayedCourse._id);
+            }}
+          >
+            {props.actionBtn}
+          </button>
           ;
         </div>
       )}

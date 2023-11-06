@@ -14,7 +14,6 @@ const MyLearningElement = (props) => {
       data-courseid={props.id}
     >
       <div className={styles["image-container"]}>
-        {/* <img src={props.image} /> */}
         <Image
           src={props.image}
           width={1770}

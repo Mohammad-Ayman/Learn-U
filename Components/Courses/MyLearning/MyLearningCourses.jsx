@@ -1,6 +1,4 @@
 import DisplayMyLearning from "@/Components/HomePage/MyLearning/DisplayMyLearning";
-import { fetchedCourses } from "@/Components/Fetching/fetching";
-import Button from "@/Components/UI/Button";
 import EqualizerIcon from "@mui/icons-material/Equalizer";
 import Link from "next/link";
 import Styles from "./styles/MyLearningCourses.module.css";

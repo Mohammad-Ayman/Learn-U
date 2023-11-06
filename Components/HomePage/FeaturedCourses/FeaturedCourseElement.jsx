@@ -61,7 +61,6 @@ const FeaturedCourseElement = (props) => {
       onClick={() => reviewBtnHandler(props._id)}
     >
       <div className={`${styles["course-image__container"]}`}>
-        {/* <img src={props.image} /> */}
         <Image
           src={props.image}
           width={1770}

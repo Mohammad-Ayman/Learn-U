@@ -7,12 +7,10 @@ const SearchBar = (props) => {
   const [searchInput, setSearchInput] = useState("");
 
   const handleInputChange = (event) => {
-    // console.log("Search input:", searchInput);
     setSearchInput(event.target.value);
   };
 
   const handleSearchClick = () => {
-    // console.log("Search input:", searchInput);
     props.onChange(searchInput);
   };
 
@@ -26,7 +24,6 @@ const SearchBar = (props) => {
         value={searchInput}
         onChange={handleInputChange}
       />
-      {/* <Button onClick={handleSearchClick}>SEARCH</Button> */}
       <button
         onClick={handleSearchClick}
         style={{
