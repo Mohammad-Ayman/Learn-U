@@ -3,7 +3,10 @@ import { redirect } from "next/navigation";
 import { useState, useContext, useEffect } from "react";
 import CoursePreview from "@/Components/Courses/Course/CoursePreview";
 import MyLearningCourses from "@/Components/Courses/MyLearning/MyLearningCourses";
-import { fetchCourses, fetchUserSavedCourses } from "@/Components/Fetching/fetching";
+import {
+  fetchCourses,
+  fetchUserSavedCourses,
+} from "@/Components/Fetching/fetching";
 import AuthContext from "@/store/AuthContext";
 import styles from "./coursePage.module.css";
 
@@ -20,18 +23,22 @@ const Courses = () => {
       const courses = await fetchCourses();
       const updatedCourses = [];
       courses.map((course) => {
-        userSavedCourses.savedCourses.includes(course._id) ? course = {saved: true, ...course} : course = {saved: false, ...course} 
-        updatedCourses.push(course)
-      })
+        if (userSavedCourses.myLearning.includes(course._id)) {
+          userSavedCourses.savedCourses.includes(course._id)
+            ? (course = { saved: true, ...course })
+            : (course = { saved: false, ...course });
+          updatedCourses.push(course);
+        }
+      });
       //Cache data to session storage
-      sessionStorage.setItem('updatedCourses', JSON.stringify(updatedCourses));
-      sessionStorage.setItem('cachedUserId', JSON.stringify(context.userId));
+      sessionStorage.setItem("updatedCourses", JSON.stringify(updatedCourses));
+      sessionStorage.setItem("cachedUserId", JSON.stringify(context.userId));
       //Update states
       setAllCourses(updatedCourses);
       setDisplayCourse(updatedCourses[0]);
     };
-    const cachedCourses = sessionStorage.getItem('updatedCourses');
-    const cachedUserId = sessionStorage.getItem('cachedUserId');
+    const cachedCourses = sessionStorage.getItem("updatedCourses");
+    const cachedUserId = sessionStorage.getItem("cachedUserId");
 
     // if (cachedCourses) {
     //   console.log("from cached courses")
@@ -41,7 +48,7 @@ const Courses = () => {
     //   setDisplayCourse(updatedCourses[0]);
     // } else {
     // }
-      fetchAllCourses();
+    fetchAllCourses();
   }, []);
 
   const renderClickedCourse = (courseName) => {
