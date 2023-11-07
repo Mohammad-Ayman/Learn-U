@@ -21,7 +21,7 @@ const CoursePreview = (props) => {
       <div className={`${styles.container} mflex`}>
         <div className={styles["media-container"]}>
           <Image
-            src={props.displayedCourse.image}
+            src={props.displayedCourse?.image}
             width={1770}
             height={1180}
             alt="Course Photo"
@@ -29,7 +29,7 @@ const CoursePreview = (props) => {
           />
         </div>
         <div className={styles["course-content__container"]}>
-          <h2 className={styles.text}>{props.displayedCourse.name}</h2>
+          <h2 className={styles.text}>{props.displayedCourse?.name}</h2>
           <div className={`${styles["course-info"]} mflex`}>
             <div className={`${styles["author-container"]} mflex`}>
               <div className={styles["author-image__container"]}>
@@ -40,7 +40,7 @@ const CoursePreview = (props) => {
                   alt="Picture of the author"
                 />
               </div>
-              <h3>{props.displayedCourse.author}</h3>
+              <h3>{props.displayedCourse?.author}</h3>
             </div>
             <p className={`${styles["course-duration"]} mflex`}>
               <svg
@@ -55,7 +55,7 @@ const CoursePreview = (props) => {
                   clipRule="evenodd"
                 />
               </svg>
-              {props.displayedCourse.duration}
+              {props.displayedCourse?.duration}
             </p>
             <p className={`${styles["course-rate"]} mflex`}>
               <svg
@@ -70,7 +70,7 @@ const CoursePreview = (props) => {
                   clipRule="evenodd"
                 />
               </svg>
-              {props.displayedCourse.rate}/5
+              {props.displayedCourse?.rate}/5
             </p>
           </div>
         </div>
@@ -80,7 +80,7 @@ const CoursePreview = (props) => {
             {/* This online course was created for you if you are interested in
             taking great digital photos and learning how to make your
             photography unique and outstanding. */}
-            {props.displayedCourse.description}
+            {props.displayedCourse?.description}
           </p>
         </div>
       </div>
@@ -88,14 +88,11 @@ const CoursePreview = (props) => {
         <div className={`${styles["actions-container"]} mflex`}>
           <button
             className={`${styles["action-button"]} ${styles["action-button__review"]}`}
-            onClick={() => reviewBtnHandler(props.displayedCourse._id)}
+            onClick={() => reviewBtnHandler(props.displayedCourse?._id)}
           >
             {props.reviewBtn}
           </button>
-          <button
-            className={styles["action-button"]}
-            onClick={props.onClick}
-          >
+          <button className={styles["action-button"]} onClick={props.onClick}>
             {props.actionBtn}
           </button>
           ;
