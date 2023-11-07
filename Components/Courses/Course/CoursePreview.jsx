@@ -94,9 +94,7 @@ const CoursePreview = (props) => {
           </button>
           <button
             className={styles["action-button"]}
-            onClick={async () => {
-              addToMyLearningCourses(props.userId, props.displayedCourse._id);
-            }}
+            onClick={props.onClick}
           >
             {props.actionBtn}
           </button>

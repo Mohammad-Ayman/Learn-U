@@ -115,16 +115,7 @@ export const addToMyLearningCourses = async (uid, courseId) => {
       }
       // Update the user document with the updated myLearning array
       await updateDoc(userDocRef, { myLearning });
-
-      console.log(
-        `Course ${courseId} ${
-          courseIndex !== -1 ? "removed from" : "added to"
-        } myLearning for user with ID: ${uid}`
-      );
     } else {
-      console.error("User document not found.");
     }
-  } catch (e) {
-    console.error("Error adding course to myLearning: ", e);
-  }
+  } catch (e) {}
 };
