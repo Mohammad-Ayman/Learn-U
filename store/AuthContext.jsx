@@ -43,7 +43,7 @@ export const addUserData = async (uid) => {
 };
 
 export const handleSignup = (email, password, setError, context, router) => {
-  const auth = getAuth();
+  // const auth = getAuth();
   createUserWithEmailAndPassword(auth, email, password, setError)
     .then((userCredential) => {
       const user = userCredential.user;
@@ -61,12 +61,14 @@ export const handleSignup = (email, password, setError, context, router) => {
     });
 };
 export const handleLogin = (email, password, setError, context, router) => {
-  const auth = getAuth();
+  // const auth = getAuth();
   signInWithEmailAndPassword(auth, email, password, setError)
     .then((userCredential) => {
+      console.log(userCredential)
       const user = userCredential.user;
       context.setIsLoggedIn(true);
       context.setUserId(user.uid);
+      sessionStorage.setItem("loginStatus", JSON.stringify(true));
       router.push("/home");
     })
     .catch((error) => {
@@ -77,7 +79,7 @@ export const handleLogin = (email, password, setError, context, router) => {
 };
 
 export const handleGoogleLogin = (context, router) => {
-  const auth = getAuth();
+  // const auth = getAuth();
   signInWithPopup(auth, googleProvider)
     .then(() => {
       context.setIsLoggedIn(true);
@@ -92,4 +94,5 @@ export const handleGoogleLogin = (context, router) => {
 export const handleLogout = (context) => {
   context.setIsLoggedIn(false);
   context.setUserId(null);
+  sessionStorage.setItem("loginStatus", JSON.stringify(false));
 };

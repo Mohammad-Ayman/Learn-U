@@ -7,6 +7,7 @@ import { handleLogout } from "@/store/AuthContext";
 
 const Navbar = () => {
   const authContext = useContext(AuthContext);
+  const loggedIn = JSON.parse(sessionStorage.getItem("loginStatus"));
   const classes = {
     home: true,
     search: false,
@@ -109,7 +110,8 @@ const Navbar = () => {
           </div>
         </Link>
         {/* Render Saved And Profile Only When isLoggedIn === true */}
-        {authContext.isLoggedIn === true && (
+        {(authContext.isLoggedIn === true || loggedIn) && (
+
           <>
             <Link href="/courses">
               <div
@@ -214,7 +216,7 @@ const Navbar = () => {
         <Link href="/signin">
           <div
             onClick={() => {
-              if (authContext.isLoggedIn === true) {
+              if (authContext.isLoggedIn === true || loggedIn) {
                 handleLogout(authContext);
               }
             }}
@@ -237,7 +239,7 @@ const Navbar = () => {
               />
             </svg>
             <p className="text-l font-bold">
-              {authContext.isLoggedIn === true ? "Logout" : "Login"}
+              {(authContext.isLoggedIn === true || loggedIn) ? "Logout" : "Login"}
             </p>
           </div>
         </Link>

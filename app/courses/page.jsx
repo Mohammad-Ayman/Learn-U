@@ -18,8 +18,10 @@ import styles from "./coursePage.module.css";
 // });
 
 const Courses = () => {
+  const loggedIn = JSON.parse(sessionStorage.getItem("loginStatus"));
+
   const context = useContext(AuthContext);
-  if (!context.isLoggedIn) redirect("/signin");
+  if (!(context.isLoggedIn || loggedIn)) redirect("/signin");
 
   const [isLoading, setIsLoading] = useState(false);
   const [displayCourse, setDisplayCourse] = useState("");

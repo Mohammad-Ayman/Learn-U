@@ -87,16 +87,16 @@ export const addToSavedCourses = async (uid, courseId, setSaved) => {
       // Update the user document with the updated savedCourses array
       await updateDoc(userDocRef, { savedCourses });
 
-      console.log(
-        `Course ${courseId} ${
-          courseIndex !== -1 ? "removed from" : "added to"
-        } savedCourses for user with ID: ${uid}`
-      );
+      // console.log(
+      //   `Course ${courseId} ${
+      //     courseIndex !== -1 ? "removed from" : "added to"
+      //   } savedCourses for user with ID: ${uid}`
+      // );
     } else {
-      console.error("User document not found.");
+      // console.error("User document not found.");
     }
   } catch (e) {
-    console.error("Error adding course to savedCourses: ", e);
+    // console.error("Error adding course to savedCourses: ", e);
   }
 };
 
