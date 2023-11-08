@@ -1,22 +1,31 @@
 "use client";
+import dynamic from "next/dynamic";
 import { redirect } from "next/navigation";
 import { useState, useContext, useEffect } from "react";
 import CoursePreview from "@/Components/Courses/Course/CoursePreview";
 import MyLearningCourses from "@/Components/Courses/MyLearning/MyLearningCourses";
+import NoCoursesFoundMessage from "@/Components/UI/NoCoursesFoundMessage";
 import {
   fetchCourses,
   fetchUserSavedCourses,
 } from "@/Components/Fetching/fetching";
 import AuthContext from "@/store/AuthContext";
+import LoadingPage from "@/Components/UI/LoadingPage";
 import styles from "./coursePage.module.css";
+
+// const NoCoursesFoundMessage = dynamic (() => {
+//   import("@/Components/UI/NoCoursesFoundMessage")
+// });
 
 const Courses = () => {
   const context = useContext(AuthContext);
   if (!context.isLoggedIn) redirect("/signin");
 
+  const [isLoading, setIsLoading] = useState(false);
   const [displayCourse, setDisplayCourse] = useState("");
   const [allCourses, setAllCourses] = useState([]);
   useEffect(() => {
+    setIsLoading(true)
     const fetchAllCourses = async () => {
       // console.log("NOT from cached courses")
       const userSavedCourses = await fetchUserSavedCourses(context.userId);
@@ -36,6 +45,7 @@ const Courses = () => {
       //Update states
       setAllCourses(updatedCourses);
       setDisplayCourse(updatedCourses[0]);
+      setIsLoading(false)
     };
     const cachedCourses = sessionStorage.getItem("updatedCourses");
     const cachedUserId = sessionStorage.getItem("cachedUserId");
@@ -57,6 +67,12 @@ const Courses = () => {
   };
 
   return (
+    isLoading ? (
+      <LoadingPage/>
+    ) : (
+    allCourses.length === 0 ? 
+    <NoCoursesFoundMessage message={"Enroll into"}/>
+    : 
     <main
       className={`home-container grid-2 ${styles["home-container__courses"]}`}
     >
@@ -72,7 +88,9 @@ const Courses = () => {
         reviewBtn={"REVIEW COURSE"}
         actionBtn={"CONTINUE LEARNING"}
       />
-    </main>
+     </main>
+    )
+        
   );
 };
 

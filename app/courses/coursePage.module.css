@@ -12,7 +12,7 @@
 
 .centered-loading {
   display: flex;
-  justify-content: flex-end;
+  justify-content: center;
   align-items: center;
   height: 100vh;
   font-size: 4rem;
