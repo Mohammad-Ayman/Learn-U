@@ -1,4 +1,4 @@
-
+import Link from "next/link";
 const NoCoursesFoundMessage = (props) => {
   return (
     <div
@@ -13,9 +13,9 @@ const NoCoursesFoundMessage = (props) => {
       <p style={{ fontSize: "2.5rem", marginBottom: "1rem" }}>
         No courses found.
       </p>
-      <p style={{ fontSize: "1.5rem" }}>
+      <Link  href="/search" style={{ fontSize: "1.5rem", textDecoration: "underline"}}>
         {props.message} courses to find them here.
-      </p>
+      </Link>
     </div>
   );
 };

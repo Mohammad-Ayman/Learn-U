@@ -30,6 +30,7 @@ const SavedCourses = () => {
   const [displayCourse, setDisplayCourse] = useState("");
   const [allCourses, setAllCourses] = useState([]);
   useEffect(() => {
+    setIsLoading(true)
     const fetchAllCourses = async () => {
       const userSavedCourses = await fetchUserSavedCourses(authCtx.userId);
       const courses = await fetchCourses();
@@ -42,6 +43,7 @@ const SavedCourses = () => {
       });
       setAllCourses(updatedCourses);
       setDisplayCourse(updatedCourses[0]);
+      setIsLoading(false)
     };
 
     fetchAllCourses();
