@@ -7,7 +7,7 @@ import Recommended from "@/Components/SearchPage/RecommendedForYou/Recommended";
 import LoadingPage from "@/Components/UI/LoadingPage";
 import SearchContext from "@/store/search-context";
 
-import { useState, useEffect, useContext } from "react";
+import { useState, useEffect } from "react";
 import { fetchCourses } from "@/Components/Fetching/fetching";
 
 const Search = () => {

@@ -6,6 +6,8 @@ import Image from "next/image";
 import styles from "./styles/myLearningElement.module.css";
 
 const MyLearningElement = (props) => {
+  const firebase =  JSON.parse(sessionStorage.getItem("firebase:authUser:AIzaSyAnZT6PINdbCDR7mfYMbdJS_fBv3nOadEQ:[DEFAULT]"));
+
   const [saved, setSaved] = useState(props.saved);
   const authContext = useContext(AuthContext);
   return (
@@ -30,7 +32,7 @@ const MyLearningElement = (props) => {
               viewBox="0 0 24 24"
               fill="currentColor"
               onClick={() => {
-                addToSavedCourses(authContext.userId, props._id, setSaved);
+                addToSavedCourses(firebase.uid, props._id, setSaved);
               }}
               className={`${styles.icon} ${saved ? styles["active-icon"] : ""}`}
             >

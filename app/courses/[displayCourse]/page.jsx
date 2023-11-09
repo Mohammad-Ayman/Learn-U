@@ -1,19 +1,18 @@
 "use client";
-import { useState, useEffect, useContext } from "react";
+import { useState, useEffect } from "react";
 import CoursePreview from "@/Components/Courses/Course/CoursePreview";
 import CourseContent from "@/Components/CourseContent/CourseContent";
 import {
   fetchCourseByDocumentId,
   addToMyLearningCourses,
 } from "@/Components/Fetching/fetching";
-import AuthContext from "@/store/AuthContext";
 import LoadingPage from "@/Components/UI/LoadingPage";
 import styles from "../../courses/coursePage.module.css";
 
 const CoursePreviews = ({ params }) => {
+  const firebase =  JSON.parse(sessionStorage.getItem("firebase:authUser:AIzaSyAnZT6PINdbCDR7mfYMbdJS_fBv3nOadEQ:[DEFAULT]"));
   // const router = useRouter();
   const { displayCourse } = params;
-  const authCtx = useContext(AuthContext);
   const [courseData, setCourseData] = useState(null);
 
   useEffect(() => {
@@ -32,7 +31,7 @@ const CoursePreviews = ({ params }) => {
           <CourseContent
             displayedCourseContent={courseData.content}
             onClick={() => {
-              addToMyLearningCourses(authCtx.userId, displayCourse);
+              addToMyLearningCourses(firebase.uid, displayCourse);
             }}
           />
       </main>

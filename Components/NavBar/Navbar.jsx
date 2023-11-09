@@ -7,7 +7,7 @@ import { handleLogout } from "@/store/AuthContext";
 
 const Navbar = () => {
   const authContext = useContext(AuthContext);
-  const loggedIn = JSON.parse(sessionStorage.getItem("loginStatus"));
+  const firebase =  JSON.parse(sessionStorage.getItem("firebase:authUser:AIzaSyAnZT6PINdbCDR7mfYMbdJS_fBv3nOadEQ:[DEFAULT]"));
   const classes = {
     home: true,
     search: false,
@@ -110,7 +110,7 @@ const Navbar = () => {
           </div>
         </Link>
         {/* Render Saved And Profile Only When isLoggedIn === true */}
-        {(authContext.isLoggedIn === true || loggedIn) && (
+        {(firebase) && (
 
           <>
             <Link href="/courses">
@@ -216,7 +216,7 @@ const Navbar = () => {
         <Link href="/signin">
           <div
             onClick={() => {
-              if (authContext.isLoggedIn === true || loggedIn) {
+              if (firebase) {
                 handleLogout(authContext);
               }
             }}
@@ -239,7 +239,7 @@ const Navbar = () => {
               />
             </svg>
             <p className="text-l font-bold">
-              {(authContext.isLoggedIn === true || loggedIn) ? "Logout" : "Login"}
+              {(firebase) ? "Logout" : "Login"}
             </p>
           </div>
         </Link>

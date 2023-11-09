@@ -1,15 +1,11 @@
 "use client";
 import dynamic from "next/dynamic";
 import { redirect } from "next/navigation";
-import { useState, useContext, useEffect } from "react";
+import { useState, useEffect } from "react";
 import CoursePreview from "@/Components/Courses/Course/CoursePreview";
 import MyLearningCourses from "@/Components/Courses/MyLearning/MyLearningCourses";
 import NoCoursesFoundMessage from "@/Components/UI/NoCoursesFoundMessage";
-import {
-  fetchCourses,
-  fetchUserSavedCourses,
-} from "@/Components/Fetching/fetching";
-import AuthContext from "@/store/AuthContext";
+import { fetchCourses, fetchUserSavedCourses, } from "@/Components/Fetching/fetching";
 import LoadingPage from "@/Components/UI/LoadingPage";
 import styles from "./coursePage.module.css";
 
@@ -18,10 +14,8 @@ import styles from "./coursePage.module.css";
 // });
 
 const Courses = () => {
-  const loggedIn = JSON.parse(sessionStorage.getItem("loginStatus"));
-
-  const context = useContext(AuthContext);
-  if (!(context.isLoggedIn || loggedIn)) redirect("/signin");
+  const firebase =  JSON.parse(sessionStorage.getItem("firebase:authUser:AIzaSyAnZT6PINdbCDR7mfYMbdJS_fBv3nOadEQ:[DEFAULT]"));
+  if (!firebase) redirect("/signin");
 
   const [isLoading, setIsLoading] = useState(false);
   const [displayCourse, setDisplayCourse] = useState("");
@@ -30,7 +24,7 @@ const Courses = () => {
     setIsLoading(true)
     const fetchAllCourses = async () => {
       // console.log("NOT from cached courses")
-      const userSavedCourses = await fetchUserSavedCourses(context.userId);
+      const userSavedCourses = await fetchUserSavedCourses(firebase.uid);      
       const courses = await fetchCourses();
       const updatedCourses = [];
       courses.map((course) => {
@@ -43,7 +37,7 @@ const Courses = () => {
       });
       //Cache data to session storage
       sessionStorage.setItem("updatedCourses", JSON.stringify(updatedCourses));
-      sessionStorage.setItem("cachedUserId", JSON.stringify(context.userId));
+      sessionStorage.setItem("cachedUserId", JSON.stringify(firebase.uid));
       //Update states
       setAllCourses(updatedCourses);
       setDisplayCourse(updatedCourses[0]);

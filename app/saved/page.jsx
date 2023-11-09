@@ -1,7 +1,7 @@
 "use client";
 import dynamic from "next/dynamic";
 import { redirect } from "next/navigation";
-import { useState, useContext, useEffect } from "react";
+import { useState, useEffect } from "react";
 import CoursePreview from "@/Components/Courses/Course/CoursePreview";
 import MyLearningCourses from "@/Components/Courses/MyLearning/MyLearningCourses";
 import NoCoursesFoundMessage from "@/Components/UI/NoCoursesFoundMessage";
@@ -10,7 +10,6 @@ import {
   fetchUserSavedCourses,
   addToMyLearningCourses,
 } from "@/Components/Fetching/fetching";
-import AuthContext from "@/store/AuthContext";
 import LoadingPage from "@/Components/UI/LoadingPage";
 import styles from "../courses/coursePage.module.css";
 
@@ -23,8 +22,8 @@ import styles from "../courses/coursePage.module.css";
 // });
 
 const SavedCourses = () => {
-  const authCtx = useContext(AuthContext);
-  if (!authCtx.isLoggedIn) redirect("/signin");
+  const firebase =  JSON.parse(sessionStorage.getItem("firebase:authUser:AIzaSyAnZT6PINdbCDR7mfYMbdJS_fBv3nOadEQ:[DEFAULT]"));
+  if (!firebase) redirect("/signin");
 
   const [isLoading, setIsLoading] = useState(false);
   const [displayCourse, setDisplayCourse] = useState("");
@@ -32,7 +31,7 @@ const SavedCourses = () => {
   useEffect(() => {
     setIsLoading(true)
     const fetchAllCourses = async () => {
-      const userSavedCourses = await fetchUserSavedCourses(authCtx.userId);
+      const userSavedCourses = await fetchUserSavedCourses(firebase.uid);
       const courses = await fetchCourses();
       const updatedCourses = [];
       courses.map((course) => {
@@ -74,7 +73,7 @@ const SavedCourses = () => {
         displayedCourse={displayCourse}
         coursesSource={allCourses}
         onClick={async () => {
-          addToMyLearningCourses(authCtx.userId, displayCourse._id);
+          addToMyLearningCourses(firebase.uid, displayCourse._id);
         }}
         reviewBtn={"PREVIEW"}
         actionBtn={displayCourse.message}

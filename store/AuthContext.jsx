@@ -1,12 +1,12 @@
-import React, { useContext } from "react";
+import React from "react";
 
 import db from "@/firebase";
 import { auth, googleProvider } from "@/firebase";
 import { signInWithPopup } from "firebase/auth";
 import {
-  getAuth,
+  signOut,
   createUserWithEmailAndPassword,
-  signInWithEmailAndPassword,
+  signInWithEmailAndPassword, 
 } from "firebase/auth";
 import { doc, setDoc } from "firebase/firestore";
 
@@ -64,11 +64,9 @@ export const handleLogin = (email, password, setError, context, router) => {
   // const auth = getAuth();
   signInWithEmailAndPassword(auth, email, password, setError)
     .then((userCredential) => {
-      console.log(userCredential)
       const user = userCredential.user;
       context.setIsLoggedIn(true);
       context.setUserId(user.uid);
-      sessionStorage.setItem("loginStatus", JSON.stringify(true));
       router.push("/home");
     })
     .catch((error) => {
@@ -92,7 +90,12 @@ export const handleGoogleLogin = (context, router) => {
 };
 
 export const handleLogout = (context) => {
-  context.setIsLoggedIn(false);
-  context.setUserId(null);
-  sessionStorage.setItem("loginStatus", JSON.stringify(false));
+  signOut(auth) // Corrected the function call
+    .then(() => {
+      context.setIsLoggedIn(false);
+      context.setUserId(null);
+    })
+    .catch((error) => {
+      // console.error("Sign-out error:", error);
+    });
 };
