@@ -7,6 +7,7 @@ import {
   addToMyLearningCourses,
 } from "@/Components/Fetching/fetching";
 import AuthContext from "@/store/AuthContext";
+import LoadingPage from "@/Components/UI/LoadingPage";
 import styles from "../../courses/coursePage.module.css";
 
 const CoursePreviews = ({ params }) => {
@@ -25,11 +26,8 @@ const CoursePreviews = ({ params }) => {
   }, [displayCourse]);
 
   return (
-    <main
-      className={`home-container grid-2 ${styles["home-container__courses"]}`}
-    >
-      {courseData ? (
-        <>
+    courseData ? (
+      <main className={`home-container grid-2 ${styles["home-container__courses"]}`}>
           <CoursePreview displayedCourse={courseData} actionButton={true} />
           <CourseContent
             displayedCourseContent={courseData.content}
@@ -37,13 +35,11 @@ const CoursePreviews = ({ params }) => {
               addToMyLearningCourses(authCtx.userId, displayCourse);
             }}
           />
-        </>
-      ) : (
-        <div className={styles["centered-loading"]}>
-          <p>Loading...</p>
-        </div>
-      )}
-    </main>
+      </main>
+    ) : (
+      <LoadingPage/>
+    )
+    
   );
 };
 

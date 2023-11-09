@@ -4,7 +4,7 @@ import CategoriesSearchPage from "@/Components/SearchPage/CategoriesSearchPage/c
 import SearchBar from "@/Components/SearchPage/FindYourFav/SearchBar";
 import RatingLevel from "@/Components/SearchPage/RatingLevel/RatingLevel";
 import Recommended from "@/Components/SearchPage/RecommendedForYou/Recommended";
-
+import LoadingPage from "@/Components/UI/LoadingPage";
 import SearchContext from "@/store/search-context";
 
 import { useState, useEffect, useContext } from "react";
@@ -86,10 +86,11 @@ const Search = () => {
         <TopSearches onClick={handleInputChange} />
         <CategoriesSearchPage />
         <RatingLevel />
+        {allCourses.length === 0 ? <LoadingPage/> :
         <Recommended
           filteredCoursesProp={filteredCourses}
           allData={allCourses}
-        />
+        />}
       </SearchContext.Provider>
     </main>
   );
