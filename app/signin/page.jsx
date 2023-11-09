@@ -1,7 +1,7 @@
 "use client";
 import AuthContext from "@/store/AuthContext";
 import React, { useState, useContext } from "react";
-import { useRouter } from "next/navigation";
+import { useRouter, redirect } from "next/navigation";
 import Image from "next/image";
 import {
   handleSignup,
@@ -13,6 +13,8 @@ import { fetchLimitedCourses } from "@/Components/Fetching/fetching";
 import styles from "./signinPage.module.css";
 
 const LoginPage = () => {
+  const firebase =  JSON.parse(sessionStorage.getItem("firebase:authUser:AIzaSyAnZT6PINdbCDR7mfYMbdJS_fBv3nOadEQ:[DEFAULT]"));
+  if (firebase) redirect("/home");
   const router = useRouter();
   const authContext = useContext(AuthContext);
 
