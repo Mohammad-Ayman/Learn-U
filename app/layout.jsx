@@ -2,6 +2,7 @@
 import Navbar from "@/Components/NavBar/Navbar";
 import "./globals.css";
 import { Inter } from "next/font/google";
+import Head from "next/head";
 
 import { useState } from "react";
 import AuthContext from "@/store/AuthContext";
@@ -44,6 +45,13 @@ export default function RootLayout({ children }) {
         }}
       >
         <html lang="en">
+          <Head>
+            <title>{metadata.title}</title>
+            <meta name="description" content={metadata.description} />
+            <meta name="author" content={metadata.author} />
+            <meta name="keywords" content={metadata.keywords} />
+            <meta name="url" content={metadata.url} />
+          </Head>
           <body className={inter.className} style={{ display: "flex" }}>
             <header>
               <Navbar />
