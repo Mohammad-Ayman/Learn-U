@@ -1,7 +1,7 @@
 "use client";
 import dynamic from "next/dynamic";
 import { redirect } from "next/navigation";
-import { useState, useContext, useEffect } from "react";
+import { useState, useEffect } from "react";
 import CoursePreview from "@/Components/Courses/Course/CoursePreview";
 import MyLearningCourses from "@/Components/Courses/MyLearning/MyLearningCourses";
 import NoCoursesFoundMessage from "@/Components/UI/NoCoursesFoundMessage";
@@ -10,7 +10,6 @@ import {
   fetchUserSavedCourses,
   addToMyLearningCourses,
 } from "@/Components/Fetching/fetching";
-import AuthContext from "@/store/AuthContext";
 import LoadingPage from "@/Components/UI/LoadingPage";
 import styles from "../courses/coursePage.module.css";
 
@@ -23,27 +22,44 @@ import styles from "../courses/coursePage.module.css";
 // });
 
 const SavedCourses = () => {
-  const authCtx = useContext(AuthContext);
-  if (!authCtx.isLoggedIn) redirect("/signin");
+  const isLocalStorageAvailable =
+    typeof window !== "undefined" && window.localStorage;
+
+  const firebase = isLocalStorageAvailable
+    ? JSON.parse(
+        localStorage.getItem(
+          "firebase:authUser:AIzaSyAnZT6PINdbCDR7mfYMbdJS_fBv3nOadEQ:[DEFAULT]"
+        )
+      )
+    : null;
+  if (!firebase) redirect("/signin");
 
   const [isLoading, setIsLoading] = useState(false);
   const [displayCourse, setDisplayCourse] = useState("");
   const [allCourses, setAllCourses] = useState([]);
   useEffect(() => {
-    setIsLoading(true)
+    setIsLoading(true);
     const fetchAllCourses = async () => {
-      const userSavedCourses = await fetchUserSavedCourses(authCtx.userId);
+      const userSavedCourses = await fetchUserSavedCourses(firebase.uid);
       const courses = await fetchCourses();
       const updatedCourses = [];
       courses.map((course) => {
         if (userSavedCourses.savedCourses.includes(course._id))
-          userSavedCourses.myLearning.includes(course._id) 
-           ? updatedCourses.push({ saved: true, ...course,message: "CONTINUE LEARNING" })
-           :  updatedCourses.push({ saved: true, ...course,message: "BUY NOW" })
+          userSavedCourses.myLearning.includes(course._id)
+            ? updatedCourses.push({
+                saved: true,
+                ...course,
+                message: "CONTINUE LEARNING",
+              })
+            : updatedCourses.push({
+                saved: true,
+                ...course,
+                message: "BUY NOW",
+              });
       });
       setAllCourses(updatedCourses);
       setDisplayCourse(updatedCourses[0]);
-      setIsLoading(false)
+      setIsLoading(false);
     };
 
     fetchAllCourses();
@@ -53,13 +69,11 @@ const SavedCourses = () => {
     setDisplayCourse(allCourses[clickedCourseIndex]);
   };
 
-  return (
-    isLoading ? (
-      <LoadingPage/>
-    ) : (
-    allCourses.length === 0 ? 
-    <NoCoursesFoundMessage message={"Save"}/>
-    : 
+  return isLoading ? (
+    <LoadingPage />
+  ) : allCourses.length === 0 ? (
+    <NoCoursesFoundMessage message={"Save"} />
+  ) : (
     <main
       className={`home-container grid-2 ${styles["home-container__courses"]}`}
     >
@@ -74,13 +88,12 @@ const SavedCourses = () => {
         displayedCourse={displayCourse}
         coursesSource={allCourses}
         onClick={async () => {
-          addToMyLearningCourses(authCtx.userId, displayCourse._id);
+          addToMyLearningCourses(firebase.uid, displayCourse._id);
         }}
         reviewBtn={"PREVIEW"}
         actionBtn={displayCourse.message}
       />
     </main>
-    )
   );
 };
 

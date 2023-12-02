@@ -1,17 +1,13 @@
 import { initializeApp } from "firebase/app";
 import { getFirestore } from "firebase/firestore";
 import { getAuth } from "firebase/auth";
-import { GoogleAuthProvider } from "firebase/auth";
+import {
+  GoogleAuthProvider,
+  setPersistence,
+  browserLocalPersistence,
+  signInWithEmailAndPassword,
+} from "firebase/auth";
 
-const firebaseConfig = {
-  apiKey: "AIzaSyCJU74bWOYzwdIDM_0IXoBRnIrWQEYRNbY",
-  authDomain: "capstone-team-6-1ff18.firebaseapp.com",
-  projectId: "capstone-team-6-1ff18",
-  storageBucket: "capstone-team-6-1ff18.appspot.com",
-  messagingSenderId: "690382240461",
-  appId: "1:690382240461:web:f8d6355c919bcf2a198784",
-  measurementId: "G-PKN15Z2GXT",
-};
 const firebaseConfigMohammed = {
   apiKey: "AIzaSyAnZT6PINdbCDR7mfYMbdJS_fBv3nOadEQ",
   authDomain: "learn-u-35d00.firebaseapp.com",
@@ -24,6 +20,15 @@ const firebaseConfigMohammed = {
 // Initialize Firebase
 const app = initializeApp(firebaseConfigMohammed);
 const auth = getAuth(app);
+setPersistence(auth, browserLocalPersistence)
+  .then(() => {
+    return signInWithEmailAndPassword(auth, email, password);
+  })
+  .catch((error) => {
+    // Handle Errors here.
+    const errorCode = error.code;
+    const errorMessage = error.message;
+  });
 const db = getFirestore(app);
 export const googleProvider = new GoogleAuthProvider();
 export default db;

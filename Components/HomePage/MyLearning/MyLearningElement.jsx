@@ -1,11 +1,21 @@
 "use client";
-import { useState, useContext } from "react";
+import { useState, useContext, useEffect } from "react";
 import AuthContext from "@/store/AuthContext";
 import { addToSavedCourses } from "@/Components/Fetching/fetching";
 import Image from "next/image";
 import styles from "./styles/myLearningElement.module.css";
 
 const MyLearningElement = (props) => {
+  const isLocalStorageAvailable =
+    typeof window !== "undefined" && window.localStorage;
+
+  const firebase = isLocalStorageAvailable
+    ? JSON.parse(
+        localStorage.getItem(
+          "firebase:authUser:AIzaSyAnZT6PINdbCDR7mfYMbdJS_fBv3nOadEQ:[DEFAULT]"
+        )
+      )
+    : null;
   const [saved, setSaved] = useState(props.saved);
   const authContext = useContext(AuthContext);
   return (
@@ -30,7 +40,7 @@ const MyLearningElement = (props) => {
               viewBox="0 0 24 24"
               fill="currentColor"
               onClick={() => {
-                addToSavedCourses(authContext.userId, props._id, setSaved);
+                addToSavedCourses(firebase.uid, props._id, setSaved);
               }}
               className={`${styles.icon} ${saved ? styles["active-icon"] : ""}`}
             >

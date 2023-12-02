@@ -7,6 +7,25 @@ import { handleLogout } from "@/store/AuthContext";
 
 const Navbar = () => {
   const authContext = useContext(AuthContext);
+  const isLocalStorageAvailable =
+    typeof window !== "undefined" && window.localStorage;
+
+  const firebase = isLocalStorageAvailable
+    ? JSON.parse(
+        localStorage.getItem(
+          "firebase:authUser:AIzaSyAnZT6PINdbCDR7mfYMbdJS_fBv3nOadEQ:[DEFAULT]"
+        )
+      )
+    : null;
+
+  // if (firebase) redirect("/home");
+  // const firebase =
+  //   JSON.parse(
+  //     localStorage.getItem(
+  //       "firebase:authUser:AIzaSyAnZT6PINdbCDR7mfYMbdJS_fBv3nOadEQ:[DEFAULT]"
+  //     )
+  //   ) || null;
+
   const classes = {
     home: true,
     search: false,
@@ -24,9 +43,25 @@ const Navbar = () => {
   ) {
     return null;
   }
+
+  const logOut = async () => {
+    if (firebase) {
+      try {
+        await handleLogout(authContext);
+
+        localStorage.removeItem(
+          "firebase:authUser:AIzaSyAnZT6PINdbCDR7mfYMbdJS_fBv3nOadEQ:[DEFAULT]"
+        );
+      } catch (error) {
+        // Handle any errors that occur during logout
+        console.error("Logout error:", error);
+      }
+    }
+  };
+
   return (
     <nav
-      className={`flex flex-col rounded w-20 h-screen text-center gap-10 pl-10 pt-12`}
+      className={`flex flex-col rounded w-20 h-screen text-center gap-10 pl-10 mr-10 pt-12`}
     >
       <Link href="/">
         <div>
@@ -109,7 +144,7 @@ const Navbar = () => {
           </div>
         </Link>
         {/* Render Saved And Profile Only When isLoggedIn === true */}
-        {authContext.isLoggedIn === true && (
+        {firebase && (
           <>
             <Link href="/courses">
               <div
@@ -213,11 +248,7 @@ const Navbar = () => {
 
         <Link href="/signin">
           <div
-            onClick={() => {
-              if (authContext.isLoggedIn === true) {
-                handleLogout(authContext);
-              }
-            }}
+            onClick={logOut}
             className={
               changeClass.profile
                 ? "text-gray-400 hover:text-blue-400 cursor-pointer mb-4"
@@ -236,9 +267,7 @@ const Navbar = () => {
                 clipRule="evenodd"
               />
             </svg>
-            <p className="text-l font-bold">
-              {authContext.isLoggedIn === true ? "Logout" : "Login"}
-            </p>
+            <p className="text-l font-bold">{firebase ? "Logout" : "Login"}</p>
           </div>
         </Link>
       </div>

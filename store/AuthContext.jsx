@@ -1,10 +1,10 @@
-import React, { useContext } from "react";
+import React from "react";
 
 import db from "@/firebase";
 import { auth, googleProvider } from "@/firebase";
 import { signInWithPopup } from "firebase/auth";
 import {
-  getAuth,
+  signOut,
   createUserWithEmailAndPassword,
   signInWithEmailAndPassword,
 } from "firebase/auth";
@@ -43,7 +43,7 @@ export const addUserData = async (uid) => {
 };
 
 export const handleSignup = (email, password, setError, context, router) => {
-  const auth = getAuth();
+  // const auth = getAuth();
   createUserWithEmailAndPassword(auth, email, password, setError)
     .then((userCredential) => {
       const user = userCredential.user;
@@ -61,7 +61,7 @@ export const handleSignup = (email, password, setError, context, router) => {
     });
 };
 export const handleLogin = (email, password, setError, context, router) => {
-  const auth = getAuth();
+  // const auth = getAuth();
   signInWithEmailAndPassword(auth, email, password, setError)
     .then((userCredential) => {
       const user = userCredential.user;
@@ -77,7 +77,7 @@ export const handleLogin = (email, password, setError, context, router) => {
 };
 
 export const handleGoogleLogin = (context, router) => {
-  const auth = getAuth();
+  // const auth = getAuth();
   signInWithPopup(auth, googleProvider)
     .then(() => {
       context.setIsLoggedIn(true);
@@ -90,6 +90,15 @@ export const handleGoogleLogin = (context, router) => {
 };
 
 export const handleLogout = (context) => {
-  context.setIsLoggedIn(false);
-  context.setUserId(null);
+  signOut(auth) // Corrected the function call
+    .then(() => {
+      context.setIsLoggedIn(false);
+      context.setUserId(null);
+      // localStorage.removeItem(
+      //   "firebase:authUser:AIzaSyAnZT6PINdbCDR7mfYMbdJS_fBv3nOadEQ:[DEFAULT]"
+      // );
+    })
+    .catch((error) => {
+      // console.error("Sign-out error:", error);
+    });
 };
