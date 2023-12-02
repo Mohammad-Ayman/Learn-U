@@ -1,18 +1,20 @@
 "use client";
 import { usePathname } from "next/navigation";
 import Link from "next/link";
-import { useState, useContext } from "react";
+import { useState, useContext, useEffect } from "react";
 import AuthContext from "@/store/AuthContext";
 import { handleLogout } from "@/store/AuthContext";
 
 const Navbar = () => {
   const authContext = useContext(AuthContext);
-  const firebase =
-    JSON.parse(
+  let firebase = null;
+  useEffect(() => {
+    firebase = JSON.parse(
       localStorage.getItem(
         "firebase:authUser:AIzaSyAnZT6PINdbCDR7mfYMbdJS_fBv3nOadEQ:[DEFAULT]"
       )
-    ) || null;
+    );
+  }, []);
   const classes = {
     home: true,
     search: false,
@@ -30,6 +32,22 @@ const Navbar = () => {
   ) {
     return null;
   }
+
+  const logOut = async () => {
+    if (firebase) {
+      try {
+        await handleLogout(authContext);
+
+        localStorage.removeItem(
+          "firebase:authUser:AIzaSyAnZT6PINdbCDR7mfYMbdJS_fBv3nOadEQ:[DEFAULT]"
+        );
+      } catch (error) {
+        // Handle any errors that occur during logout
+        console.error("Logout error:", error);
+      }
+    }
+  };
+
   return (
     <nav
       className={`flex flex-col rounded w-20 h-screen text-center gap-10 pl-10 mr-10 pt-12`}
@@ -219,11 +237,7 @@ const Navbar = () => {
 
         <Link href="/signin">
           <div
-            onClick={() => {
-              if (firebase) {
-                handleLogout(authContext);
-              }
-            }}
+            onClick={logOut}
             className={
               changeClass.profile
                 ? "text-gray-400 hover:text-blue-400 cursor-pointer mb-4"

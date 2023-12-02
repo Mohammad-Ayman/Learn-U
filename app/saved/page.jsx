@@ -22,11 +22,14 @@ import styles from "../courses/coursePage.module.css";
 // });
 
 const SavedCourses = () => {
-  const firebase = JSON.parse(
-    localStorage.getItem(
-      "firebase:authUser:AIzaSyAnZT6PINdbCDR7mfYMbdJS_fBv3nOadEQ:[DEFAULT]"
-    )
-  );
+  let firebase = null;
+  useEffect(() => {
+    firebase = JSON.parse(
+      localStorage.getItem(
+        "firebase:authUser:AIzaSyAnZT6PINdbCDR7mfYMbdJS_fBv3nOadEQ:[DEFAULT]"
+      )
+    );
+  }, []);
   if (!firebase) redirect("/signin");
 
   const [isLoading, setIsLoading] = useState(false);

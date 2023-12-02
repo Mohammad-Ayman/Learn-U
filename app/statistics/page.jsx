@@ -1,13 +1,21 @@
 "use client";
 import { redirect } from "next/navigation";
+import { useEffect } from "react";
 import ThisWeek from "@/Components/Statistics/ThisWeek/ThisWeek";
 import MyPerformance from "@/Components/Statistics/MyPerformance/MyPerformance";
 import MyActivity from "@/Components/Statistics/MyActivity/MyActivity";
 import LastYear from "@/Components/Statistics/LastYear/LastYear";
 import Styles from "./statistics.module.css";
 
-const Statistics = () => {  
-  const firebase =  JSON.parse(sessionStorage.getItem("firebase:authUser:AIzaSyAnZT6PINdbCDR7mfYMbdJS_fBv3nOadEQ:[DEFAULT]"));
+const Statistics = () => {
+  let firebase = null;
+  useEffect(() => {
+    firebase = JSON.parse(
+      localStorage.getItem(
+        "firebase:authUser:AIzaSyAnZT6PINdbCDR7mfYMbdJS_fBv3nOadEQ:[DEFAULT]"
+      )
+    );
+  }, []);
   if (!firebase) redirect("/signin");
   return (
     <main className={Styles.main}>

@@ -1,6 +1,6 @@
 "use client";
 import AuthContext from "@/store/AuthContext";
-import React, { useState, useContext } from "react";
+import React, { useState, useContext, useEffect } from "react";
 import { useRouter, redirect } from "next/navigation";
 import Image from "next/image";
 import {
@@ -9,14 +9,16 @@ import {
   handleGoogleLogin,
 } from "@/store/AuthContext";
 import { AiOutlineEyeInvisible, AiOutlineEye } from "react-icons/ai";
-import { fetchLimitedCourses } from "@/Components/Fetching/fetching";
 import styles from "./signinPage.module.css";
 const LoginPage = () => {
-  const firebase = JSON.parse(
-    localStorage.getItem(
-      "firebase:authUser:AIzaSyAnZT6PINdbCDR7mfYMbdJS_fBv3nOadEQ:[DEFAULT]"
-    )
-  );
+  let firebase = null;
+  useEffect(() => {
+    firebase = JSON.parse(
+      localStorage.getItem(
+        "firebase:authUser:AIzaSyAnZT6PINdbCDR7mfYMbdJS_fBv3nOadEQ:[DEFAULT]"
+      )
+    );
+  }, []);
   if (firebase) redirect("/home");
   const router = useRouter();
   const authContext = useContext(AuthContext);

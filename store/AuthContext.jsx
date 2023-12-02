@@ -94,9 +94,9 @@ export const handleLogout = (context) => {
     .then(() => {
       context.setIsLoggedIn(false);
       context.setUserId(null);
-      localStorage.removeItem(
-        "firebase:authUser:AIzaSyAnZT6PINdbCDR7mfYMbdJS_fBv3nOadEQ:[DEFAULT]"
-      );
+      // localStorage.removeItem(
+      //   "firebase:authUser:AIzaSyAnZT6PINdbCDR7mfYMbdJS_fBv3nOadEQ:[DEFAULT]"
+      // );
     })
     .catch((error) => {
       // console.error("Sign-out error:", error);

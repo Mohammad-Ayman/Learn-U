@@ -10,11 +10,14 @@ import LoadingPage from "@/Components/UI/LoadingPage";
 import styles from "../../courses/coursePage.module.css";
 
 const CoursePreviews = ({ params }) => {
-  const firebase = JSON.parse(
-    localStorage.getItem(
-      "firebase:authUser:AIzaSyAnZT6PINdbCDR7mfYMbdJS_fBv3nOadEQ:[DEFAULT]"
-    )
-  );
+  let firebase = null;
+  useEffect(() => {
+    firebase = JSON.parse(
+      localStorage.getItem(
+        "firebase:authUser:AIzaSyAnZT6PINdbCDR7mfYMbdJS_fBv3nOadEQ:[DEFAULT]"
+      )
+    );
+  }, []);
   // const router = useRouter();
   const { displayCourse } = params;
   const [courseData, setCourseData] = useState(null);

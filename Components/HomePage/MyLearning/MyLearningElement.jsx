@@ -1,13 +1,19 @@
 "use client";
-import { useState, useContext } from "react";
+import { useState, useContext, useEffect } from "react";
 import AuthContext from "@/store/AuthContext";
 import { addToSavedCourses } from "@/Components/Fetching/fetching";
 import Image from "next/image";
 import styles from "./styles/myLearningElement.module.css";
 
 const MyLearningElement = (props) => {
-  const firebase =  JSON.parse(sessionStorage.getItem("firebase:authUser:AIzaSyAnZT6PINdbCDR7mfYMbdJS_fBv3nOadEQ:[DEFAULT]"));
-
+  let firebase = null;
+  useEffect(() => {
+    firebase = JSON.parse(
+      localStorage.getItem(
+        "firebase:authUser:AIzaSyAnZT6PINdbCDR7mfYMbdJS_fBv3nOadEQ:[DEFAULT]"
+      )
+    );
+  }, []);
   const [saved, setSaved] = useState(props.saved);
   const authContext = useContext(AuthContext);
   return (
