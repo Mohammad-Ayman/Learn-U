@@ -5,7 +5,7 @@ const Navbar = () => {
   const authContext = useContext(AuthContext);
   console.log("auth", authContext.isLoggedIn);
   return (
-    <nav className="flex flex-col rounded w-20 h-screen text-center gap-10 pl-10 mr-10 pt-12">
+    <nav className="navbar-container hidden xs:block sm:flex flex flex-col rounded w-20 h-screen text-center gap-10 pl-10 mr-10 pt-12">
       <Link href="/">
         <div>
           <div className="text-blue-500 hover:text-blue-400 cursor-pointer">
