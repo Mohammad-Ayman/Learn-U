@@ -11,14 +11,16 @@ import {
 import { AiOutlineEyeInvisible, AiOutlineEye } from "react-icons/ai";
 import styles from "./signinPage.module.css";
 const LoginPage = () => {
-  let firebase = null;
-  useEffect(() => {
-    firebase = JSON.parse(
-      localStorage.getItem(
-        "firebase:authUser:AIzaSyAnZT6PINdbCDR7mfYMbdJS_fBv3nOadEQ:[DEFAULT]"
+  const isLocalStorageAvailable =
+    typeof window !== "undefined" && window.localStorage;
+
+  const firebase = isLocalStorageAvailable
+    ? JSON.parse(
+        localStorage.getItem(
+          "firebase:authUser:AIzaSyAnZT6PINdbCDR7mfYMbdJS_fBv3nOadEQ:[DEFAULT]"
+        )
       )
-    );
-  }, []);
+    : null;
   if (firebase) redirect("/home");
   const router = useRouter();
   const authContext = useContext(AuthContext);

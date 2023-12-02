@@ -13,6 +13,7 @@ const metadata = {
   description: "Online Learning Platform",
   author: "Mohamed Ayman",
   keywords: "online learning, education, courses, tutorials",
+  image: "/path/to/your/image.jpg",
   url: "https://learn-u.vercel.app/",
 };
 

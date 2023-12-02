@@ -1,20 +1,31 @@
 "use client";
 import { usePathname } from "next/navigation";
 import Link from "next/link";
-import { useState, useContext, useEffect } from "react";
+import { useState, useContext } from "react";
 import AuthContext from "@/store/AuthContext";
 import { handleLogout } from "@/store/AuthContext";
 
 const Navbar = () => {
   const authContext = useContext(AuthContext);
-  let firebase = null;
-  useEffect(() => {
-    firebase = JSON.parse(
-      localStorage.getItem(
-        "firebase:authUser:AIzaSyAnZT6PINdbCDR7mfYMbdJS_fBv3nOadEQ:[DEFAULT]"
+  const isLocalStorageAvailable =
+    typeof window !== "undefined" && window.localStorage;
+
+  const firebase = isLocalStorageAvailable
+    ? JSON.parse(
+        localStorage.getItem(
+          "firebase:authUser:AIzaSyAnZT6PINdbCDR7mfYMbdJS_fBv3nOadEQ:[DEFAULT]"
+        )
       )
-    );
-  }, []);
+    : null;
+
+  // if (firebase) redirect("/home");
+  // const firebase =
+  //   JSON.parse(
+  //     localStorage.getItem(
+  //       "firebase:authUser:AIzaSyAnZT6PINdbCDR7mfYMbdJS_fBv3nOadEQ:[DEFAULT]"
+  //     )
+  //   ) || null;
+
   const classes = {
     home: true,
     search: false,

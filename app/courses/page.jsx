@@ -17,14 +17,16 @@ import styles from "./coursePage.module.css";
 // });
 
 const Courses = () => {
-  let firebase = null;
-  useEffect(() => {
-    firebase = JSON.parse(
-      localStorage.getItem(
-        "firebase:authUser:AIzaSyAnZT6PINdbCDR7mfYMbdJS_fBv3nOadEQ:[DEFAULT]"
+  const isLocalStorageAvailable =
+    typeof window !== "undefined" && window.localStorage;
+
+  const firebase = isLocalStorageAvailable
+    ? JSON.parse(
+        localStorage.getItem(
+          "firebase:authUser:AIzaSyAnZT6PINdbCDR7mfYMbdJS_fBv3nOadEQ:[DEFAULT]"
+        )
       )
-    );
-  }, []);
+    : null;
   if (!firebase) redirect("/signin");
 
   const [isLoading, setIsLoading] = useState(false);
