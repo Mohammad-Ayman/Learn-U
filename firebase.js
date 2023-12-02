@@ -1,7 +1,12 @@
 import { initializeApp } from "firebase/app";
 import { getFirestore } from "firebase/firestore";
 import { getAuth } from "firebase/auth";
-import { GoogleAuthProvider,setPersistence,browserSessionPersistence,signInWithEmailAndPassword  } from "firebase/auth";
+import {
+  GoogleAuthProvider,
+  setPersistence,
+  browserLocalPersistence,
+  signInWithEmailAndPassword,
+} from "firebase/auth";
 
 const firebaseConfigMohammed = {
   apiKey: "AIzaSyAnZT6PINdbCDR7mfYMbdJS_fBv3nOadEQ",
@@ -15,7 +20,7 @@ const firebaseConfigMohammed = {
 // Initialize Firebase
 const app = initializeApp(firebaseConfigMohammed);
 const auth = getAuth(app);
-setPersistence(auth, browserSessionPersistence)
+setPersistence(auth, browserLocalPersistence)
   .then(() => {
     return signInWithEmailAndPassword(auth, email, password);
   })

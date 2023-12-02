@@ -7,7 +7,11 @@ import { handleLogout } from "@/store/AuthContext";
 
 const Navbar = () => {
   const authContext = useContext(AuthContext);
-  const firebase =  JSON.parse(sessionStorage.getItem("firebase:authUser:AIzaSyAnZT6PINdbCDR7mfYMbdJS_fBv3nOadEQ:[DEFAULT]"));
+  const firebase = JSON.parse(
+    sessionStorage.getItem(
+      "firebase:authUser:AIzaSyAnZT6PINdbCDR7mfYMbdJS_fBv3nOadEQ:[DEFAULT]"
+    )
+  );
   const classes = {
     home: true,
     search: false,
@@ -27,7 +31,7 @@ const Navbar = () => {
   }
   return (
     <nav
-      className={`flex flex-col rounded w-20 h-screen text-center gap-10 pl-10 pt-12`}
+      className={`flex flex-col rounded w-20 h-screen text-center gap-10 pl-10 mr-10 pt-12`}
     >
       <Link href="/">
         <div>
@@ -110,8 +114,7 @@ const Navbar = () => {
           </div>
         </Link>
         {/* Render Saved And Profile Only When isLoggedIn === true */}
-        {(firebase) && (
-
+        {firebase && (
           <>
             <Link href="/courses">
               <div
@@ -238,9 +241,7 @@ const Navbar = () => {
                 clipRule="evenodd"
               />
             </svg>
-            <p className="text-l font-bold">
-              {(firebase) ? "Logout" : "Login"}
-            </p>
+            <p className="text-l font-bold">{firebase ? "Logout" : "Login"}</p>
           </div>
         </Link>
       </div>

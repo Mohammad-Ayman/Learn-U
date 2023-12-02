@@ -30,7 +30,7 @@ body {
 }
 
 .home-container {
-  margin: auto 12rem auto 4rem;
+  /* margin: auto 12rem auto 4rem; */
 }
 
 .home-container > section:first-of-type {
