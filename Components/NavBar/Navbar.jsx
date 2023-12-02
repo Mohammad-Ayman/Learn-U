@@ -61,7 +61,7 @@ const Navbar = () => {
 
   return (
     <nav
-      className={`flex flex-col rounded w-20 h-screen text-center gap-10 pl-10 mr-10 pt-12`}
+      className={`navbar-container hidden xs:block sm:flex flex flex-col rounded w-20 h-screen text-center gap-10 pl-10 mr-10 pt-12`}
     >
       <Link href="/">
         <div>

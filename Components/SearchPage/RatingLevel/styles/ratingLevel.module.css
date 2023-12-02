@@ -8,3 +8,8 @@
   display: flex;
   gap: 28rem;
 }
+@media (max-width: 426px) {
+  .ratingLevelContainer {
+    gap: 5rem;
+  }
+}
