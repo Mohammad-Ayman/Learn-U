@@ -10,7 +10,11 @@ import LoadingPage from "@/Components/UI/LoadingPage";
 import styles from "../../courses/coursePage.module.css";
 
 const CoursePreviews = ({ params }) => {
-  const firebase =  JSON.parse(sessionStorage.getItem("firebase:authUser:AIzaSyAnZT6PINdbCDR7mfYMbdJS_fBv3nOadEQ:[DEFAULT]"));
+  const firebase = JSON.parse(
+    localStorage.getItem(
+      "firebase:authUser:AIzaSyAnZT6PINdbCDR7mfYMbdJS_fBv3nOadEQ:[DEFAULT]"
+    )
+  );
   // const router = useRouter();
   const { displayCourse } = params;
   const [courseData, setCourseData] = useState(null);
@@ -24,21 +28,20 @@ const CoursePreviews = ({ params }) => {
     fetchCourseData();
   }, [displayCourse]);
 
-  return (
-    courseData ? (
-      <main className={`home-container grid-2 ${styles["home-container__courses"]}`}>
-          <CoursePreview displayedCourse={courseData} actionButton={true} />
-          <CourseContent
-            displayedCourseContent={courseData.content}
-            onClick={() => {
-              addToMyLearningCourses(firebase.uid, displayCourse);
-            }}
-          />
-      </main>
-    ) : (
-      <LoadingPage/>
-    )
-    
+  return courseData ? (
+    <main
+      className={`home-container grid-2 ${styles["home-container__courses"]}`}
+    >
+      <CoursePreview displayedCourse={courseData} actionButton={true} />
+      <CourseContent
+        displayedCourseContent={courseData.content}
+        onClick={() => {
+          addToMyLearningCourses(firebase.uid, displayCourse);
+        }}
+      />
+    </main>
+  ) : (
+    <LoadingPage />
   );
 };
 

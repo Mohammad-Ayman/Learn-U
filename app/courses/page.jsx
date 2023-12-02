@@ -5,7 +5,10 @@ import { useState, useEffect } from "react";
 import CoursePreview from "@/Components/Courses/Course/CoursePreview";
 import MyLearningCourses from "@/Components/Courses/MyLearning/MyLearningCourses";
 import NoCoursesFoundMessage from "@/Components/UI/NoCoursesFoundMessage";
-import { fetchCourses, fetchUserSavedCourses, } from "@/Components/Fetching/fetching";
+import {
+  fetchCourses,
+  fetchUserSavedCourses,
+} from "@/Components/Fetching/fetching";
 import LoadingPage from "@/Components/UI/LoadingPage";
 import styles from "./coursePage.module.css";
 
@@ -14,17 +17,21 @@ import styles from "./coursePage.module.css";
 // });
 
 const Courses = () => {
-  const firebase =  JSON.parse(sessionStorage.getItem("firebase:authUser:AIzaSyAnZT6PINdbCDR7mfYMbdJS_fBv3nOadEQ:[DEFAULT]"));
+  const firebase = JSON.parse(
+    localStorage.getItem(
+      "firebase:authUser:AIzaSyAnZT6PINdbCDR7mfYMbdJS_fBv3nOadEQ:[DEFAULT]"
+    )
+  );
   if (!firebase) redirect("/signin");
 
   const [isLoading, setIsLoading] = useState(false);
   const [displayCourse, setDisplayCourse] = useState("");
   const [allCourses, setAllCourses] = useState([]);
   useEffect(() => {
-    setIsLoading(true)
+    setIsLoading(true);
     const fetchAllCourses = async () => {
       // console.log("NOT from cached courses")
-      const userSavedCourses = await fetchUserSavedCourses(firebase.uid);      
+      const userSavedCourses = await fetchUserSavedCourses(firebase.uid);
       const courses = await fetchCourses();
       const updatedCourses = [];
       courses.map((course) => {
@@ -41,7 +48,7 @@ const Courses = () => {
       //Update states
       setAllCourses(updatedCourses);
       setDisplayCourse(updatedCourses[0]);
-      setIsLoading(false)
+      setIsLoading(false);
     };
     const cachedCourses = sessionStorage.getItem("updatedCourses");
     const cachedUserId = sessionStorage.getItem("cachedUserId");
@@ -62,13 +69,11 @@ const Courses = () => {
     setDisplayCourse(allCourses[clickedCourseIndex]);
   };
 
-  return (
-    isLoading ? (
-      <LoadingPage/>
-    ) : (
-    allCourses.length === 0 ? 
-    <NoCoursesFoundMessage message={"Enroll into"}/>
-    : 
+  return isLoading ? (
+    <LoadingPage />
+  ) : allCourses.length === 0 ? (
+    <NoCoursesFoundMessage message={"Enroll into"} />
+  ) : (
     <main
       className={`home-container grid-2 ${styles["home-container__courses"]}`}
     >
@@ -84,9 +89,7 @@ const Courses = () => {
         reviewBtn={"REVIEW COURSE"}
         actionBtn={"CONTINUE LEARNING"}
       />
-     </main>
-    )
-        
+    </main>
   );
 };
 

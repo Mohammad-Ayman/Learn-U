@@ -12,7 +12,11 @@ import { AiOutlineEyeInvisible, AiOutlineEye } from "react-icons/ai";
 import { fetchLimitedCourses } from "@/Components/Fetching/fetching";
 import styles from "./signinPage.module.css";
 const LoginPage = () => {
-  const firebase =  JSON.parse(sessionStorage.getItem("firebase:authUser:AIzaSyAnZT6PINdbCDR7mfYMbdJS_fBv3nOadEQ:[DEFAULT]"));
+  const firebase = JSON.parse(
+    localStorage.getItem(
+      "firebase:authUser:AIzaSyAnZT6PINdbCDR7mfYMbdJS_fBv3nOadEQ:[DEFAULT]"
+    )
+  );
   if (firebase) redirect("/home");
   const router = useRouter();
   const authContext = useContext(AuthContext);

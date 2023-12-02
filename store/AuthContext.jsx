@@ -6,7 +6,7 @@ import { signInWithPopup } from "firebase/auth";
 import {
   signOut,
   createUserWithEmailAndPassword,
-  signInWithEmailAndPassword, 
+  signInWithEmailAndPassword,
 } from "firebase/auth";
 import { doc, setDoc } from "firebase/firestore";
 
@@ -94,6 +94,9 @@ export const handleLogout = (context) => {
     .then(() => {
       context.setIsLoggedIn(false);
       context.setUserId(null);
+      localStorage.removeItem(
+        "firebase:authUser:AIzaSyAnZT6PINdbCDR7mfYMbdJS_fBv3nOadEQ:[DEFAULT]"
+      );
     })
     .catch((error) => {
       // console.error("Sign-out error:", error);

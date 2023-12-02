@@ -7,11 +7,12 @@ import { handleLogout } from "@/store/AuthContext";
 
 const Navbar = () => {
   const authContext = useContext(AuthContext);
-  const firebase = JSON.parse(
-    sessionStorage.getItem(
-      "firebase:authUser:AIzaSyAnZT6PINdbCDR7mfYMbdJS_fBv3nOadEQ:[DEFAULT]"
-    )
-  );
+  const firebase =
+    JSON.parse(
+      localStorage.getItem(
+        "firebase:authUser:AIzaSyAnZT6PINdbCDR7mfYMbdJS_fBv3nOadEQ:[DEFAULT]"
+      )
+    ) || null;
   const classes = {
     home: true,
     search: false,
