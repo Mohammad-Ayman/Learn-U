@@ -7,13 +7,16 @@ import LoadingPage from "@/Components/UI/LoadingPage";
 
 const FeaturedCourses = () => {
   const [featuredCourses, setFeaturedCourses] = useState([]);
-  const [isLoading, setIsLoading] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
+
   useEffect(() => {
-    setIsLoading(true);
     const fetchFeaturedCourses = async () => {
-      const courses = await fetchLimitedCourses(5);
-      setFeaturedCourses(courses);
-      setIsLoading(false);
+      try {
+        const courses = await fetchLimitedCourses(5);
+        setFeaturedCourses(courses);
+      } finally {
+        setIsLoading(false);
+      }
     };
 
     fetchFeaturedCourses();

@@ -36,9 +36,10 @@ export default function RootLayout({ children }) {
         try {
           await handleLogout(authContext);
 
-          localStorage.removeItem(
-            "firebase:authUser:AIzaSyAnZT6PINdbCDR7mfYMbdJS_fBv3nOadEQ:[DEFAULT]"
-          );
+          // localStorage.removeItem(
+          //   "firebase:authUser:AIzaSyAnZT6PINdbCDR7mfYMbdJS_fBv3nOadEQ:[DEFAULT]"
+          // );
+          localStorage.clear();
         } catch (error) {
           // Handle any errors that occur during logout
           console.error("Logout error:", error);
