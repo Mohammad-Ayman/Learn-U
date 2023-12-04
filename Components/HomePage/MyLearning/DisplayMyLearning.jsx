@@ -18,7 +18,7 @@ const DisplayMyLearning = (props) => {
         {props.isButton ? (
           <Button>BUY</Button>
         ) : (
-          <Progress value={course.value} />
+          <Progress value={course.value || 0} />
         )}
       </MyLearningElement>
     );
