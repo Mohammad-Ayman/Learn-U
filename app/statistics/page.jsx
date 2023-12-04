@@ -1,3 +1,4 @@
+"use client";
 import { redirect } from "next/navigation";
 import { loginStatus } from "@/store/AuthContext";
 import ThisWeek from "@/Components/Statistics/ThisWeek/ThisWeek";
@@ -8,7 +9,6 @@ import Styles from "./statistics.module.css";
 
 const Statistics = () => {
   const isLogged = loginStatus();
-  if (isLogged) redirect("/home");
   if (!isLogged) redirect("/signin");
   return (
     <main className={Styles.main}>
