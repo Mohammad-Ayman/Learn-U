@@ -9,15 +9,10 @@ import AuthContext from "@/store/AuthContext";
 import { handleLogout } from "@/store/AuthContext";
 
 const inter = Inter({ subsets: ["latin"] });
-const metadata = {
+export const metadata = {
   title: "LearnU",
   description: "Online Learning Platform",
-  author: "Mohamed Ayman",
-  keywords: "online learning, education, courses, tutorials",
-  image: "/path/to/your/image.jpg",
-  url: "https://learn-u.vercel.app/",
 };
-
 export default function RootLayout({ children }) {
   const isLocalStorageAvailable =
     typeof window !== "undefined" && window.localStorage;
@@ -35,10 +30,6 @@ export default function RootLayout({ children }) {
       if (firebase) {
         try {
           await handleLogout(authContext);
-
-          // localStorage.removeItem(
-          //   "firebase:authUser:AIzaSyAnZT6PINdbCDR7mfYMbdJS_fBv3nOadEQ:[DEFAULT]"
-          // );
           localStorage.clear();
         } catch (error) {
           // Handle any errors that occur during logout
@@ -81,17 +72,25 @@ export default function RootLayout({ children }) {
       >
         <html lang="en">
           <Head>
-            <title>{metadata.title}</title>
-            <meta name="description" content={metadata.description} />
-            <meta name="author" content={metadata.author} />
-            <meta name="keywords" content={metadata.keywords} />
-            <meta name="url" content={metadata.url} />
+            <title>Learn U</title>
           </Head>
           <body className={inter.className} style={{ display: "flex" }}>
             <header>
               <Navbar />
             </header>
             {/* <main style={{ flex: 1 }}>{children}</main> */}
+            <div
+              style={{
+                position: "fixed",
+                top: 0,
+                right: 0,
+                padding: "10px",
+                background: "#fff",
+                zIndex: 1000,
+              }}
+            >
+              Hello
+            </div>
             {children}
           </body>
         </html>

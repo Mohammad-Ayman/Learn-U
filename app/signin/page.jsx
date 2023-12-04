@@ -7,21 +7,14 @@ import {
   handleSignup,
   handleLogin,
   handleGoogleLogin,
+  loginStatus,
 } from "@/store/AuthContext";
 import { AiOutlineEyeInvisible, AiOutlineEye } from "react-icons/ai";
 import styles from "./signinPage.module.css";
 const LoginPage = () => {
   useEffect(() => {
-    const isLocalStorageAvailable =
-      typeof window !== "undefined" && window.localStorage;
-    const firebase = isLocalStorageAvailable
-      ? JSON.parse(
-          localStorage.getItem(
-            "firebase:authUser:AIzaSyAnZT6PINdbCDR7mfYMbdJS_fBv3nOadEQ:[DEFAULT]"
-          )
-        )
-      : null;
-    if (firebase) redirect("/home");
+    const isLogged = loginStatus();
+    if (isLogged) redirect("/home");
   }, []);
   const router = useRouter();
   const authContext = useContext(AuthContext);
