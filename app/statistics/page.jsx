@@ -1,6 +1,5 @@
-"use client";
 import { redirect } from "next/navigation";
-import { useEffect } from "react";
+import { loginStatus } from "@/store/AuthContext";
 import ThisWeek from "@/Components/Statistics/ThisWeek/ThisWeek";
 import MyPerformance from "@/Components/Statistics/MyPerformance/MyPerformance";
 import MyActivity from "@/Components/Statistics/MyActivity/MyActivity";
@@ -8,17 +7,9 @@ import LastYear from "@/Components/Statistics/LastYear/LastYear";
 import Styles from "./statistics.module.css";
 
 const Statistics = () => {
-  const isLocalStorageAvailable =
-    typeof window !== "undefined" && window.localStorage;
-
-  const firebase = isLocalStorageAvailable
-    ? JSON.parse(
-        localStorage.getItem(
-          "firebase:authUser:AIzaSyAnZT6PINdbCDR7mfYMbdJS_fBv3nOadEQ:[DEFAULT]"
-        )
-      )
-    : null;
-  if (!firebase) redirect("/signin");
+  const isLogged = loginStatus();
+  if (isLogged) redirect("/home");
+  if (!isLogged) redirect("/signin");
   return (
     <main className={Styles.main}>
       <ThisWeek />

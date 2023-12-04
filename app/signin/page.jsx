@@ -11,6 +11,7 @@ import {
 } from "@/store/AuthContext";
 import { AiOutlineEyeInvisible, AiOutlineEye } from "react-icons/ai";
 import styles from "./signinPage.module.css";
+
 const LoginPage = () => {
   useEffect(() => {
     const isLogged = loginStatus();

@@ -6,38 +6,29 @@ import Head from "next/head";
 import { useState, useContext, useEffect } from "react";
 import FetchedCourses from "@/store/FetchedCourses";
 import AuthContext from "@/store/AuthContext";
-import { handleLogout } from "@/store/AuthContext";
+import { handleLogout, loginStatus } from "@/store/AuthContext";
 
 const inter = Inter({ subsets: ["latin"] });
 export const metadata = {
   title: "LearnU",
   description: "Online Learning Platform",
 };
+
 export default function RootLayout({ children }) {
-  const isLocalStorageAvailable =
-    typeof window !== "undefined" && window.localStorage;
-
-  const firebase = isLocalStorageAvailable
-    ? JSON.parse(
-        localStorage.getItem(
-          "firebase:authUser:AIzaSyAnZT6PINdbCDR7mfYMbdJS_fBv3nOadEQ:[DEFAULT]"
-        )
-      )
-    : null;
   const authContext = useContext(AuthContext);
-  useEffect(() => {
-    const logOut = async () => {
-      if (firebase) {
-        try {
-          await handleLogout(authContext);
-          localStorage.clear();
-        } catch (error) {
-          // Handle any errors that occur during logout
-          console.error("Logout error:", error);
-        }
+  const logOut = async () => {
+    const isLogged = loginStatus();
+    if (isLogged) {
+      try {
+        await handleLogout(authContext);
+        localStorage.clear();
+      } catch (error) {
+        // Handle any errors that occur during logout
+        console.error("Logout error:", error);
       }
-    };
-
+    }
+  };
+  useEffect(() => {
     window.addEventListener("beforeunload", logOut);
 
     // Cleanup the event listener when the component unmounts

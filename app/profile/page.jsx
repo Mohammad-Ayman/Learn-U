@@ -6,7 +6,7 @@ import Friends from "@/Components/ProfilePage/Friends/friends";
 import Button from "@/Components/ProfilePage/Buttons/buttons";
 import styles from "./profilePage.module.css";
 
-const Profile = (props) => {
+const Profile = () => {
   return (
     <main className={styles["profile-container"]}>
       <div className={styles["first"]}>

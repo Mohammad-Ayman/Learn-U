@@ -2,6 +2,7 @@
 import dynamic from "next/dynamic";
 import { redirect } from "next/navigation";
 import { useState, useEffect } from "react";
+import { loginStatus } from "@/store/AuthContext";
 import CoursePreview from "@/Components/Courses/Course/CoursePreview";
 import MyLearningCourses from "@/Components/Courses/MyLearning/MyLearningCourses";
 import NoCoursesFoundMessage from "@/Components/UI/NoCoursesFoundMessage";
@@ -17,17 +18,9 @@ import styles from "./coursePage.module.css";
 // });
 
 const Courses = () => {
-  const isLocalStorageAvailable =
-    typeof window !== "undefined" && window.localStorage;
-
-  const firebase = isLocalStorageAvailable
-    ? JSON.parse(
-        localStorage.getItem(
-          "firebase:authUser:AIzaSyAnZT6PINdbCDR7mfYMbdJS_fBv3nOadEQ:[DEFAULT]"
-        )
-      )
-    : null;
-  if (!firebase) redirect("/signin");
+  const isLogged = loginStatus();
+  if (isLogged) redirect("/home");
+  if (!isLogged) redirect("/signin");
 
   const [isLoading, setIsLoading] = useState(false);
   const [displayCourse, setDisplayCourse] = useState("");
