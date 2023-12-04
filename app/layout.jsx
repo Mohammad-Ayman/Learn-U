@@ -9,7 +9,7 @@ import AuthContext from "@/store/AuthContext";
 import { handleLogout, loginStatus } from "@/store/AuthContext";
 
 const inter = Inter({ subsets: ["latin"] });
-export const metadata = {
+const metadata = {
   title: "LearnU",
   description: "Online Learning Platform",
 };
