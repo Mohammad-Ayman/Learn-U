@@ -24,7 +24,6 @@ import styles from "../courses/coursePage.module.css";
 
 const SavedCourses = () => {
   const isLogged = loginStatus();
-  if (isLogged) redirect("/home");
   if (!isLogged) redirect("/signin");
 
   const [isLoading, setIsLoading] = useState(false);
@@ -33,7 +32,7 @@ const SavedCourses = () => {
   useEffect(() => {
     setIsLoading(true);
     const fetchAllCourses = async () => {
-      const userSavedCourses = await fetchUserSavedCourses(firebase.uid);
+      const userSavedCourses = await fetchUserSavedCourses(isLogged.uid);
       const courses = await fetchCourses();
       const updatedCourses = [];
       courses.map((course) => {

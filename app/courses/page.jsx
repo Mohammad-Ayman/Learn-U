@@ -19,7 +19,6 @@ import styles from "./coursePage.module.css";
 
 const Courses = () => {
   const isLogged = loginStatus();
-  if (isLogged) redirect("/home");
   if (!isLogged) redirect("/signin");
 
   const [isLoading, setIsLoading] = useState(false);
@@ -29,7 +28,7 @@ const Courses = () => {
     setIsLoading(true);
     const fetchAllCourses = async () => {
       // console.log("NOT from cached courses")
-      const userSavedCourses = await fetchUserSavedCourses(firebase.uid);
+      const userSavedCourses = await fetchUserSavedCourses(isLogged.uid);
       const courses = await fetchCourses();
       const updatedCourses = [];
       courses.map((course) => {
@@ -42,7 +41,7 @@ const Courses = () => {
       });
       //Cache data to session storage
       sessionStorage.setItem("updatedCourses", JSON.stringify(updatedCourses));
-      sessionStorage.setItem("cachedUserId", JSON.stringify(firebase.uid));
+      sessionStorage.setItem("cachedUserId", JSON.stringify(isLogged.uid));
       //Update states
       setAllCourses(updatedCourses);
       setDisplayCourse(updatedCourses[0]);
