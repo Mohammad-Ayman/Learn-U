@@ -90,7 +90,7 @@ export const handleGoogleLogin = (context, router) => {
 };
 
 export const handleLogout = (context) => {
-  signOut(auth) // Corrected the function call
+  signOut(auth)
     .then(() => {
       context.setIsLoggedIn(false);
       context.setUserId(null);
