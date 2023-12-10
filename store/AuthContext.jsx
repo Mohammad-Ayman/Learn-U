@@ -94,11 +94,22 @@ export const handleLogout = (context) => {
     .then(() => {
       context.setIsLoggedIn(false);
       context.setUserId(null);
-      // localStorage.removeItem(
-      //   "firebase:authUser:AIzaSyAnZT6PINdbCDR7mfYMbdJS_fBv3nOadEQ:[DEFAULT]"
-      // );
     })
     .catch((error) => {
       // console.error("Sign-out error:", error);
     });
+};
+
+export const loginStatus = () => {
+  const isLocalStorageAvailable =
+    typeof window !== "undefined" && window.localStorage;
+
+  const firebase = isLocalStorageAvailable
+    ? JSON.parse(
+        localStorage.getItem(
+          "firebase:authUser:AIzaSyAnZT6PINdbCDR7mfYMbdJS_fBv3nOadEQ:[DEFAULT]"
+        )
+      )
+    : null;
+  return firebase;
 };
