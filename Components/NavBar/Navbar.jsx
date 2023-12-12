@@ -57,18 +57,17 @@ const Navbar = () => {
   return (
     <>
       <button
-        className={styles.xyz}
+        className={styles["mobile-navbar"]}
         onClick={() => {
-          const jj = showNavbar === "hidden" ? "block" : "hidden";
-          setShowNavbar(jj);
-          console.log("The Button Is Clicked ", jj);
+          const toggleVisibility = showNavbar === "hidden" ? "block" : "hidden";
+          setShowNavbar(toggleVisibility);
         }}
       >
         <svg
           xmlns="http://www.w3.org/2000/svg"
           viewBox="0 0 20 20"
           fill="currentColor"
-          className="w-5 h-5"
+          className={styles["burger-icon"]}
         >
           <path
             fillRule="evenodd"
