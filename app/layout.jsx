@@ -30,30 +30,30 @@ export default function RootLayout({ children }) {
       )
     : null;
   const authContext = useContext(AuthContext);
-  useEffect(() => {
-    const logOut = async () => {
-      if (firebase) {
-        try {
-          await handleLogout(authContext);
+  // useEffect(() => {
+  //   const logOut = async () => {
+  //     if (firebase) {
+  //       try {
+  //         await handleLogout(authContext);
 
-          // localStorage.removeItem(
-          //   "firebase:authUser:AIzaSyAnZT6PINdbCDR7mfYMbdJS_fBv3nOadEQ:[DEFAULT]"
-          // );
-          localStorage.clear();
-        } catch (error) {
-          // Handle any errors that occur during logout
-          console.error("Logout error:", error);
-        }
-      }
-    };
+  //         // localStorage.removeItem(
+  //         //   "firebase:authUser:AIzaSyAnZT6PINdbCDR7mfYMbdJS_fBv3nOadEQ:[DEFAULT]"
+  //         // );
+  //         localStorage.clear();
+  //       } catch (error) {
+  //         // Handle any errors that occur during logout
+  //         console.error("Logout error:", error);
+  //       }
+  //     }
+  //   };
 
-    window.addEventListener("beforeunload", logOut);
+  //   window.addEventListener("beforeunload", logOut);
 
-    // Cleanup the event listener when the component unmounts
-    return () => {
-      window.removeEventListener("beforeunload", logOut);
-    };
-  }, []);
+  //   // Cleanup the event listener when the component unmounts
+  //   return () => {
+  //     window.removeEventListener("beforeunload", logOut);
+  //   };
+  // }, []);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [savedCourses, setSavedCourses] = useState([]);
   const [myLearning, setMyLearning] = useState([]);

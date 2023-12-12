@@ -1,0 +1,17 @@
+.mobile-navbar {
+  display: none;
+  position: fixed;
+  top: 1rem;
+  left: 2.5rem;
+}
+
+.burger-icon {
+  width: 2rem;
+  height: 2rem;
+}
+
+@media (max-width: 639.9px) {
+  .mobile-navbar {
+    display: block;
+  }
+}

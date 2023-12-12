@@ -77,9 +77,6 @@ const CoursePreview = (props) => {
         <div className={styles["course-description__container"]}>
           <h2 className={styles.text}>Course Description</h2>
           <p>
-            {/* This online course was created for you if you are interested in
-            taking great digital photos and learning how to make your
-            photography unique and outstanding. */}
             {props.displayedCourse?.description}
           </p>
         </div>
