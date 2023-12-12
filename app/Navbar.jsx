@@ -1,13 +1,85 @@
+"use client";
+import { usePathname } from "next/navigation";
 import Link from "next/link";
+import { useState, useContext } from "react";
 import AuthContext from "@/store/AuthContext";
+import { handleLogout } from "@/store/AuthContext";
+import styles from "./navbar.module.css";
 
 const Navbar = () => {
   const authContext = useContext(AuthContext);
-  console.log("auth", authContext.isLoggedIn);
+  const isLocalStorageAvailable =
+    typeof window !== "undefined" && window.localStorage;
+
+  const firebase = isLocalStorageAvailable
+    ? JSON.parse(
+        localStorage.getItem(
+          "firebase:authUser:AIzaSyAnZT6PINdbCDR7mfYMbdJS_fBv3nOadEQ:[DEFAULT]"
+        )
+      )
+    : null;
+
+  const classes = {
+    home: true,
+    search: false,
+    course: false,
+    saved: false,
+    profile: false,
+  };
+
+  const [changeClass, setChangeClass] = useState(classes);
+  const [showNavbar, setShowNavbar] = useState("hidden");
+  const pathname = usePathname();
+  if (
+    pathname === "/" ||
+    pathname === "/signin" ||
+    pathname === "/statistics"
+  ) {
+    return null;
+  }
+
+  const logOut = async () => {
+    if (firebase) {
+      try {
+        await handleLogout(authContext);
+
+        // localStorage.removeItem(
+        //   "firebase:authUser:AIzaSyAnZT6PINdbCDR7mfYMbdJS_fBv3nOadEQ:[DEFAULT]"
+        // );
+        localStorage.clear();
+      } catch (error) {
+        // Handle any errors that occur during logout
+        console.error("Logout error:", error);
+      }
+    }
+  };
+
   return (
     <>
-      <button>Hello</button>
-      <nav className="navbar-container hidden xs:block sm:flex flex flex-col rounded w-20 h-screen text-center gap-10 pl-10 mr-10 pt-12">
+      <button
+        className={styles.xyz}
+        onClick={() => {
+          const jj = showNavbar === "hidden" ? "block" : "hidden";
+          setShowNavbar(jj);
+          console.log("The Button Is Clicked ", jj);
+        }}
+      >
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          viewBox="0 0 20 20"
+          fill="currentColor"
+          className="w-5 h-5"
+        >
+          <path
+            fillRule="evenodd"
+            d="M2 4.75A.75.75 0 012.75 4h14.5a.75.75 0 010 1.5H2.75A.75.75 0 012 4.75zM2 10a.75.75 0 01.75-.75h14.5a.75.75 0 010 1.5H2.75A.75.75 0 012 10zm0 5.25a.75.75 0 01.75-.75h14.5a.75.75 0 010 1.5H2.75a.75.75 0 01-.75-.75z"
+            clipRule="evenodd"
+          />
+        </svg>
+      </button>
+      <nav
+        className={`navbar-container  xs:block sm:flex flex flex-col rounded w-20 h-screen text-center gap-10 pl-10 mr-10 pt-12`}
+      >
         <Link href="/">
           <div>
             <div className="text-blue-500 hover:text-blue-400 cursor-pointer">
@@ -23,12 +95,26 @@ const Navbar = () => {
               </svg>
             </div>
           </div>
-          <h2>Hello Here</h2>
         </Link>
 
         <div className="flex flex-col gap-10">
           <Link href="/home">
-            <div className="text-gray-400 hover:text-blue-400 cursor-pointer">
+            <div
+              onClick={() =>
+                setChangeClass({
+                  search: false,
+                  course: false,
+                  saved: false,
+                  profile: false,
+                  home: true,
+                })
+              }
+              className={
+                changeClass.home
+                  ? "text-gray-400 hover:text-blue-400 cursor-pointer"
+                  : "text-gray-400 hover:text-blue-400 cursor-pointer"
+              }
+            >
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 viewBox="0 0 24 24"
@@ -38,12 +124,27 @@ const Navbar = () => {
                 <path d="M11.47 3.84a.75.75 0 011.06 0l8.69 8.69a.75.75 0 101.06-1.06l-8.689-8.69a2.25 2.25 0 00-3.182 0l-8.69 8.69a.75.75 0 001.061 1.06l8.69-8.69z" />
                 <path d="M12 5.432l8.159 8.159c.03.03.06.058.091.086v6.198c0 1.035-.84 1.875-1.875 1.875H15a.75.75 0 01-.75-.75v-4.5a.75.75 0 00-.75-.75h-3a.75.75 0 00-.75.75V21a.75.75 0 01-.75.75H5.625a1.875 1.875 0 01-1.875-1.875v-6.198a2.29 2.29 0 00.091-.086L12 5.43z" />
               </svg>
-              <p className="text-l font-bold">Home al</p>
+              <p className="text-l font-bold">Home</p>
             </div>
           </Link>
 
           <Link href="/search">
-            <div className="text-gray-400 hover:text-blue-400 cursor-pointer">
+            <div
+              onClick={() =>
+                setChangeClass({
+                  search: true,
+                  course: false,
+                  saved: false,
+                  profile: false,
+                  home: false,
+                })
+              }
+              className={
+                changeClass.search
+                  ? "text-gray-400 hover:text-blue-400 cursor-pointer"
+                  : "text-gray-400 hover:text-blue-400 cursor-pointer"
+              }
+            >
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 viewBox="0 0 24 24"
@@ -59,46 +160,91 @@ const Navbar = () => {
               <p className="text-l font-bold">Search</p>
             </div>
           </Link>
-
-          <Link href="/courses">
-            <div className="text-gray-400 hover:text-blue-400 cursor-pointer">
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                viewBox="0 0 24 24"
-                fill="currentColor"
-                className="mx-auto w-10 h-10"
-              >
-                <path
-                  fillRule="evenodd"
-                  d="M2.25 12c0-5.385 4.365-9.75 9.75-9.75s9.75 4.365 9.75 9.75-4.365 9.75-9.75 9.75S2.25 17.385 2.25 12zm14.024-.983a1.125 1.125 0 010 1.966l-5.603 3.113A1.125 1.125 0 019 15.113V8.887c0-.857.921-1.4 1.671-.983l5.603 3.113z"
-                  clipRule="evenodd"
-                />
-              </svg>
-              <p className="text-l font-bold">Course</p>
-            </div>
-          </Link>
-          {/* {authContext.isLoggedIn == true && (
-          <>
-            <Link href="/saved">
-              <div className="text-gray-400 hover:text-blue-400 cursor-pointer">
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  viewBox="0 0 24 24"
-                  fill="currentColor"
-                  className="mx-auto w-10 h-10"
+          {/* Render Saved And Profile Only When isLoggedIn === true */}
+          {firebase && (
+            <>
+              <Link href="/courses">
+                <div
+                  onClick={() =>
+                    setChangeClass({
+                      search: false,
+                      course: true,
+                      saved: false,
+                      profile: false,
+                      home: false,
+                    })
+                  }
+                  className={
+                    changeClass.course
+                      ? "text-gray-400 hover:text-blue-400 cursor-pointer"
+                      : "text-gray-400 hover:text-blue-400 cursor-pointer"
+                  }
                 >
-                  <path
-                    fillRule="evenodd"
-                    d="M6.32 2.577a49.255 49.255 0 0111.36 0c1.497.174 2.57 1.46 2.57 2.93V21a.75.75 0 01-1.085.67L12 18.089l-7.165 3.583A.75.75 0 013.75 21V5.507c0-1.47 1.073-2.756 2.57-2.93z"
-                    clipRule="evenodd"
-                  />
-                </svg>
-                <p className="text-l font-bold">Saved</p>
-              </div>
-            </Link>
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    viewBox="0 0 24 24"
+                    fill="currentColor"
+                    className="mx-auto w-10 h-10"
+                  >
+                    <path
+                      fillRule="evenodd"
+                      d="M2.25 12c0-5.385 4.365-9.75 9.75-9.75s9.75 4.365 9.75 9.75-4.365 9.75-9.75 9.75S2.25 17.385 2.25 12zm14.024-.983a1.125 1.125 0 010 1.966l-5.603 3.113A1.125 1.125 0 019 15.113V8.887c0-.857.921-1.4 1.671-.983l5.603 3.113z"
+                      clipRule="evenodd"
+                    />
+                  </svg>
+                  <p className="text-l font-bold">Course</p>
+                </div>
+              </Link>
 
-            <Link href="/profile">
-              <div className="text-gray-400 hover:text-blue-400 cursor-pointer mb-4">
+              <Link href="/saved">
+                <div
+                  onClick={() =>
+                    setChangeClass({
+                      search: false,
+                      course: false,
+                      saved: true,
+                      profile: false,
+                      home: false,
+                    })
+                  }
+                  className={
+                    changeClass.saved
+                      ? "text-gray-400 hover:text-blue-400 cursor-pointer"
+                      : "text-gray-400 hover:text-blue-400 cursor-pointer"
+                  }
+                >
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    viewBox="0 0 24 24"
+                    fill="currentColor"
+                    className="mx-auto w-10 h-10"
+                  >
+                    <path
+                      fillRule="evenodd"
+                      d="M6.32 2.577a49.255 49.255 0 0111.36 0c1.497.174 2.57 1.46 2.57 2.93V21a.75.75 0 01-1.085.67L12 18.089l-7.165 3.583A.75.75 0 013.75 21V5.507c0-1.47 1.073-2.756 2.57-2.93z"
+                      clipRule="evenodd"
+                    />
+                  </svg>
+                  <p className="text-l font-bold">Saved</p>
+                </div>
+              </Link>
+              {/* <Link href="/profile">
+              <div
+                onClick={() =>
+                  setChangeClass({
+                    search: false,
+                    course: false,
+                    saved: false,
+                    profile: true,
+                    home: false,
+                  })
+                }
+                className={
+                  changeClass.profile
+                    ? "text-gray-400 hover:text-blue-400 cursor-pointer mb-4"
+                    : "text-gray-400 hover:text-blue-400 cursor-pointer mb-4"
+                }
+              >
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   viewBox="0 0 24 24"
@@ -113,13 +259,40 @@ const Navbar = () => {
                 </svg>
                 <p className="text-l font-bold">Profile</p>
               </div>
-            </Link>
-          </>
-        )} */}
+            </Link> */}
+            </>
+          )}
+
+          <Link href="/signin">
+            <div
+              onClick={logOut}
+              className={
+                changeClass.profile
+                  ? "text-gray-400 hover:text-blue-400 cursor-pointer mb-4"
+                  : "text-gray-400 hover:text-blue-400 cursor-pointer mb-4"
+              }
+            >
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 0 24 24"
+                fill="currentColor"
+                className="mx-auto w-10 h-10"
+              >
+                <path
+                  fillRule="evenodd"
+                  d="M18.685 19.097A9.723 9.723 0 0021.75 12c0-5.385-4.365-9.75-9.75-9.75S2.25 6.615 2.25 12a9.723 9.723 0 003.065 7.097A9.716 9.716 0 0012 21.75a9.716 9.716 0 006.685-2.653zm-12.54-1.285A7.486 7.486 0 0112 15a7.486 7.486 0 015.855 2.812A8.224 8.224 0 0112 20.25a8.224 8.224 0 01-5.855-2.438zM15.75 9a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0z"
+                  clipRule="evenodd"
+                />
+              </svg>
+              <p className="text-l font-bold">
+                {firebase ? "Logout" : "Login"}
+              </p>
+            </div>
+          </Link>
         </div>
       </nav>
     </>
   );
 };
 
-// export default Navbar;
+export default Navbar;

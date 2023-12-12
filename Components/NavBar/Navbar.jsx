@@ -78,7 +78,7 @@ const Navbar = () => {
         </svg>
       </button>
       <nav
-        className={`navbar-container ${showNavbar} xs:block sm:flex flex flex-col rounded w-20 h-screen text-center gap-10 pl-10 mr-10 pt-12`}
+        className={`navbar-container  xs:block sm:flex flex flex-col rounded w-20 h-screen text-center gap-10 pl-10 mr-10 pt-12`}
       >
         <Link href="/">
           <div>
