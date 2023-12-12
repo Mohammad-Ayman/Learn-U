@@ -1,0 +1,12 @@
+.xyz {
+  display: none;
+  position: fixed;
+  top: 1rem;
+  left: 2.5rem;
+}
+
+@media (max-width: 639.9px) {
+  .xyz {
+    display: block;
+  }
+}
