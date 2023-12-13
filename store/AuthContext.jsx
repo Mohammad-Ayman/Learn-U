@@ -62,6 +62,7 @@ export const handleSignup = (email, password, setError, context, router) => {
 };
 export const handleLogin = (email, password, setError, context, router) => {
   // const auth = getAuth();
+  console.log(email, password);
   signInWithEmailAndPassword(auth, email, password, setError)
     .then((userCredential) => {
       const user = userCredential.user;
