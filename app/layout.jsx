@@ -3,10 +3,9 @@ import Navbar from "@/Components/NavBar/Navbar";
 import "./globals.css";
 import { Inter } from "next/font/google";
 import Head from "next/head";
-import { useState, useContext, useEffect } from "react";
+import { useState, useContext } from "react";
 import FetchedCourses from "@/store/FetchedCourses";
 import AuthContext from "@/store/AuthContext";
-import { handleLogout } from "@/store/AuthContext";
 
 const inter = Inter({ subsets: ["latin"] });
 const metadata = {
@@ -19,17 +18,17 @@ const metadata = {
 };
 
 export default function RootLayout({ children }) {
-  const isLocalStorageAvailable =
-    typeof window !== "undefined" && window.localStorage;
+  // const isLocalStorageAvailable =
+  //   typeof window !== "undefined" && window.localStorage;
 
-  const firebase = isLocalStorageAvailable
-    ? JSON.parse(
-        localStorage.getItem(
-          "firebase:authUser:AIzaSyAnZT6PINdbCDR7mfYMbdJS_fBv3nOadEQ:[DEFAULT]"
-        )
-      )
-    : null;
-  const authContext = useContext(AuthContext);
+  // const firebase = isLocalStorageAvailable
+  //   ? JSON.parse(
+  //       localStorage.getItem(
+  //         "firebase:authUser:AIzaSyAnZT6PINdbCDR7mfYMbdJS_fBv3nOadEQ:[DEFAULT]"
+  //       )
+  //     )
+  //   : null;
+  // const authContext = useContext(AuthContext);
   // useEffect(() => {
   //   const logOut = async () => {
   //     if (firebase) {
@@ -91,7 +90,6 @@ export default function RootLayout({ children }) {
             <header>
               <Navbar />
             </header>
-            {/* <main style={{ flex: 1 }}>{children}</main> */}
             {children}
           </body>
         </html>

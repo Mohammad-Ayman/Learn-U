@@ -43,7 +43,6 @@ const LoadingPage = () => {
   return (
     <div className={`home-container `}>
       <LoaderContainer>
-        {/* <p>Loading...</p> */}
         <LoaderCircle />
       </LoaderContainer>
     </div>

@@ -1,6 +1,5 @@
 "use client";
 import { redirect } from "next/navigation";
-import { useEffect } from "react";
 import ThisWeek from "@/Components/Statistics/ThisWeek/ThisWeek";
 import MyPerformance from "@/Components/Statistics/MyPerformance/MyPerformance";
 import MyActivity from "@/Components/Statistics/MyActivity/MyActivity";

@@ -1,5 +1,4 @@
 "use client";
-import { addToMyLearningCourses } from "@/Components/Fetching/fetching";
 import { useRouter } from "next/navigation";
 import Image from "next/image";
 import styles from "./styles/coursePreview.module.css";

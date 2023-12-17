@@ -1,5 +1,5 @@
 "use client";
-import { useState, useContext, useEffect } from "react";
+import { useState, useContext } from "react";
 import SearchContext from "@/store/search-context";
 
 import styles from "./styles/level.module.css";

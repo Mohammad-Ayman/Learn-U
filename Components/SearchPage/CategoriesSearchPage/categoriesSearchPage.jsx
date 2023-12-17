@@ -1,5 +1,5 @@
 "use client";
-import { useState, useEffect, useContext } from "react";
+import { useState, useContext } from "react";
 import SearchContext from "@/store/search-context";
 
 import "@fortawesome/fontawesome-free/css/all.min.css";

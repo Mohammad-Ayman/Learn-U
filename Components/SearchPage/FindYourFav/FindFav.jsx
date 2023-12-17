@@ -1,6 +1,6 @@
 import SearchBar from "./SearchBar";
 
-const FindFav = (props) => {
+const FindFav = () => {
   return <SearchBar></SearchBar>;
 };
 

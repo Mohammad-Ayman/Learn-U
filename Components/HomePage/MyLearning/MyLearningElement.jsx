@@ -1,6 +1,5 @@
 "use client";
-import { useState, useContext, useEffect } from "react";
-import AuthContext from "@/store/AuthContext";
+import { useState } from "react";
 import { addToSavedCourses } from "@/Components/Fetching/fetching";
 import Image from "next/image";
 import styles from "./styles/myLearningElement.module.css";
@@ -17,7 +16,6 @@ const MyLearningElement = (props) => {
       )
     : null;
   const [saved, setSaved] = useState(props.saved);
-  const authContext = useContext(AuthContext);
   return (
     <li
       className={`${styles["myLearning-card"]} mflex`}
