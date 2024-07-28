@@ -35,7 +35,7 @@
     "react-icons": "^4.10.1",
     "react-sweet-progress": "^1.1.2",
     "rsuite": "^5.37.3",
-    "sharp": "^0.33.0",
+    "sonner": "^1.5.0",
     "styled-components": "^6.0.4",
     "tw-elements": "^1.0.0-beta3"
   },
