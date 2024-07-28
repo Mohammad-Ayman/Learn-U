@@ -62,7 +62,6 @@ export const handleSignup = (email, password, setError, context, router) => {
 };
 export const handleLogin = (email, password, setError, context, router) => {
   // const auth = getAuth();
-  console.log(email, password);
   signInWithEmailAndPassword(auth, email, password, setError)
     .then((userCredential) => {
       const user = userCredential.user;
@@ -91,26 +90,15 @@ export const handleGoogleLogin = (context, router) => {
 };
 
 export const handleLogout = (context) => {
-  signOut(auth)
+  signOut(auth) // Corrected the function call
     .then(() => {
       context.setIsLoggedIn(false);
       context.setUserId(null);
+      // localStorage.removeItem(
+      //   "firebase:authUser:AIzaSyAnZT6PINdbCDR7mfYMbdJS_fBv3nOadEQ:[DEFAULT]"
+      // );
     })
     .catch((error) => {
       // console.error("Sign-out error:", error);
     });
-};
-
-export const loginStatus = () => {
-  const isLocalStorageAvailable =
-    typeof window !== "undefined" && window.localStorage;
-
-  const firebase = isLocalStorageAvailable
-    ? JSON.parse(
-        localStorage.getItem(
-          "firebase:authUser:AIzaSyAnZT6PINdbCDR7mfYMbdJS_fBv3nOadEQ:[DEFAULT]"
-        )
-      )
-    : null;
-  return firebase;
 };

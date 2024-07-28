@@ -11,23 +11,14 @@ import {
 } from "@/Components/Fetching/fetching";
 import LoadingPage from "@/Components/UI/LoadingPage";
 import styles from "./coursePage.module.css";
+import { auth } from "@/firebase";
 
 // const NoCoursesFoundMessage = dynamic (() => {
 //   import("@/Components/UI/NoCoursesFoundMessage")
 // });
 
 const Courses = () => {
-  const isLocalStorageAvailable =
-    typeof window !== "undefined" && window.localStorage;
-
-  const firebase = isLocalStorageAvailable
-    ? JSON.parse(
-        localStorage.getItem(
-          "firebase:authUser:AIzaSyAnZT6PINdbCDR7mfYMbdJS_fBv3nOadEQ:[DEFAULT]"
-        )
-      )
-    : null;
-  if (!firebase) redirect("/signin");
+  if (!auth?.currentUser?.uid) redirect("/signin");
 
   const [isLoading, setIsLoading] = useState(false);
   const [displayCourse, setDisplayCourse] = useState("");
@@ -36,7 +27,9 @@ const Courses = () => {
     setIsLoading(true);
     const fetchAllCourses = async () => {
       // console.log("NOT from cached courses")
-      const userSavedCourses = await fetchUserSavedCourses(firebase.uid);
+      const userSavedCourses = await fetchUserSavedCourses(
+        auth?.currentUser?.uid
+      );
       const courses = await fetchCourses();
       const updatedCourses = [];
       courses.map((course) => {
@@ -49,7 +42,10 @@ const Courses = () => {
       });
       //Cache data to session storage
       sessionStorage.setItem("updatedCourses", JSON.stringify(updatedCourses));
-      sessionStorage.setItem("cachedUserId", JSON.stringify(firebase.uid));
+      sessionStorage.setItem(
+        "cachedUserId",
+        JSON.stringify(auth?.currentUser?.uid)
+      );
       //Update states
       setAllCourses(updatedCourses);
       setDisplayCourse(updatedCourses[0]);

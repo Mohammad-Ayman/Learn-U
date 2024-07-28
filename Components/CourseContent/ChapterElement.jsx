@@ -2,7 +2,7 @@ import styles from "./styles/courseContent.module.css";
 
 const ChapterElement = (props) => {
   return (
-    <article className={styles["chapter__container"]}>
+    <article className={styles["chapter__title__container"]}>
       <div>
         <svg
           fill="#000000"

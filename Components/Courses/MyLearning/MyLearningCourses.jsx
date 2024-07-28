@@ -30,7 +30,7 @@ const MyLearningCourses = (props) => {
         }}
       >
         <h2 className="header-text">{props.header}</h2>
-        <Link
+        {/* <Link
           href="/statistics"
           className={Styles.link}
           target="_blank"
@@ -40,7 +40,7 @@ const MyLearningCourses = (props) => {
             <EqualizerIcon style={{ fontSize: "2.5rem" }} />
             Statistics
           </h2>
-        </Link>
+        </Link> */}
       </div>
       <ul onClick={getClickedCourse} className={Styles.coursesList}>
         <DisplayMyLearning

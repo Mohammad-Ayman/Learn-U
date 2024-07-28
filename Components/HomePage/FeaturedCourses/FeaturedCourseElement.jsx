@@ -4,12 +4,6 @@ import { styled } from "styled-components";
 import { useRouter } from "next/navigation";
 
 import Image from "next/image";
-import { courses } from "@/app/page";
-import { useState, useEffect } from "react";
-import {
-  checkIfBookmarked,
-  bookmarkCourse,
-} from "@/Components/Fetching/fetching";
 
 const PriceBox = styled.span`
   background-color: #2e8dff;
@@ -21,25 +15,6 @@ const PriceBox = styled.span`
 const ButtonContainer = styled.div`
   position: relative;
   color: #333;
-`;
-
-const BookmarkButton = styled.button`
-  background: rgba(128, 128, 128, 0.5);
-  border: none;
-  border-radius: 0.6rem;
-  padding: 0.6rem;
-  position: absolute;
-  top: -18rem;
-  right: 0.5rem;
-
-  .bookmark-icon {
-    color: #ffffff;
-    width: 1.5rem;
-    height: 1.5rem;
-  }
-  &:hover {
-    transform: scale(1.15);
-  }
 `;
 
 const FeaturedCourseElement = (props) => {
@@ -62,7 +37,7 @@ const FeaturedCourseElement = (props) => {
     >
       <div className={`${styles["course-image__container"]}`}>
         <Image
-          src={props.image}
+          src={props.image || "/images/default.jpeg"}
           width={1770}
           height={1180}
           alt="Picture of the author"

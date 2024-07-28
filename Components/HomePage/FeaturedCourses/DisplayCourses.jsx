@@ -1,4 +1,3 @@
-import { styled } from "styled-components";
 import styles from "./styles/featuredCourses.module.css";
 import CourseElement from "./FeaturedCourseElement";
 

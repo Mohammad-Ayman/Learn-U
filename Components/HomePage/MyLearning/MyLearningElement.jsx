@@ -4,6 +4,7 @@ import AuthContext from "@/store/AuthContext";
 import { addToSavedCourses } from "@/Components/Fetching/fetching";
 import Image from "next/image";
 import styles from "./styles/myLearningElement.module.css";
+import { toast } from "sonner";
 
 const MyLearningElement = (props) => {
   const isLocalStorageAvailable =
@@ -17,7 +18,18 @@ const MyLearningElement = (props) => {
       )
     : null;
   const [saved, setSaved] = useState(props.saved);
-  const authContext = useContext(AuthContext);
+
+  const handleAddToSavedCourses = async (uid, _id, setSaved) => {
+    try {
+      await addToSavedCourses(uid, _id, setSaved);
+      if (!saved) toast.success("Course Saved Successfully.");
+      else toast("Course Removed Successfully.");
+    } catch (error) {
+      toast.error("Error Saving Course.");
+      console.error(error);
+    }
+  };
+
   return (
     <li
       className={`${styles["myLearning-card"]} mflex`}
@@ -40,7 +52,7 @@ const MyLearningElement = (props) => {
               viewBox="0 0 24 24"
               fill="currentColor"
               onClick={() => {
-                addToSavedCourses(firebase.uid, props._id, setSaved);
+                handleAddToSavedCourses(firebase.uid, props._id, setSaved);
               }}
               className={`${styles.icon} ${saved ? styles["active-icon"] : ""}`}
             >

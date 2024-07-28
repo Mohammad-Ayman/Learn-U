@@ -1,6 +1,6 @@
 "use client";
 import AuthContext from "@/store/AuthContext";
-import React, { useState, useContext, useEffect, useRef } from "react";
+import React, { useState, useContext, useEffect, useLayoutEffect } from "react";
 import { useRouter, redirect } from "next/navigation";
 import Image from "next/image";
 import {
@@ -10,29 +10,19 @@ import {
 } from "@/store/AuthContext";
 import { AiOutlineEyeInvisible, AiOutlineEye } from "react-icons/ai";
 import styles from "./signinPage.module.css";
+import { auth } from "@/firebase";
 
 const LoginPage = () => {
-  useEffect(() => {
-    const isLocalStorageAvailable =
-      typeof window !== "undefined" && window.localStorage;
-    const firebase = isLocalStorageAvailable
-      ? JSON.parse(
-          localStorage.getItem(
-            "firebase:authUser:AIzaSyAnZT6PINdbCDR7mfYMbdJS_fBv3nOadEQ:[DEFAULT]"
-          )
-        )
-      : null;
-    if (firebase) redirect("/home");
+  useLayoutEffect(() => {
+    if (auth.currentUser?.uid) redirect("/home");
   }, []);
-
   const router = useRouter();
   const authContext = useContext(AuthContext);
 
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
   const [error, setError] = useState(null);
   const [passwordVisible, setPasswordVisible] = useState(false);
-
-  const emailInputRef = useRef(null);
-  const passwordInputRef = useRef(null);
 
   const navigateToHomePage = () => {
     router.push("/");
@@ -72,14 +62,26 @@ const LoginPage = () => {
             className="h-20 outline outline-2 outline-slate-400 focus:outline-blue-400 text-2xl rounded p-1 pl-4 m-10"
             type="text"
             placeholder="example@mail.com"
-            ref={emailInputRef}
+            value={email}
+            onChange={(e) => {
+              setEmail(e.target.value);
+              if (!e.target.value && !password) {
+                setError(null);
+              }
+            }}
           />
           <div className={styles.passwordContainer}>
             <input
               className={`h-20 text-2xl rounded p-1 pl-4 pr-10 m-10 mt-0 ${styles.inputField} `}
               type={passwordVisible ? "text" : "password"}
               placeholder="Password"
-              ref={passwordInputRef}
+              value={password}
+              onChange={(e) => {
+                setPassword(e.target.value);
+                if (!e.target.value && !email) {
+                  setError(null);
+                }
+              }}
             />
             <span
               onClick={() => setPasswordVisible(!passwordVisible)}
@@ -97,13 +99,7 @@ const LoginPage = () => {
             className="bg-blue-600 hover:bg-blue-500 text-white font-semibold text-2xl h-20 rounded-xl pl-4 m-10 mt-0"
             type="submit"
             onClick={() =>
-              handleLogin(
-                emailInputRef.current?.value,
-                passwordInputRef.current?.value,
-                setError,
-                authContext,
-                router
-              )
+              handleLogin(email, password, setError, authContext, router)
             }
             value="Log In"
           />
@@ -112,13 +108,7 @@ const LoginPage = () => {
             className="bg-green-600 hover:bg-green-500 text-white font-semibold text-2xl h-20 rounded-xl pl-4 m-10"
             type="button"
             onClick={() =>
-              handleSignup(
-                emailInputRef.current?.value,
-                passwordInputRef.current?.value,
-                setError,
-                authContext,
-                router
-              )
+              handleSignup(email, password, setError, authContext, router)
             }
             name=""
             id=""

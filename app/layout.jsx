@@ -7,6 +7,8 @@ import { useState, useContext, useEffect } from "react";
 import FetchedCourses from "@/store/FetchedCourses";
 import AuthContext from "@/store/AuthContext";
 import { handleLogout } from "@/store/AuthContext";
+import { Toaster } from "sonner";
+import { auth } from "@/firebase";
 
 const inter = Inter({ subsets: ["latin"] });
 const metadata = {
@@ -19,41 +21,32 @@ const metadata = {
 };
 
 export default function RootLayout({ children }) {
-  const isLocalStorageAvailable =
-    typeof window !== "undefined" && window.localStorage;
-
-  const firebase = isLocalStorageAvailable
-    ? JSON.parse(
-        localStorage.getItem(
-          "firebase:authUser:AIzaSyAnZT6PINdbCDR7mfYMbdJS_fBv3nOadEQ:[DEFAULT]"
-        )
-      )
-    : null;
+  const firebase = auth?.currentUser?.uid;
   const authContext = useContext(AuthContext);
-  // useEffect(() => {
-  //   const logOut = async () => {
-  //     if (firebase) {
-  //       try {
-  //         await handleLogout(authContext);
+  useEffect(() => {
+    const logOut = async () => {
+      if (firebase) {
+        try {
+          await handleLogout(authContext);
 
-  //         // localStorage.removeItem(
-  //         //   "firebase:authUser:AIzaSyAnZT6PINdbCDR7mfYMbdJS_fBv3nOadEQ:[DEFAULT]"
-  //         // );
-  //         localStorage.clear();
-  //       } catch (error) {
-  //         // Handle any errors that occur during logout
-  //         console.error("Logout error:", error);
-  //       }
-  //     }
-  //   };
+          // localStorage.removeItem(
+          //   "firebase:authUser:AIzaSyAnZT6PINdbCDR7mfYMbdJS_fBv3nOadEQ:[DEFAULT]"
+          // );
+          localStorage.clear();
+        } catch (error) {
+          // Handle any errors that occur during logout
+          console.error("Logout error:", error);
+        }
+      }
+    };
 
-  //   window.addEventListener("beforeunload", logOut);
+    window.addEventListener("beforeunload", logOut);
 
-  //   // Cleanup the event listener when the component unmounts
-  //   return () => {
-  //     window.removeEventListener("beforeunload", logOut);
-  //   };
-  // }, []);
+    // Cleanup the event listener when the component unmounts
+    return () => {
+      window.removeEventListener("beforeunload", logOut);
+    };
+  }, []);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [savedCourses, setSavedCourses] = useState([]);
   const [myLearning, setMyLearning] = useState([]);
@@ -88,6 +81,12 @@ export default function RootLayout({ children }) {
             <meta name="url" content={metadata.url} />
           </Head>
           <body className={inter.className} style={{ display: "flex" }}>
+            <Toaster
+              richColors
+              duration={2000}
+              position="top-right"
+              className="sonner_toast"
+            />
             <header>
               <Navbar />
             </header>

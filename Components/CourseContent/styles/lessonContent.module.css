@@ -1,0 +1,28 @@
+.lesson__container {
+  /* background-color: #fbfbfb; */
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem;
+  padding-bottom: 0;
+  border-radius: 5px;
+}
+
+.lesson-completion__container {
+  align-self: flex-start;
+  margin-top: 0.5rem;
+  margin-left: 3rem;
+  margin-right: 1rem;
+}
+
+.lesson-content__container {
+  flex-grow: 1;
+}
+.lesson-content__container h3 {
+  font-size: 1.5rem;
+}
+.lesson-content__container p {
+  font-size: 1.4rem;
+  color: #616161;
+}

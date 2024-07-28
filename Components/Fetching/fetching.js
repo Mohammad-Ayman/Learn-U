@@ -1,12 +1,9 @@
 import {
   doc,
-  setDoc,
   getDoc,
   updateDoc,
-  arrayUnion,
   getDocs,
   collection,
-  addDoc,
   query,
   where,
   limit,
@@ -68,7 +65,17 @@ export const fetchUserSavedCourses = async (uid) => {
   const userDoc = await getDoc(userDocRef);
   return userDoc.data();
 };
-
+export const isCourseSaved = async (uid, courseId) => {
+  const userDocRef = doc(db, "users", uid);
+  const userDoc = await getDoc(userDocRef);
+  if (userDoc.exists()) {
+    const userData = userDoc.data();
+    const savedCourses = userData.savedCourses || [];
+    return savedCourses.includes(courseId);
+  } else {
+    console.error("User document not found.");
+  }
+};
 export const addToSavedCourses = async (uid, courseId, setSaved) => {
   try {
     const userDocRef = doc(db, "users", uid);
@@ -85,18 +92,13 @@ export const addToSavedCourses = async (uid, courseId, setSaved) => {
         setSaved(true);
       }
       // Update the user document with the updated savedCourses array
-      await updateDoc(userDocRef, { savedCourses });
-
-      // console.log(
-      //   `Course ${courseId} ${
-      //     courseIndex !== -1 ? "removed from" : "added to"
-      //   } savedCourses for user with ID: ${uid}`
-      // );
+      const data = await updateDoc(userDocRef, { savedCourses });
+      return data;
     } else {
-      // console.error("User document not found.");
+      console.error("User document not found.");
     }
   } catch (e) {
-    // console.error("Error adding course to savedCourses: ", e);
+    console.error("Error adding course to savedCourses: ", e);
   }
 };
 
@@ -118,4 +120,33 @@ export const addToMyLearningCourses = async (uid, courseId) => {
     } else {
     }
   } catch (e) {}
+};
+export const removeFromMyLearningCourses = async (uid, courseId) => {
+  try {
+    const userDocRef = doc(db, "users", uid);
+    const userDoc = await getDoc(userDocRef);
+    if (userDoc.exists()) {
+      const userData = userDoc.data();
+      const myLearning = userData.myLearning || [];
+      const courseIndex = myLearning.indexOf(courseId);
+      if (courseIndex !== -1) {
+        myLearning.splice(courseIndex, 1);
+        // Update the user document with the updated myLearning array
+        await updateDoc(userDocRef, { myLearning });
+      }
+    } else {
+    }
+  } catch (e) {}
+};
+
+export const isCourseInMyLearning = async (uid, courseId) => {
+  const userDocRef = doc(db, "users", uid);
+  const userDoc = await getDoc(userDocRef);
+  if (userDoc.exists()) {
+    const userData = userDoc.data();
+    const myLearning = userData.myLearning || [];
+    return myLearning.includes(courseId);
+  } else {
+    console.error("User document not found.");
+  }
 };
